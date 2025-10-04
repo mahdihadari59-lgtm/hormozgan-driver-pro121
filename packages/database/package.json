@@ -1,0 +1,27 @@
+{
+  "name": "@hormozgan/database",
+  "version": "1.0.0",
+  "description": "Database models and migrations with TypeORM",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:generate": "npm run typeorm -- migration:generate",
+    "migration:run": "npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert"
+  },
+  "keywords": ["typeorm", "database", "postgresql"],
+  "author": "Hormozgan Team",
+  "license": "MIT",
+  "dependencies": {
+    "typeorm": "^0.3.17",
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "ts-node": "^10.9.1"
+  }
+}
