@@ -31,15 +31,16 @@ class AuthService {
       await this.userRepository.save(user);
     }
 
-    const token = jwt.sign(
-      { 
-        userId: user.id, 
-        phoneNumber: user.phoneNumber, 
-        role: user.role 
-      },
-      process.env.JWT_SECRET || 'default-secret',
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
-    );
+    const payload = { 
+      userId: user.id, 
+      phoneNumber: user.phoneNumber, 
+      role: user.role 
+    };
+
+    const secret = process.env.JWT_SECRET || 'default-secret-key';
+    const options = { expiresIn: process.env.JWT_EXPIRES_IN || '7d' };
+    
+    const token = (jwt.sign as any)(payload, secret, options) as string;
 
     return {
       user: {
