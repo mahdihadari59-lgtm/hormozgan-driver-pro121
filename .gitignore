@@ -24,3 +24,6 @@ Thumbs.db
 packages/*/dist
 apps/*/dist
 *.tsbuildinfo
+
+# Local Netlify folder
+.netlify
