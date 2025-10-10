@@ -1,36 +1,38 @@
-#!/usr/bin/env node
 
-const chalk = require('chalk');
-const inquirer = require('inquirer');
-const figlet = require('figlet');
-const Table = require('cli-table3');
-const fs = require('fs');
-const path = require('path');
-
-const DATA_DIR = path.join(__dirname, 'data');
-const TRIPS_FILE = path.join(DATA_DIR, 'trips.json');
-
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-console.clear();
-console.log(chalk.yellow(figlet.textSync('Driver Pro', { horizontalLayout: 'full' })));
-console.log(chalk.blue('🚗 سامانه راننده هرمزگان - نسخه CLI\n'));
-
-const recordTrip = async () => {
+ const recordTrip = async () => {
   const trip = await inquirer.prompt([
-    { type: 'input', name: 'from', message: 'مبدا:' },
-    { type: 'input', name: 'to', message: 'مقصد:' },
-    { 
-      type: 'input', 
-      name: 'distance', 
-      message: 'مسافت (کیلومتر):',
-      validate: (v) => !isNaN(parseFloat(v)) && parseFloat(v) > 0 ? true : 'عدد وارد کنید'
+    { type: 'input', name: 'from', message: '📍 از کجا؟' },
+    { type: 'input', name: 'to', message: '🎯 به کجا؟' },
+    {
+      type: 'input',
+      name: 'distance',
+      message: '🚘 چند کیلومتر؟',
+      validate: (v) => {
+        const num = parseFloat(v);
+        return !isNaN(num) && num > 0 ? true : 'لطفاً عدد معتبر وارد کن 🚗';
+      },
     },
-    { 
-      type: 'input', 
-      name: 'fare', 
+    {
+      type: 'input',
+      name: 'price',
+      message: '💰 کرایه (تومان):',
+      validate: (v) => {
+        const num = parseFloat(v);
+        return !isNaN(num) && num >= 0 ? true : 'عدد معتبر وارد کن 💵';
+      },
+    },
+  ]);
+
+  // ذخیره در فایل JSON
+  const trips = fs.existsSync(TRIPS_FILE)
+    ? JSON.parse(fs.readFileSync(TRIPS_FILE))
+    : [];
+
+  trips.push({ ...trip, date: new Date().toLocaleString('fa-IR') });
+
+  fs.writeFileSync(TRIPS_FILE, JSON.stringify(trips, null, 2));
+  console.log(chalk.green('✅ سفر با موفقیت ثبت شد!'));
+};     name: 'fare', 
       message: 'کرایه (تومان):',
       validate: (v) => !isNaN(parseFloat(v)) && parseFloat(v) > 0 ? true : 'عدد وارد کنید'
     }
@@ -89,4 +91,4 @@ const mainMenu = async () => {
   await mainMenu();
 };
 
-mainMenu().catch(console.error);
+mainMenu().catch(console.error)
