@@ -14,7 +14,11 @@
     "cli": "cd cli && npm start"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "concurrently": "^8.0.0"
+    "concurrently": "^8.0.0",
+    "netlify-cli": "^23.9.1",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "inquirer": "^12.9.6"
   }
 }
