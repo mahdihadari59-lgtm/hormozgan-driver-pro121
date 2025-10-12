@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hormozgan Driver Pro - معرفی کامل پروژه</title>
+    <meta name="description" content="پلتفرم هوشمند حمل و نقل استان هرمزگان با معماری مدرن و فناوری‌های پیشرفته">
+    <meta name="keywords" content="تاکسی آنلاین, هرمزگان, حمل و نقل هوشمند, Termux, Netlify">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            font-size: 1.5em;
+        }
+
+        .navbar nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section {
+            background: white;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 12px;
+            border-right: 4px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="navbar">
+        <div class="container">
+            <h1>🚖 Hormozgan Driver Pro</h1>
+            <nav>
+                <a href="index.html">خانه</a>
+                <a href="driver-panel.html">پنل راننده</a>
+                <a href="call-system.html">سیستم تماس</a>
+                <a href="https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121" target="_blank">GitHub</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>🚖 Hormozgan Driver Pro</h1>
+        <p>پلتفرم هوشمند حمل و نقل استان هرمزگان</p>
+        <a href="driver-panel.html" class="btn">ورود به پنل</a>
+        <a href="#features" class="btn btn-secondary">بیشتر بخوانید</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Introduction -->
+        <div class="section">
+            <h2>🌟 معرفی پروژه</h2>
+            <p>
+                Hormozgan Driver Pro یک پلتفرم حمل و نقل هوشمند و بومی‌سازی شده برای استان هرمزگان است که با معماری مدرن و فناوری‌های پیشرفته توسعه یافته است.
+            </p>
+        </div>
+
+        <!-- Key Features -->
+        <div class="section" id="features">
+            <h2>🚀 ویژگی‌های کلیدی</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🧭 مسیریابی هوشمند</h3>
+                    <p>با الگوریتم‌های A* و Dijkstra برای بهینه‌ترین مسیر</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💰 مدیریت درآمد</h3>
+                    <p>سیستم کیف پول دیجیتال پیشرفته</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔐 امنیت چندلایه</h3>
+                    <p>احراز هویت دو مرحله‌ای</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📱 پشتیبانی Termux</h3>
+                    <p>اجرای آسان روی اندروید</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🏝️ سرویس‌های ویژه</h3>
+                    <p>قشم، کیش و هرمز</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ عملکرد بالا</h3>
+                    <p>معماری Microservices</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Netlify Deployment -->
+        <div class="section">
+            <h2>🚀 استقرار در Netlify</h2>
+            <div class="code-block">
+<pre># پیکربندی Netlify
+[build]
+  publish = "cli"
+  command = ""
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200</pre>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>✅ استقرار خودکار</h3>
+                    <p>اتصال به GitHub</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✅ SSL رایگان</h3>
+                    <p>CDN جهانی</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✅ عملکرد بالا</h3>
+                    <p>Load Balancing</p>
+                </div>
+                <div class="feature-card">
+                    <h3>✅ PWA Support</h3>
+                    <p>Progressive Web Apps</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- GitHub Repository -->
+        <div class="section">
+            <h2>💻 مخزن GitHub</h2>
+            <div class="code-block">
+<pre># کلون و اجرا
+git clone https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git
+cd hormozgan-driver-pro121
+npm install
+npm start</pre>
+            </div>
+        </div>
+
+        <!-- Termux Setup -->
+        <div class="section">
+            <h2>📱 اجرا در Termux</h2>
+            <div class="code-block">
+<pre># نصب پیش‌نیازها
+pkg update && pkg upgrade -y
+pkg install git nodejs -y
+
+# کلون پروژه
+git clone https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git
+cd hormozgan-driver-pro121/cli
+
+# نصب و اجرا
+npm install
+npm start</pre>
+            </div>
+        </div>
+
+        <!-- Revenue Model -->
+        <div class="section">
+            <h2>📊 مدل درآمدی</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number">500</div>
+                    <p>راننده فعال در 6 ماه</p>
+                </div>
+                <div class="stat-card">
+                    <div class="number">75M</div>
+                    <p>تومان درآمد ماهانه</p>
+                </div>
+                <div class="stat-card">
+                    <div class="number">5,000</div>
+                    <p>سفر روزانه</p>
+                </div>
+                <div class="stat-card">
+                    <div class="number">10-15%</div>
+                    <p>کمیسیون سفرها</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack -->
+        <div class="section">
+            <h2>🏗️ معماری فنی</h2>
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Frontend</h3>
+                    <p>React, TypeScript, HTML5/CSS3</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Backend</h3>
+                    <p>Node.js, Microservices</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Database</h3>
+                    <p>PostgreSQL, Redis, MongoDB</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Infrastructure</h3>
+                    <p>Docker, Kubernetes</p>
+                </div>
+                <div class="feature-card">
+                    <h3>CI/CD</h3>
+                    <p>GitHub Actions, Netlify</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Maps & Routing</h3>
+                    <p>OpenStreetMap, Neshan</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-align: center;">
+            <h2 style="color: white;">🚀 آماده شروع هستید؟</h2>
+            <p style="font-size: 1.2em; margin: 20px 0;">همین حالا پروژه را امتحان کنید!</p>
+            <a href="driver-panel.html" class="btn" style="background: white; color: #667eea;">ورود به پنل راننده</a>
+            <a href="https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121" class="btn btn-secondary" style="background: rgba(255,255,255,0.2); color: white;" target="_blank">مشاهده در GitHub</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <h3>🚖 Hormozgan Driver Pro</h3>
+        <p>تحولی در صنعت حمل و نقل استان هرمزگان</p>
+        <p style="margin-top: 20px;">
+            <a href="https://hormozgan-driver-pro.netlify.app" style="color: white; margin: 0 10px;">وبسایت</a> |
+            <a href="https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121" style="color: white; margin: 0 10px;">GitHub</a> |
+            <a href="mailto:info@hormozgan-driver.ir" style="color: white; margin: 0 10px;">تماس با ما</a>
+        </p>
+        <p style="margin-top: 20px; color: #a0aec0;">
+            © 2025 Hormozgan Driver Pro. ساخته شده با ❤️ در ایران
+        </p>
+    </div>
+</body>
+</html>
