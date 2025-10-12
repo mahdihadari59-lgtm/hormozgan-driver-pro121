@@ -1,94 +1,89 @@
+#!/usr/bin/env node
+const inquirer = require("inquirer");
+const fs = require("fs");
+const path = require("path");
+const chalk = require("chalk");
 
- const recordTrip = async () => {
+const TRIPS_FILE = path.join(__dirname, "../data/trips.json");
+
+// 📦 اطمینان از وجود پوشه data
+const dataDir = path.join(__dirname, "../data");
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
+
+// 🚖 ثبت سفر جدید
+async function recordTrip() {
   const trip = await inquirer.prompt([
-    { type: 'input', name: 'from', message: '📍 از کجا؟' },
-    { type: 'input', name: 'to', message: '🎯 به کجا؟' },
-    {
-      type: 'input',
-      name: 'distance',
-      message: '🚘 چند کیلومتر؟',
-      validate: (v) => {
-        const num = parseFloat(v);
-        return !isNaN(num) && num > 0 ? true : 'لطفاً عدد معتبر وارد کن 🚗';
-      },
-    },
-    {
-      type: 'input',
-      name: 'price',
-      message: '💰 کرایه (تومان):',
-      validate: (v) => {
-        const num = parseFloat(v);
-        return !isNaN(num) && num >= 0 ? true : 'عدد معتبر وارد کن 💵';
-      },
-    },
+    { type: "input", name: "from", message: "📍 از کجا؟" },
+    { type: "input", name: "to", message: "🎯 به کجا؟" },
+    { type: "input", name: "distance", message: "🚘 چند کیلومتر؟" },
+    { type: "input", name: "price", message: "💰 کرایه (تومان):" },
+    { type: "input", name: "driver", message: "👨‍✈️ نام راننده:" },
   ]);
 
-  // ذخیره در فایل JSON
   const trips = fs.existsSync(TRIPS_FILE)
     ? JSON.parse(fs.readFileSync(TRIPS_FILE))
     : [];
 
-  trips.push({ ...trip, date: new Date().toLocaleString('fa-IR') });
+  trips.push({ ...trip, date: new Date().toISOString() });
+  fs.writeFileSync(TRIPS_FILE, JSON.stringify(trips, null, 2), "utf8");
 
-  fs.writeFileSync(TRIPS_FILE, JSON.stringify(trips, null, 2));
-  console.log(chalk.green('✅ سفر با موفقیت ثبت شد!'));
-};     name: 'fare', 
-      message: 'کرایه (تومان):',
-      validate: (v) => !isNaN(parseFloat(v)) && parseFloat(v) > 0 ? true : 'عدد وارد کنید'
-    }
+  console.log(chalk.green("✅ سفر با موفقیت ذخیره شد!"));
+}
+
+// 📜 مشاهده سفرهای ذخیره‌شده
+function showTrips() {
+  if (!fs.existsSync(TRIPS_FILE)) {
+    console.log(chalk.yellow("⚠️ هنوز سفری ثبت نشده است."));
+    return;
+  }
+
+  const trips = JSON.parse(fs.readFileSync(TRIPS_FILE, "utf8"));
+  console.log(chalk.cyan("\n📘 فهرست سفرها:\n"));
+  trips.forEach((t, i) => {
+    console.log(
+      chalk.white(
+        `${i + 1}. ${t.from} → ${t.to} | ${t.distance} km | ${t.price} تومان | راننده: ${t.driver} | تاریخ: ${new Date(
+          t.date
+        ).toLocaleString("fa-IR")}`
+      )
+    );
+  });
+  console.log();
+}
+
+// 🧭 منوی اصلی CLI
+async function mainMenu() {
+  const { action } = await inquirer.prompt([
+    {
+      type: "list",
+      name: "action",
+      message: "🚖 چه کاری می‌خواهید انجام دهید؟",
+      choices: [
+        { name: "➕ ثبت سفر جدید", value: "record" },
+        { name: "📜 مشاهده سفرها", value: "list" },
+        { name: "🚪 خروج", value: "exit" },
+      ],
+    },
   ]);
 
-  let trips = [];
-  try { trips = JSON.parse(fs.readFileSync(TRIPS_FILE, 'utf8')); } catch {}
+  if (action === "record") {
+    await recordTrip();
+  } else if (action === "list") {
+    showTrips();
+  } else {
+    console.log(chalk.blue("👋 خداحافظ!"));
+    process.exit(0);
+  }
 
-  trips.push({
-    from: trip.from, to: trip.to,
-    distance: parseFloat(trip.distance),
-    fare: parseFloat(trip.fare),
-    date: new Date().toISOString().split('T')[0],
-    time: new Date().toLocaleTimeString('fa-IR')
-  });
-
-  fs.writeFileSync(TRIPS_FILE, JSON.stringify(trips, null, 2));
-  console.log(chalk.green('\n✓ ثبت شد\n'));
-};
-
-const showTrips = () => {
-  try {
-    const trips = JSON.parse(fs.readFileSync(TRIPS_FILE, 'utf8'));
-    if (trips.length === 0) { console.log(chalk.yellow('\n⚠ خالی\n')); return; }
-
-    const table = new Table({ head: ['#', 'تاریخ', 'مبدا', 'مقصد', 'km', 'تومان'] });
-    let total = {fare: 0, km: 0};
-
-    trips.forEach((t, i) => {
-      table.push([i+1, t.date, t.from, t.to, t.distance, t.fare.toLocaleString('fa-IR')]);
-      total.fare += t.fare; total.km += t.distance;
-    });
-
-    console.log('\n' + table.toString());
-    console.log(chalk.cyan(`\n📊 ${trips.length} سفر | ${total.km} km | ${total.fare.toLocaleString('fa-IR')} تومان\n`));
-  } catch { console.log(chalk.yellow('\n⚠ خالی\n')); }
-};
-
-const mainMenu = async () => {
-  const {action} = await inquirer.prompt([{
-    type: 'list', name: 'action', message: 'عملیات:',
-    choices: [
-      { name: '📝 ثبت سفر', value: 'record' },
-      { name: '📋 لیست', value: 'list' },
-      { name: '🗑️ پاک', value: 'clear' },
-      { name: '❌ خروج', value: 'exit' }
-    ]
-  }]);
-
-  if (action === 'record') await recordTrip();
-  else if (action === 'list') showTrips();
-  else if (action === 'clear') { fs.writeFileSync(TRIPS_FILE, '[]'); console.log(chalk.green('\n✓ پاک شد\n')); }
-  else if (action === 'exit') { console.log(chalk.green('\n👋\n')); process.exit(0); }
-
-  await inquirer.prompt([{type: 'input', name: 'c', message: 'Enter...'}]);
+  // بعد از هر عملیات، دوباره منو را نمایش بده
   await mainMenu();
-};
+}
 
-mainMenu().catch(console.error)
+// ▶️ اجرای ایمن برنامه بدون خطای async سطح بالا
+(async () => {
+  try {
+    await mainMenu();
+  } catch (err) {
+    console.error(chalk.red("❌ خطا:", err.message));
+  }
+})();
