@@ -5,10 +5,7 @@ services:
     buildCommand: |
       pnpm install
       pnpm -r run build
-    startCommand: |
-      cd apps/driver-service && pnpm start
+    startCommand: cd apps/driver-service && pnpm start
     envVars:
       - key: NODE_ENV
         value: production
-    branches:
-      - main
