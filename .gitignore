@@ -1,29 +1,7 @@
-# Dependencies
 node_modules/
-package-lock.json
-yarn.lock
-
-# Environment
+npm-debug.log
 .env
-.env.local
-
-# Build
-dist/
-build/
+data/database.json
+logs/
 *.log
-
-# IDE
-.vscode/
-.idea/
-*.swp
-
-# OS
 .DS_Store
-Thumbs.db
-# Project specific
-packages/*/dist
-apps/*/dist
-*.tsbuildinfo
-
-# Local Netlify folder
-.netlify
