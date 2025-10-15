@@ -3,15 +3,14 @@
   "version": "2.0.0",
   "description": "Hormozgan Driver Pro - Professional Taxi Service Platform",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js",
-    "build": "tsc",
-    "start:prod": "node dist/main.js"
+    "dev": "node server.js"
   },
-  "keywords": ["taxi", "driver", "hormozgan", "ride-sharing"],
-  "author": "Mahdi Hadari",
-  "license": "ISC",
+  "keywords": ["taxi", "driver", "hormozgan", "ride-sharing", "iran"],
+  "author": "Mahdi Hadari <mahdihadari59@gmail.com>",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git"
@@ -19,5 +18,6 @@
   "bugs": {
     "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/issues"
   },
-  "homepage": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121#readme"
+  "homepage": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121#readme",
+  "dependencies": {}
 }
