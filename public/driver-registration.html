@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📝 ثبت‌نام راننده - Hormozgan Driver Pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        
+        .section-title {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .file-upload {
+            border: 2px dashed #667eea;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .file-upload:hover {
+            background: #f8f9fa;
+        }
+        
+        .file-upload input {
+            display: none;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #5568d3;
+        }
+        
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .success-message.show {
+            display: block;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 فرم ثبت‌نام راننده</h1>
+        
+        <form id="driverForm" onsubmit="submitForm(event)">
+            <!-- اطلاعات شخصی -->
+            <div class="form-section">
+                <h3 class="section-title">👤 اطلاعات شخصی</h3>
+                
+                <div class="form-group">
+                    <label>نام و نام خانوادگی *</label>
+                    <input type="text" required placeholder="مثال: علی محمدی">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>کد ملی *</label>
+                        <input type="text" required pattern="[0-9]{10}" placeholder="1234567890">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>تاریخ تولد *</label>
+                        <input type="text" required placeholder="1370/01/01">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>شماره موبایل *</label>
+                        <input type="tel" required pattern="09[0-9]{9}" placeholder="09121234567">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>ایمیل</label>
+                        <input type="email" placeholder="example@gmail.com">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>آدرس محل سکونت *</label>
+                    <textarea rows="3" required placeholder="آدرس کامل"></textarea>
+                </div>
+            </div>
+
+            <!-- اطلاعات خودرو -->
+            <div class="form-section">
+                <h3 class="section-title">🚗 اطلاعات خودرو</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>مدل خودرو *</label>
+                        <select required>
+                            <option value="">انتخاب کنید</option>
+                            <option>پژو 206</option>
+                            <option>پژو 207</option>
+                            <option>پژو پارس</option>
+                            <option>سمند</option>
+                            <option>دنا</option>
+                            <option>رانا</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>سال ساخت *</label>
+                        <select required>
+                            <option value="">انتخاب کنید</option>
+                            <option>1403</option>
+                            <option>1402</option>
+                            <option>1401</option>
+                            <option>1400</option>
+                            <option>1399</option>
+                            <option>1398</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>رنگ خودرو *</label>
+                        <input type="text" required placeholder="مثال: سفید">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>پلاک *</label>
+                        <input type="text" required placeholder="مثال: الف ۱۲ ایران ۳۴۵">
+                    </div>
+                </div>
+            </div>
+
+            <!-- مدارک -->
+            <div class="form-section">
+                <h3 class="section-title">📄 بارگذاری مدارک</h3>
+                
+                <div class="form-group">
+                    <label>گواهینامه *</label>
+                    <div class="file-upload" onclick="document.getElementById('license').click()">
+                        <input type="file" id="license" accept="image/*" required>
+                        <p>📷 کلیک برای آپلود</p>
+                        <small>فرمت: JPG, PNG - حداکثر 5MB</small>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>کارت خودرو *</label>
+                    <div class="file-upload" onclick="document.getElementById('carCard').click()">
+                        <input type="file" id="carCard" accept="image/*" required>
+                        <p>📷 کلیک برای آپلود</p>
+                        <small>فرمت: JPG, PNG - حداکثر 5MB</small>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">✅ ثبت درخواست</button>
+            
+            <div class="success-message" id="successMessage">
+                <h3>✅ ثبت‌نام شما با موفقیت انجام شد!</h3>
+                <p>پس از بررسی مدارک، از طریق پیامک با شما تماس خواهیم گرفت.</p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            
+            // Simulate form submission
+            const form = document.getElementById('driverForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Show success message
+            form.style.display = 'none';
+            successMessage.classList.add('show');
+            
+            // In real application, send data to backend
+            console.log('Form submitted successfully!');
+            
+            // Reset after 3 seconds
+            setTimeout(() => {
+                form.reset();
+                form.style.display = 'block';
+                successMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // File upload preview
+        document.querySelectorAll('.file-upload input').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const fileName = e.target.files[0]?.name;
+                if (fileName) {
+                    this.parentElement.querySelector('p').textContent = '✅ ' + fileName;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
