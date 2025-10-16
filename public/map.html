@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🗺️ نقشه - Hormozgan Driver Pro</title>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; }
+        
+        #map {
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        .info-panel {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .driver-popup {
+            text-align: center;
+        }
+        
+        .driver-popup h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .driver-popup .rating {
+            color: #ffc107;
+            font-size: 1.2em;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .status.available {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.busy {
+            background: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-panel">
+        <h3>🚕 رانندگان فعال</h3>
+        <p id="driverCount">در حال بارگذاری...</p>
+        <button onclick="refreshDrivers()" style="margin-top:10px; padding:10px; background:#667eea; color:white; border:none; border-radius:5px; cursor:pointer;">
+            🔄 به‌روزرسانی
+        </button>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Initialize map (Bandar Abbas coordinates)
+        const map = L.map('map').setView([27.1865, 56.2768], 13);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Custom driver icon
+        const driverIcon = L.icon({
+            iconUrl: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxOCIgZmlsbD0iIzY2N2VlYSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LXNpemU9IjIwIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPvCfmoU8L3RleHQ+PC9zdmc+',
+            iconSize: [40, 40],
+            iconAnchor: [20, 40],
+            popupAnchor: [0, -40]
+        });
+
+        let markers = [];
+
+        // Sample drivers data
+        const drivers = [
+            { id: 1, name: 'علی محمدی', lat: 27.1865, lng: 56.2768, rating: 4.8, status: 'available', car: 'پژو 206' },
+            { id: 2, name: 'حسن رضایی', lat: 27.1900, lng: 56.2800, rating: 4.9, status: 'busy', car: 'سمند' },
+            { id: 3, name: 'محمد احمدی', lat: 27.1850, lng: 56.2750, rating: 4.7, status: 'available', car: 'دنا' },
+            { id: 4, name: 'رضا کریمی', lat: 27.1920, lng: 56.2820, rating: 4.6, status: 'available', car: 'پژو پارس' }
+        ];
+
+        function addDriverMarkers() {
+            // Clear existing markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+
+            // Add new markers
+            drivers.forEach(driver => {
+                const marker = L.marker([driver.lat, driver.lng], { icon: driverIcon })
+                    .addTo(map)
+                    .bindPopup(`
+                        <div class="driver-popup">
+                            <h3>${driver.name}</h3>
+                            <p>🚗 ${driver.car}</p>
+                            <div class="rating">⭐ ${driver.rating}</div>
+                            <div class="status ${driver.status}">
+                                ${driver.status === 'available' ? '✅ آماده' : '🔴 مشغول'}
+                            </div>
+                        </div>
+                    `);
+                markers.push(marker);
+            });
+
+            // Update count
+            const availableCount = drivers.filter(d => d.status === 'available').length;
+            document.getElementById('driverCount').textContent = 
+                `${availableCount} راننده آماده از ${drivers.length} نفر`;
+        }
+
+        function refreshDrivers() {
+            // Simulate real-time updates
+            drivers.forEach(driver => {
+                driver.lat += (Math.random() - 0.5) * 0.002;
+                driver.lng += (Math.random() - 0.5) * 0.002;
+            });
+            addDriverMarkers();
+        }
+
+        // Initial load
+        addDriverMarkers();
+
+        // Auto refresh every 5 seconds
+        setInterval(refreshDrivers, 5000);
+    </script>
+</body>
+</html>

@@ -1,23 +1,32 @@
 {
   "name": "hormozgan-driver-pro",
   "version": "2.0.0",
-  "description": "Hormozgan Driver Pro - Professional Taxi Service Platform",
+  "description": "🚕 Hormozgan Driver Pro - Professional Taxi Service Platform for Hormozgan Province",
   "main": "server.js",
-  "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
   },
-  "keywords": ["taxi", "driver", "hormozgan", "ride-sharing", "iran"],
+  "keywords": [
+    "taxi",
+    "driver",
+    "hormozgan",
+    "ride-sharing",
+    "iran",
+    "bandar-abbas",
+    "transportation"
+  ],
   "author": "Mahdi Hadari <mahdihadari59@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git"
+    "url": "git+https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git"
   },
   "bugs": {
     "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/issues"
   },
-  "homepage": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121#readme",
-  "dependencies": {}
+  "homepage": "https://hormozgan-driver-pro.netlify.app",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

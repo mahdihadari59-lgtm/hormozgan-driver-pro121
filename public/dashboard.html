@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 داشبورد - Hormozgan Driver Pro</title>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-card .change {
+            color: #10b981;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .chart-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 داشبورد مدیریت</h1>
+        <p>آمار و گزارش‌های لحظه‌ای سیستم</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>👨‍✈️ رانندگان فعال</h3>
+            <div class="value">87</div>
+            <div class="change">↗ +12% از دیروز</div>
+        </div>
+        
+        <div class="stat-card">
+            <h3>🚗 سفرهای امروز</h3>
+            <div class="value">234</div>
+            <div class="change">↗ +8% از دیروز</div>
+        </div>
+        
+        <div class="stat-card">
+            <h3>💰 درآمد امروز</h3>
+            <div class="value">۲۳.۴M</div>
+            <div class="change">↗ +15% از دیروز</div>
+        </div>
+        
+        <div class="stat-card">
+            <h3>⭐ میانگین امتیاز</h3>
+            <div class="value">4.8</div>
+            <div class="change">↗ +0.2 از ماه قبل</div>
+        </div>
+    </div>
+
+    <div class="charts-grid">
+        <div class="chart-card">
+            <h2>📈 سفرهای هفته اخیر</h2>
+            <canvas id="ridesChart"></canvas>
+        </div>
+        
+        <div class="chart-card">
+            <h2>💰 درآمد هفتگی</h2>
+            <canvas id="revenueChart"></canvas>
+        </div>
+        
+        <div class="chart-card">
+            <h2>👨‍✈️ وضعیت رانندگان</h2>
+            <canvas id="driversChart"></canvas>
+        </div>
+        
+        <div class="chart-card">
+            <h2>🕐 ساعات شلوغی</h2>
+            <canvas id="peakHoursChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Rides Chart
+        new Chart(document.getElementById('ridesChart'), {
+            type: 'line',
+            data: {
+                labels: ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'],
+                datasets: [{
+                    label: 'تعداد سفر',
+                    data: [180, 210, 234, 198, 245, 267, 234],
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Revenue Chart
+        new Chart(document.getElementById('revenueChart'), {
+            type: 'bar',
+            data: {
+                labels: ['شنبه', 'یکشنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'جمعه'],
+                datasets: [{
+                    label: 'درآمد (میلیون تومان)',
+                    data: [18.5, 21.2, 23.4, 19.8, 24.5, 26.7, 23.4],
+                    backgroundColor: '#667eea'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // Drivers Status
+        new Chart(document.getElementById('driversChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['آنلاین', 'مشغول', 'آفلاین'],
+                datasets: [{
+                    data: [45, 42, 63],
+                    backgroundColor: ['#10b981', '#fbbf24', '#ef4444']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Peak Hours
+        new Chart(document.getElementById('peakHoursChart'), {
+            type: 'bar',
+            data: {
+                labels: ['6-9', '9-12', '12-15', '15-18', '18-21', '21-24'],
+                datasets: [{
+                    label: 'تعداد سفر',
+                    data: [45, 78, 56, 89, 123, 67],
+                    backgroundColor: '#764ba2'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } }
+            }
+        });
+    </script>
+</body>
+</html>
