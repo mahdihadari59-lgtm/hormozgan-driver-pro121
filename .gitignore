@@ -1,39 +1,5 @@
-# Dependencies
 node_modules/
-package-lock.json
-pnpm-lock.yaml
-yarn.lock
-
-# Build
-dist/
-build/
-*.tsbuildinfo
-
-# Environment
 .env
-.env.local
-.env.*.local
-
-# Database
-data/database.json
-*.db
-*.sqlite
-
-# Logs
-logs/
+data/*.sqlite
 *.log
-npm-debug.log*
-
-# OS
 .DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Netlify
-.netlify/

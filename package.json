@@ -1,32 +1,22 @@
 {
   "name": "hormozgan-driver-pro",
   "version": "2.0.0",
-  "description": "🚕 Hormozgan Driver Pro - Professional Taxi Service Platform for Hormozgan Province",
-  "main": "server.js",
+  "description": "سامانه هوشمند مدیریت رانندگان استان هرمزگان",
+  "main": "src/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "init-db": "node src/database/init.js"
   },
-  "keywords": [
-    "taxi",
-    "driver",
-    "hormozgan",
-    "ride-sharing",
-    "iran",
-    "bandar-abbas",
-    "transportation"
-  ],
-  "author": "Mahdi Hadari <mahdihadari59@gmail.com>",
+  "keywords": ["hormozgan", "driver", "taxi", "iran"],
+  "author": "Mahdi Hadari",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/issues"
-  },
-  "homepage": "https://hormozgan-driver-pro.netlify.app",
-  "engines": {
-    "node": ">=18.0.0"
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^9.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
   }
 }
