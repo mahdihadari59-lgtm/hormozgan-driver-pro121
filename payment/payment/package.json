@@ -1,0 +1,14 @@
+{
+  "name": "payment-service",
+  "version": "1.0.0",
+  "description": "Payment system for Hormozgan Driver Pro",
+  "main": "payment-server.js",
+  "scripts": {
+    "start": "node payment-server.js",
+    "dev": "node payment-server.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "express": "^4.18.0"
+  }
+}
