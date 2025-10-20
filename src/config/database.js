@@ -1,17 +1,24 @@
-const Database = require('better-sqlite3');
-const path = require('path');
-const fs = require('fs');
+import initSqlJs from "sql.js";
+import fs from "fs";
 
-const dataDir = path.join(__dirname, '../../data');
-if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
-}
+let db = null;
 
-const dbPath = path.join(dataDir, 'database.sqlite');
-const db = new Database(dbPath);
+const initDB = async () => {
+  const SQL = await initSqlJs({
+    locateFile: file => `https://sql.js.org/dist/${file}`
+  });
 
-db.pragma('foreign_keys = ON');
+  const filePath = "./database.db";
 
-console.log('✅ Database connected:', dbPath);
+  if (fs.existsSync(filePath)) {
+    const fileBuffer = fs.readFileSync(filePath);
+    db = new SQL.Database(fileBuffer);
+  } else {
+    db = new SQL.Database();
+  }
 
-module.exports = db;
+  console.log("📀 Database loaded (sql.js)");
+  return db;
+};
+
+export default initDB;
