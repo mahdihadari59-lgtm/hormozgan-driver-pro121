@@ -1,5 +1,29 @@
+# Dependencies
 node_modules/
+npm-debug.log*
+package-lock.json
+
+# Environment
 .env
-data/*.sqlite
+.env.local
+.env.*.local
+
+# Build
+dist/
+build/
 *.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 .DS_Store
+
+# Test
+coverage/
+.nyc_output/
+
+# Temp
+*.tmp
+temp/
