@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧮 محاسبه کرایه - Hormozgan Driver Pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; background: #f5f7fa; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .calculator { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; color: #666; }
+        input, select { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            font-size: 16px;
+        }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background: #667eea; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer;
+        }
+        .result { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background: #10b981; 
+            color: white; 
+            border-radius: 5px; 
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧮 محاسبه کرایه</h1>
+        <p>محاسبه دقیق قیمت سفر</p>
+    </div>
+    <div class="calculator">
+        <div class="input-group">
+            <label>مسافت (کیلومتر)</label>
+            <input type="number" id="distance" placeholder="مثلاً 5">
+        </div>
+        <div class="input-group">
+            <label>نوع سرویس</label>
+            <select id="serviceType">
+                <option value="economy">اقتصادی</option>
+                <option value="comfort"> confort</option>
+                <option value="premium">پریمیوم</option>
+            </select>
+        </div>
+        <button onclick="calculateFare()">محاسبه کرایه</button>
+        <div class="result" id="result">
+            <h3>💰 قیمت سفر: <span id="price">0</span> تومان</h3>
+        </div>
+    </div>
+
+    <script>
+        function calculateFare() {
+            const distance = document.getElementById('distance').value;
+            const serviceType = document.getElementById('serviceType').value;
+            
+            if (!distance) {
+                alert('لطفا مسافت را وارد کنید');
+                return;
+            }
+            
+            // محاسبه قیمت
+            let basePrice = 10000; // پایه
+            let pricePerKm = 2000; // هر کیلومتر
+            
+            if (serviceType === 'comfort') pricePerKm = 3000;
+            if (serviceType === 'premium') pricePerKm = 5000;
+            
+            const totalPrice = basePrice + (distance * pricePerKm);
+            
+            // نمایش نتیجه
+            document.getElementById('price').textContent = totalPrice.toLocaleString();
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

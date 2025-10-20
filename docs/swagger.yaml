@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: Hormozgan Driver Pro API
+  version: 2.0.0-beta1
+  description: API برای پلتفرم حمل و نقل هوشمند استان هرمزگان
+
+servers:
+  - url: http://localhost:3000
+    description: توسعه
+  - url: https://api.hormozgandriver.pro
+    description: تولید
+
+paths:
+  /payment/request:
+    post:
+      summary: ایجاد درخواست پرداخت جدید
+      tags:
+        - Payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  example: 15000
+                  description: مبلغ به تومان
+                description:
+                  type: string
+                  example: "پرداخت سفر از بندرعباس به قشم"
+                mobile:
+                  type: string
+                  example: "09123456789"
+      responses:
+        '200':
+          description: موفق
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  paymentId:
+                    type: string
+                  authority:
+                    type: string
+                  paymentUrl:
+                    type: string
+
+  /drivers/nearby:
+    get:
+      summary: دریافت رانندگان نزدیک
+      tags:
+        - Drivers
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          schema:
+            type: number
+            example: 27.1832
+        - name: lng
+          in: query
+          required: true
+          schema:
+            type: number
+            example: 56.2666
+        - name: radius
+          in: query
+          schema:
+            type: number
+            example: 5
+      responses:
+        '200':
+          description: لیست رانندگان
