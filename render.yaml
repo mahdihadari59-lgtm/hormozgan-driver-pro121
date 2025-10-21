@@ -1,11 +1,38 @@
 services:
   - type: web
-    name: hormozgan-driver-pro121
+    name: hormozgan-driver-api
     env: node
-    buildCommand: |
-      pnpm install
-      pnpm -r run build
-    startCommand: cd apps/driver-service && pnpm start
+    region: frankfurt
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 3000
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+
+  - type: web
+    name: hormozgan-payment-service
+    env: node
+    region: frankfurt
+    plan: free
+    buildCommand: npm install
+    startCommand: node payment-server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: ZARINPAL_MERCHANT_ID
+        sync: false
+
+databases:
+  - name: hormozgan-db
+    databaseName: hormozgan_driver
+    user: hormozgan_user
+    plan: free
