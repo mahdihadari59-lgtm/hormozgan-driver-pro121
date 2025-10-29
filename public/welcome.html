@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>خوش آمدید | Hormozgan Driver Pro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',sans-serif;}
+body{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  color:#fff; display:flex; align-items:center; justify-content:center;
+  flex-direction:column; height:100vh; overflow:hidden;
+  animation:fadeIn 1.2s ease-in-out;
+}
+h1{font-size:2rem;margin-bottom:10px;animation:fadeDown 1.2s;}
+p{font-size:1rem;color:#cbd5e1;animation:fadeUp 1.6s;}
+.btn{
+  margin-top:30px; background:#facc15; color:#000; border:none;
+  padding:14px 26px; border-radius:12px; font-weight:bold;
+  font-size:1.1rem; cursor:pointer; transition:0.3s;
+  animation:fadeUp 2s;
+}
+.btn:hover{background:#fde047;transform:scale(1.05);}
+.car{
+  position:absolute; bottom:60px; left:-200px;
+  font-size:2.8rem; animation:drive 6s linear infinite;
+}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes drive{
+  0%{left:-200px;}
+  50%{left:calc(100% + 50px);}
+  100%{left:-200px;}
+}
+footer{
+  position:absolute; bottom:15px; font-size:0.8rem;
+  color:#94a3b8;
+}
+</style>
+</head>
+<body>
+  <h1>🚖 Hormozgan Driver Pro</h1>
+  <p>به سامانه هوشمند رانندگان استان هرمزگان خوش آمدید</p>
+  <button class="btn" onclick="goDashboard()">ورود به داشبورد</button>
+  <div class="car">🚗💨</div>
+  <footer>© 2025 Hormozgan Driver Pro — تمامی حقوق محفوظ است.</footer>
+
+  <script>
+  function goDashboard(){
+    document.body.style.opacity = 0;
+    setTimeout(()=>window.location.href='index.html',700);
+  }
+  </script>
+</body>
+</html>

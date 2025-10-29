@@ -1,145 +1,165 @@
-// 🚀 Hormozgan Driver API - Production Ready
-require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+const path = require('path');
+const dotenv = require('dotenv');
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// ====================================
 // Middleware
-// ====================================
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS Configuration
-app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS || '*',
-  credentials: true
-}));
-
-// Logging
+// CORS middleware
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
-  next();
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
 });
 
-// ====================================
-// Health Check Endpoint
-// ====================================
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'سرور فعال است ✅',
-    timestamp: new Date().toISOString(),
-    uptime: Math.floor(process.uptime()) + ' seconds',
-    environment: process.env.NODE_ENV || 'development'
-  });
-});
+// ==================== ROUTES ====================
 
-// ====================================
-// Main Routes
-// ====================================
+// Home page
 app.get('/', (req, res) => {
-  res.json({
-    message: '🚗 پلتفرم هوشمند تاکسی‌یابی هرمزگان',
-    version: '2.0.0-beta1',
-    endpoints: {
-      health: '/health',
-      api: '/api',
-      docs: '/api/docs'
-    }
-  });
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// API Status
-app.get('/api', (req, res) => {
-  res.json({
-    status: 'running',
-    message: 'API فعال است',
-    services: {
-      auth: 'active',
-      driver: 'active',
-      payment: 'active'
-    }
-  });
+// Dashboard
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
-// ====================================
-// Import Routes (اگه داری)
-// ====================================
-// const authRoutes = require('./src/api/auth.routes');
-// const driverRoutes = require('./src/api/driver.routes');
-// app.use('/api/auth', authRoutes);
-// app.use('/api/drivers', driverRoutes);
+// Map page
+app.get('/map', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'map.html'));
+});
 
-// ====================================
-// Error Handling
-// ====================================
+// ==================== API ROUTES ====================
+
+// Health Check
+app.get('/health', (req, res) => {
+    res.json({
+        status: 'ok',
+        message: 'سرور Hormozgan Driver Pro فعال است',
+        timestamp: new Date().toISOString(),
+        version: '2.1.0'
+    });
+});
+
+// Dashboard Statistics
+app.get('/api/dashboard/stats', (req, res) => {
+    res.json({
+        totalDrivers: 156,
+        onlineDrivers: 42,
+        activeTrips: 18,
+        totalEarnings: 12540000,
+        systemStatus: 'operational'
+    });
+});
+
+// Nearby Drivers - برای نقشه
+app.get('/api/drivers/nearby', (req, res) => {
+    const lat = parseFloat(req.query.lat) || 27.1832;
+    const lng = parseFloat(req.query.lng) || 56.2666;
+    
+    const drivers = [
+        {
+            id: 1,
+            name: "رضا محمدی",
+            lat: lat + (Math.random() - 0.5) * 0.02,
+            lng: lng + (Math.random() - 0.5) * 0.02,
+            rating: 4.8,
+            vehicle: "پراید سفید",
+            status: "online"
+        },
+        {
+            id: 2,
+            name: "علی کریمی", 
+            lat: lat + (Math.random() - 0.5) * 0.02,
+            lng: lng + (Math.random() - 0.5) * 0.02,
+            rating: 4.9,
+            vehicle: "پژو 206",
+            status: "online"
+        },
+        {
+            id: 3,
+            name: "محمد حسینی",
+            lat: lat + (Math.random() - 0.5) * 0.02,
+            lng: lng + (Math.random() - 0.5) * 0.02,
+            rating: 4.7,
+            vehicle: "سمند",
+            status: "online"
+        },
+        {
+            id: 4,
+            name: "احمد قریشی",
+            lat: lat + (Math.random() - 0.5) * 0.02,
+            lng: lng + (Math.random() - 0.5) * 0.02,
+            rating: 4.6,
+            vehicle: "تیبا",
+            status: "online"
+        }
+    ];
+    
+    res.json({
+        success: true,
+        drivers: drivers,
+        count: drivers.length
+    });
+});
+
+// Online Drivers List
+app.get('/api/drivers/online', (req, res) => {
+    res.json({
+        success: true,
+        drivers: [
+            { id: 1, name: "رضا محمدی", location: "بندرعباس", rating: 4.8 },
+            { id: 2, name: "علی کریمی", location: "قشم", rating: 4.9 },
+            { id: 3, name: "محمد حسینی", location: "میناب", rating: 4.7 },
+            { id: 4, name: "احمد قریشی", location: "بندرعباس", rating: 4.6 }
+        ]
+    });
+});
+
+// Route Calculation
+app.post('/api/route/calculate', (req, res) => {
+    const { startLat, startLng, endLat, endLng } = req.body;
+    
+    // محاسبه فاصله
+    const distance = Math.random() * 20 + 5; // 5-25 km
+    const duration = Math.round((distance / 40) * 60);
+    const cost = Math.round(distance * 10000);
+    
+    res.json({
+        success: true,
+        distance: distance.toFixed(2),
+        duration: duration,
+        estimatedCost: cost
+    });
+});
+
 // 404 Handler
 app.use((req, res) => {
-  res.status(404).json({
-    error: 'Not Found',
-    message: 'مسیر مورد نظر یافت نشد',
-    path: req.path
-  });
+    res.status(404).json({
+        error: "صفحه مورد نظر یافت نشد",
+        path: req.path
+    });
 });
 
-// Global Error Handler
-app.use((err, req, res, next) => {
-  console.error('❌ خطا:', err.stack);
-  res.status(err.status || 500).json({
-    error: 'Server Error',
-    message: err.message || 'خطای سرور',
-    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-  });
+// ==================== START SERVER ====================
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`
+✨ ========================================
+🚀 سرور Hormozgan Driver Pro راه‌اندازی شد
+📍 پورت: ${PORT}
+🌍 آدرس: http://localhost:${PORT}
+🗺️ نقشه: http://localhost:${PORT}/map
+📊 داشبورد: http://localhost:${PORT}/dashboard
+🏥 سلامت: http://localhost:${PORT}/health
+✨ ========================================
+    `);
 });
-
-// ====================================
-// Server Configuration
-// ====================================
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || '0.0.0.0';
-
-const server = app.listen(PORT, HOST, () => {
-  console.log('\n🚀 سرور با موفقیت راه‌اندازی شد!');
-  console.log(`📍 آدرس: http://localhost:${PORT}`);
-  console.log(`🏥 Health Check: http://localhost:${PORT}/health`);
-  console.log(`🌍 محیط: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`⏰ زمان: ${new Date().toLocaleString('fa-IR')}\n`);
-});
-
-// ====================================
-// Graceful Shutdown
-// ====================================
-const gracefulShutdown = (signal) => {
-  console.log(`\n⚠️  دریافت سیگنال ${signal}`);
-  console.log('🔄 در حال خاموش کردن سرور...');
-  
-  server.close(() => {
-    console.log('✅ سرور با موفقیت خاموش شد');
-    process.exit(0);
-  });
-  
-  // اگه بعد 10 ثانیه بسته نشد، force close
-  setTimeout(() => {
-    console.error('⛔ خاموش کردن اجباری سرور');
-    process.exit(1);
-  }, 10000);
-};
-
-process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
-process.on('SIGINT', () => gracefulShutdown('SIGINT'));
-
-// Unhandled Promise Rejection
-process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled Rejection:', reason);
-  server.close(() => process.exit(1));
-});
-
-// Uncaught Exception
-process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught Exception:', error);
-  server.close(() => process.exit(1));
-});
-
-module.exports = app;
