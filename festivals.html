@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎉 جشن‌ها و مناسبت‌های بومی | Hormozgan Driver Pro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Vazirmatn', sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: white;
+  min-height: 100vh;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  padding: 15px;
+  text-align: center;
+  font-size: 1.3em;
+  color: #38bdf8;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+}
+
+.icon {
+  font-size: 2.5em;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  opacity: 0.9;
+}
+
+.title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #f0f9ff;
+  margin-top: 10px;
+}
+
+.desc {
+  color: #d1d5db;
+  font-size: 0.95em;
+  margin-top: 8px;
+  line-height: 1.6em;
+}
+
+.info {
+  margin-top: 12px;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  color: #a5f3fc;
+}
+
+.discount {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.local {
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: #86efac;
+  font-size: 0.8em;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+
+footer {
+  text-align: center;
+  color: #94a3b8;
+  padding: 15px;
+  font-size: 0.9em;
+  margin-top: 20px;
+}
+
+.btn-back {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(45deg, #38bdf8, #2563eb);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 1.6em;
+  box-shadow: 0 0 20px rgba(56,189,248,0.4);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-back:hover {
+  transform: scale(1.1);
+  background: linear-gradient(45deg, #0ea5e9, #1e40af);
+}
+</style>
+</head>
+<body>
+<header>🎊 جشن‌ها و مناسبت‌های بومی هرمزگان</header>
+
+<div class="container" id="festivalContainer"></div>
+
+<footer>Hormozgan Driver Pro © 2025</footer>
+
+<button class="btn-back" onclick="window.location.href='/passenger-request.html'">🚕</button>
+
+<script>
+const festivals = [
+  {date: '08-20', title: 'جشن نوروز ماهیگیری', icon: '🎣', discount: 20, desc: 'تقدیر از ماهیگیران و صیادان خلیج فارس', isLocal: true},
+  {date: '09-01', title: 'جشنواره هنرهای دستی بافت', icon: '🧵', discount: 15, desc: 'نمایش سوزن‌دوزی و بافت‌های سنتی زنان هرمزگانی', isLocal: true},
+  {date: '09-15', title: 'جشنواره انار و محصولات باغی', icon: '🍊', discount: 20, desc: 'جشن برداشت انار و مرکبات دوفین آب‌حاجی', isLocal: true},
+  {date: '10-05', title: 'جشن چشمه‌های گرم و گرمابه', icon: '♨️', discount: 25, desc: 'سفر به چشمه‌های آب گرم طبیعی', isLocal: true},
+  {date: '10-15', title: 'جشنواره عروسی‌ها و حنا بومی', icon: '💍', discount: 30, desc: 'نمایش آداب و مراسم عروسی‌های سنتی', isLocal: true},
+  {date: '10-25', title: 'جشنواره دلفین‌های خلیج فارس', icon: '🐬', discount: 35, desc: 'تماشای دلفین‌ها در آب‌های جزیره کیش و هنگام', isLocal: true},
+  {date: '11-01', title: 'جشنواره تاریخ کنج', icon: '🏛️', discount: 20, desc: 'بازدید از بناهای تاریخی و میراث فرهنگی', isLocal: true},
+  {date: '11-10', title: 'جنگل‌های حیرا قشم', icon: '🌿', discount: 25, desc: 'گشت در جنگل‌های حرای قشم و بوتیریا جنگل', isLocal: true},
+  {date: '12-10', title: 'ستاره‌گان نهد', icon: '⭐', discount: 30, desc: 'نهد ستاره‌گان قشم - شگفتی زمین‌شناسی', isLocal: true},
+  {date: '12-25', title: 'جشن سال نو میلادی در کیش', icon: '🎆', discount: 35, desc: 'جشن پایان سال در جزیره مرجانی کیش', isLocal: false}
+];
+
+const container = document.getElementById('festivalContainer');
+festivals.forEach(f => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="icon">${f.icon}</div>
+    <div class="title">${f.title}</div>
+    <div class="desc">${f.desc}</div>
+    <div class="info">
+      <span>📅 ${f.date}</span>
+      <span class="discount">تخفیف ${f.discount}%</span>
+    </div>
+    ${f.isLocal ? `<div class="local">بومی هرمزگان</div>` : ''}
+  `;
+  container.appendChild(card);
+});
+</script>
+</body>
+</html>

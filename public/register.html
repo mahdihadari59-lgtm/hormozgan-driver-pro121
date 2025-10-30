@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ثبت‌نام | Hormozgan Driver Pro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  text-align: center;
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+h1 {
+  text-align: center;
+  color: #38bdf8;
+  margin-bottom: 25px;
+  font-size: 1.8em;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.tab {
+  flex: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  font-weight: 600;
+}
+
+.tab.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: #64748b;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 1em;
+  transition: all 0.3s;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #38bdf8;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(45deg, #2563eb, #38bdf8);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #1e40af, #0ea5e9);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+}
+
+.btn-primary:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: #64748b;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+  padding: 0 15px;
+}
+
+.link {
+  text-align: center;
+  color: #38bdf8;
+  text-decoration: none;
+  display: block;
+  margin-top: 15px;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: #0ea5e9;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  display: none;
+}
+
+.alert.success {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+.alert.error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.password-strength {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.password-strength-bar {
+  height: 100%;
+  width: 0%;
+  transition: all 0.3s;
+}
+
+.strength-weak { background: #ef4444; width: 33%; }
+.strength-medium { background: #f59e0b; width: 66%; }
+.strength-strong { background: #22c55e; width: 100%; }
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 1.5em;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="logo">🚖</div>
+  <h1>Hormozgan Driver Pro</h1>
+  
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('passenger')">👤 مسافر</div>
+    <div class="tab" onclick="switchTab('driver')">🚗 راننده</div>
+  </div>
+
+  <div id="alert" class="alert"></div>
+
+  <!-- فرم ثبت‌نام -->
+  <form id="registerForm" onsubmit="handleRegister(event)">
+    
+    <div class="form-group">
+      <label>👤 نام و نام خانوادگی</label>
+      <div class="input-wrapper">
+        <span class="input-icon">📝</span>
+        <input type="text" id="fullname" placeholder="مثال: محمد رضایی" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>📱 شماره موبایل</label>
+      <div class="input-wrapper">
+        <span class="input-icon">📞</span>
+        <input type="tel" id="phone" placeholder="09123456789" pattern="09[0-9]{9}" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>📧 ایمیل (اختیاری)</label>
+      <div class="input-wrapper">
+        <span class="input-icon">✉️</span>
+        <input type="email" id="email" placeholder="example@email.com">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>🔐 رمز عبور</label>
+      <div class="input-wrapper">
+        <span class="input-icon">🔒</span>
+        <input type="password" id="password" placeholder="حداقل 6 کاراکتر" minlength="6" required oninput="checkPasswordStrength()">
+      </div>
+      <div class="password-strength">
+        <div id="strengthBar" class="password-strength-bar"></div>
+      </div>
+    </div>
+
+    <!-- فیلدهای اضافی راننده -->
+    <div id="driverFields" style="display: none;">
+      <div class="form-group">
+        <label>🚗 نوع خودرو</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🚙</span>
+          <select id="carType">
+            <option value="">انتخاب کنید</option>
+            <option value="پراید">پراید</option>
+            <option value="پژو 206">پژو 206</option>
+            <option value="پژو 405">پژو 405</option>
+            <option value="سمند">سمند</option>
+            <option value="تیبا">تیبا</option>
+            <option value="دنا">دنا</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>🔢 پلاک خودرو</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🚘</span>
+          <input type="text" id="carPlate" placeholder="مثال: ایران ۱۲الف۳۴۵">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>📄 شماره گواهینامه</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🎫</span>
+          <input type="text" id="licenseNumber" placeholder="شماره گواهینامه">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-primary" id="submitBtn">
+      ✅ ثبت‌نام
+    </button>
+
+    <div class="divider">
+      <span>یا</span>
+    </div>
+
+    <a href="/login.html" class="link">قبلاً ثبت‌نام کرده‌اید؟ ورود به حساب</a>
+    <a href="/" class="link">🏠 بازگشت به صفحه اصلی</a>
+  </form>
+
+</div>
+
+<script>
+let userType = 'passenger';
+
+function switchTab(type) {
+  userType = type;
+  
+  // تغییر استایل تب‌ها
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  // نمایش/مخفی کردن فیلدهای راننده
+  const driverFields = document.getElementById('driverFields');
+  if (type === 'driver') {
+    driverFields.style.display = 'block';
+    document.getElementById('carType').required = true;
+    document.getElementById('carPlate').required = true;
+    document.getElementById('licenseNumber').required = true;
+  } else {
+    driverFields.style.display = 'none';
+    document.getElementById('carType').required = false;
+    document.getElementById('carPlate').required = false;
+    document.getElementById('licenseNumber').required = false;
+  }
+}
+
+function checkPasswordStrength() {
+  const password = document.getElementById('password').value;
+  const strengthBar = document.getElementById('strengthBar');
+  
+  strengthBar.className = 'password-strength-bar';
+  
+  if (password.length < 6) {
+    strengthBar.classList.add('strength-weak');
+  } else if (password.length < 10) {
+    strengthBar.classList.add('strength-medium');
+  } else {
+    strengthBar.classList.add('strength-strong');
+  }
+}
+
+function showAlert(message, type) {
+  const alert = document.getElementById('alert');
+  alert.textContent = message;
+  alert.className = `alert ${type}`;
+  alert.style.display = 'block';
+  
+  setTimeout(() => {
+    alert.style.display = 'none';
+  }, 5000);
+}
+
+async function handleRegister(e) {
+  e.preventDefault();
+  
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '⏳ در حال ثبت‌نام...';
+  
+  const data = {
+    fullname: document.getElementById('fullname').value,
+    phone: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    password: document.getElementById('password').value,
+    userType: userType
+  };
+  
+  if (userType === 'driver') {
+    data.carType = document.getElementById('carType').value;
+    data.carPlate = document.getElementById('carPlate').value;
+    data.licenseNumber = document.getElementById('licenseNumber').value;
+  }
+  
+  try {
+    const response = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      showAlert('✅ ثبت‌نام با موفقیت انجام شد! در حال انتقال...', 'success');
+      
+      // ذخیره توکن
+      if (result.token) {
+        localStorage.setItem('token', result.token);
+        localStorage.setItem('user', JSON.stringify(result.user));
+      }
+      
+      setTimeout(() => {
+        if (userType === 'driver') {
+          window.location.href = '/driver-dashboard.html';
+        } else {
+          window.location.href = '/';
+        }
+      }, 1500);
+    } else {
+      showAlert('❌ ' + result.error, 'error');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '✅ ثبت‌نام';
+    }
+  } catch (error) {
+    showAlert('❌ خطا در اتصال به سرور', 'error');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '✅ ثبت‌نام';
+  }
+}
+</script>
+
+</body>
+</html>

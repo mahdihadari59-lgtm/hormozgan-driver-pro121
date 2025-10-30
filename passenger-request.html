@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>درخواست سفر جدید | Hormozgan Driver Pro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Vazirmatn', sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 25px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  text-align: center;
+  font-size: 1.6em;
+  margin-bottom: 25px;
+  color: #38bdf8;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1em;
+}
+
+textarea { resize: none; }
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(45deg, #2563eb, #38bdf8);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #1e40af, #0ea5e9);
+  transform: scale(1.03);
+}
+
+.btn-glass {
+  display: block;
+  margin: 15px auto 0;
+  text-align: center;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  color: #38bdf8;
+  font-weight: bold;
+  text-decoration: none;
+  backdrop-filter: blur(6px);
+  transition: 0.3s;
+}
+
+.btn-glass:hover {
+  background: rgba(56,189,248,0.25);
+  transform: scale(1.05);
+}
+
+.driver-match {
+  display: none;
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3);
+  border-radius: 12px;
+  animation: fadeIn 0.5s ease;
+}
+
+.driver-match.show { display: block; }
+
+.driver-info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.driver-avatar {
+  font-size: 2.2em;
+  margin-left: 15px;
+}
+
+.driver-details {
+  flex: 1;
+  text-align: right;
+}
+
+.driver-name { font-weight: bold; color: #fff; margin-bottom: 5px; }
+.driver-rating { color: #fbbf24; }
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.85em;
+  color: #9ca3af;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🚖 درخواست سفر جدید</h1>
+
+<form onsubmit="requestRide(event)">
+<div class="form-group">
+<label>📍 محل فعلی شما</label>
+<input type="text" id="pickup" placeholder="مثال: میدان آزادی، بندرعباس" required>
+</div>
+
+<div class="form-group">
+<label>🎯 مقصد</label>
+<input type="text" id="destination" placeholder="مثال: فرودگاه بین‌المللی" required>
+</div>
+
+<div class="form-group">
+<label>📱 شماره تماس</label>
+<input type="tel" id="phone" placeholder="09123456789" pattern="09[0-9]{9}" required>
+</div>
+
+<div class="form-group">
+<label>💬 توضیحات (اختیاری)</label>
+<textarea id="notes" rows="3" placeholder="توضیحات اضافی برای راننده..."></textarea>
+</div>
+
+<button type="submit" class="btn-primary">
+🔍 جستجو راننده با هوش مصنوعی
+</button>
+</form>
+
+<div class="driver-match" id="driverMatch">
+<h3 style="color:#22c55e">✅ راننده پیدا شد!</h3>
+<div class="driver-info">
+<div class="driver-avatar">👨‍✈️</div>
+<div class="driver-details">
+<div class="driver-name">محمد رضایی</div>
+<div class="driver-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+<div style="color:#cbd5e1;font-size:0.9em">پژو ۲۰۶ سفید - ایران ۱۲الف۳۴۵</div>
+</div>
+</div>
+<p style="color:#a7f3d0">زمان تخمینی رسیدن: <strong>۵ دقیقه</strong><br>
+هزینه تخمینی: <strong id="estimatedFare">۳۵,۰۰۰ تومان</strong></p>
+<button class="btn-primary" onclick="confirmRide()">✅ تایید و شروع سفر</button>
+</div>
+
+<a href="/festivals" class="btn-glass">🎉 مشاهده جشن‌ها و مناسبت‌های بومی</a>
+
+<footer>Hormozgan Driver Pro © 2025</footer>
+</div>
+
+<script>
+function requestRide(e) {
+  e.preventDefault();
+  document.getElementById('driverMatch').classList.add('show');
+  const randomFare = Math.floor(Math.random() * 30000) + 25000;
+  document.getElementById('estimatedFare').textContent = 
+    randomFare.toLocaleString() + ' تومان';
+}
+
+function confirmRide() {
+  alert('✅ سفر شما تایید شد!\n🚗 راننده در راه است\n📍 زمان رسیدن: ۵ دقیقه');
+}
+</script>
+</body>
+</html>
