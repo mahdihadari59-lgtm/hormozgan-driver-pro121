@@ -1,8 +1,55 @@
-<html><body><h1>Hormozgan Driver Test</h1></body></html>
-<a href="music-player/" class="nav-btn">🎵 پلیر موزیک</a>
-<a href="/music-player/" class="nav-card">
-    <div style="text-align: center;">
-        <div style="font-size: 2em;">🎵</div>
-        <div>پلیر موزیک</div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hormozgan Driver Pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Tahoma; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; text-align: center; }
+        .header { padding: 40px 0; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0; }
+        .menu-item { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; text-decoration: none; color: white; transition: 0.3s; }
+        .menu-item:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
+        .status { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 Hormozgan Driver Pro v5.0</h1>
+            <p>سامانه کامل رانندگان حرفه‌ای هرمزگان</p>
+        </div>
+        
+        <div class="menu">
+            <a href="/music" class="menu-item">🎵 موزیک پلیر</a>
+            <a href="/calls" class="menu-item">📞 سیستم تماس</a>
+            <a href="/ai-chat" class="menu-item">🤖 چت هوش مصنوعی</a>
+            <a href="/driver-profile" class="menu-item">👤 پروفایل راننده</a>
+            <a href="/map" class="menu-item">🗺️ نقشه آنلاین</a>
+            <a href="/festivals" class="menu-item">🎉 جشن‌های بومی</a>
+        </div>
+        
+        <div class="status">
+            <p>✅ سرور فعال - پورت 3000</p>
+            <p>🕐 آخرین بروزرسانی: <span id="time"></span></p>
+        </div>
     </div>
-</a>
+
+    <script>
+        document.getElementById('time').textContent = new Date().toLocaleString('fa-IR');
+        
+        // تست اتصال به سرور
+        fetch('/api/status')
+            .then(response => response.json())
+            .then(data => {
+                console.log('✅ سرور فعال:', data);
+            })
+            .catch(error => {
+                console.log('❌ خطا در اتصال به سرور');
+            });
+    </script>
+</body>
+</html>

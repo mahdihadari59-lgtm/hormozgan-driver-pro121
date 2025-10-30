@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موزیک پلیر - Hormozgan Driver Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tahoma', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .player-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .now-playing {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .album-art {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #fd746c, #ff9068);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .play-btn {
+            background: #27ae60;
+            width: 70px;
+            height: 70px;
+        }
+        
+        .progress-container {
+            background: rgba(255, 255, 255, 0.2);
+            height: 6px;
+            border-radius: 3px;
+            margin: 20px 0;
+            cursor: pointer;
+        }
+        
+        .progress {
+            background: #27ae60;
+            height: 100%;
+            width: 30%;
+            border-radius: 3px;
+        }
+        
+        .playlist {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .song-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease;
+        }
+        
+        .song-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .song-info {
+            flex: 1;
+        }
+        
+        .song-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .song-artist {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .upload-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 موزیک پلیر</h1>
+            <p>سیستم پخش موزیک پیشرفته</p>
+        </div>
+        
+        <div class="player-container">
+            <div class="now-playing">
+                <div class="album-art">
+                    <i class="fas fa-music"></i>
+                </div>
+                <h2 id="nowPlayingTitle">آهنگ انتخاب نشده</h2>
+                <p id="nowPlayingArtist">هنرمند</p>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress"></div>
+            </div>
+            
+            <div class="controls">
+                <button class="control-btn" onclick="previousSong()">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="control-btn play-btn" onclick="togglePlay()">
+                    <i class="fas fa-play" id="playIcon"></i>
+                </button>
+                <button class="control-btn" onclick="nextSong()">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="playlist">
+            <h3 style="margin-bottom: 20px;">پلی‌لیست</h3>
+            <div id="playlistContainer">
+                <!-- آهنگ‌ها اینجا نمایش داده می‌شوند -->
+            </div>
+        </div>
+        
+        <div class="upload-section">
+            <h3>آپلود موزیک جدید</h3>
+            <button class="btn" onclick="showUploadForm()" style="margin-top: 10px;">
+                <i class="fas fa-upload"></i> آپلود فایل موزیک
+            </button>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/" class="btn">
+                <i class="fas fa-home"></i> بازگشت به خانه
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let currentPlaylist = [];
+        let currentSongIndex = -1;
+        let isPlaying = false;
+        
+        // بارگذاری پلی‌لیست
+        async function loadPlaylist() {
+            try {
+                const response = await fetch('/api/music');
+                const data = await response.json();
+                currentPlaylist = data.playlist;
+                displayPlaylist();
+            } catch (error) {
+                console.error('خطا در بارگذاری پلی‌لیست:', error);
+            }
+        }
+        
+        function displayPlaylist() {
+            const container = document.getElementById('playlistContainer');
+            container.innerHTML = currentPlaylist.map((song, index) => `
+                <div class="song-item" onclick="playSong(${index})">
+                    <div style="margin-left: 15px; font-size: 1.2em;">${index + 1}</div>
+                    <div class="song-info">
+                        <div class="song-title">${song.title}</div>
+                        <div class="song-artist">${song.artist}</div>
+                    </div>
+                    <div style="opacity: 0.7;">${song.duration}</div>
+                </div>
+            `).join('');
+        }
+        
+        function playSong(index) {
+            currentSongIndex = index;
+            const song = currentPlaylist[index];
+            document.getElementById('nowPlayingTitle').textContent = song.title;
+            document.getElementById('nowPlayingArtist').textContent = song.artist;
+            isPlaying = true;
+            document.getElementById('playIcon').className = 'fas fa-pause';
+        }
+        
+        function togglePlay() {
+            if (currentSongIndex === -1 && currentPlaylist.length > 0) {
+                playSong(0);
+            } else {
+                isPlaying = !isPlaying;
+                document.getElementById('playIcon').className = isPlaying ? 'fas fa-pause' : 'fas fa-play';
+            }
+        }
+        
+        function nextSong() {
+            if (currentPlaylist.length > 0) {
+                const nextIndex = (currentSongIndex + 1) % currentPlaylist.length;
+                playSong(nextIndex);
+            }
+        }
+        
+        function previousSong() {
+            if (currentPlaylist.length > 0) {
+                const prevIndex = currentSongIndex === 0 ? currentPlaylist.length - 1 : currentSongIndex - 1;
+                playSong(prevIndex);
+            }
+        }
+        
+        function showUploadForm() {
+            alert('سیستم آپلود به زودی فعال می‌شود');
+        }
+        
+        // بارگذاری اولیه
+        loadPlaylist();
+    </script>
+</body>
+</html>
