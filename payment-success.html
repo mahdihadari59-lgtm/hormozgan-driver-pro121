@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پرداخت موفق</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            background: radial-gradient(circle at top, #0f172a, #020617);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-container {
+            text-align: center;
+            background: rgba(34, 197, 94, 0.15);
+            border: 2px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .success-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .ticket {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .ticket-detail {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-home {
+            background: linear-gradient(45deg, #2563eb, #38bdf8);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .btn-home:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="success-icon">✅</div>
+        <h1>پرداخت موفقیت‌آمیز!</h1>
+        <p>سفر شما با موفقیت رزرو شد</p>
+        
+        <div class="ticket">
+            <div class="ticket-detail">
+                <span>کد رهگیری:</span>
+                <span id="trackingCode">ZP123456</span>
+            </div>
+            <div class="ticket-detail">
+                <span>مبلغ پرداختی:</span>
+                <span id="paidAmount">35,000 تومان</span>
+            </div>
+            <div class="ticket-detail">
+                <span>زمان پرداخت:</span>
+                <span id="paymentTime">۱۴۰۳/۱۰/۱۵ - ۱۴:۳۰</span>
+            </div>
+            <div class="ticket-detail">
+                <span>راننده:</span>
+                <span>محمد رضایی - پژو ۲۰۶ سفید</span>
+            </div>
+        </div>
+
+        <button class="btn-home" onclick="goHome()">
+            🏠 بازگشت به صفحه اصلی
+        </button>
+    </div>
+
+    <script>
+        function goHome() {
+            window.location.href = '/';
+        }
+
+        // دریافت اطلاعات از URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        const tracking = urlParams.get('tracking');
+
+        if(amount) {
+            document.getElementById('paidAmount').textContent = 
+                parseInt(amount).toLocaleString() + ' تومان';
+        }
+        if(tracking) {
+            document.getElementById('trackingCode').textContent = tracking;
+        }
+
+        // تنظیم زمان فعلی
+        const now = new Date();
+        document.getElementById('paymentTime').textContent = 
+            now.toLocaleDateString('fa-IR') + ' - ' + now.toLocaleTimeString('fa-IR');
+    </script>
+</body>
+</html>

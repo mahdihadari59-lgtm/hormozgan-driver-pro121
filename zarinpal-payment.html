@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درگاه پرداخت زرین‌پال</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-gateway {
+            background: white;
+            color: #333;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .zarinpal-logo {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #f0b909;
+        }
+
+        .amount {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #22c55e;
+        }
+
+        .btn-confirm {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-cancel {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-confirm:hover, .btn-cancel:hover {
+            transform: scale(1.05);
+        }
+
+        .bank-cards {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .card {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .card.selected {
+            border-color: #22c55e;
+        }
+
+        .card-icon {
+            font-size: 1.5em;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-gateway">
+        <div class="zarinpal-logo">🏦 زرین‌پال</div>
+        <h2>درگاه پرداخت امن</h2>
+        
+        <div class="amount" id="paymentAmount">35,000 تومان</div>
+        
+        <div class="bank-cards">
+            <div class="card selected" onclick="selectCard(this)">
+                <div class="card-icon">💳</div>
+                <div>کارت بانک ملی •••• 1234</div>
+            </div>
+            <div class="card" onclick="selectCard(this)">
+                <div class="card-icon">💳</div>
+                <div>کارت بانک ملت •••• 5678</div>
+            </div>
+        </div>
+
+        <button class="btn-confirm" onclick="processZarinpalPayment()">
+            ✅ پرداخت
+        </button>
+        
+        <button class="btn-cancel" onclick="cancelPayment()">
+            ❌ انصراف
+        </button>
+    </div>
+
+    <script>
+        function selectCard(cardElement) {
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            cardElement.classList.add('selected');
+        }
+
+        function processZarinpalPayment() {
+            // شبیه‌سازی پرداخت موفق
+            setTimeout(() => {
+                alert('✅ پرداخت شما با موفقیت انجام شد!');
+                window.location.href = '/payment-success?amount=35000&tracking=ZP123456';
+            }, 2000);
+        }
+
+        function cancelPayment() {
+            if(confirm('آیا از انصراف از پرداخت اطمینان دارید؟')) {
+                window.location.href = '/payment';
+            }
+        }
+
+        // دریافت amount از URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount = urlParams.get('amount');
+        if(amount) {
+            document.getElementById('paymentAmount').textContent = 
+                parseInt(amount).toLocaleString() + ' تومان';
+        }
+    </script>
+</body>
+</html>

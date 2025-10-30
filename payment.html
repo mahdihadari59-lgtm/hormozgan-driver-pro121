@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پرداخت سفر | Hormozgan Driver Pro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+        
+        body {
+            margin: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            background: radial-gradient(circle at top, #0f172a, #020617);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 25px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            color: #38bdf8;
+            margin-bottom: 25px;
+        }
+
+        .payment-info {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .payment-detail {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-payment {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: 0.3s;
+        }
+
+        .btn-payment:hover {
+            background: linear-gradient(45deg, #16a34a, #15803d);
+            transform: scale(1.03);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .method {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .method.selected {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.2);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 4px solid #38bdf8;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💳 پرداخت هزینه سفر</h1>
+        
+        <div class="payment-info">
+            <div class="payment-detail">
+                <span>راننده:</span>
+                <span id="driverName">محمد رضایی</span>
+            </div>
+            <div class="payment-detail">
+                <span>مسیر:</span>
+                <span id="route">بندرعباس → فرودگاه</span>
+            </div>
+            <div class="payment-detail">
+                <span>مبلغ:</span>
+                <span id="amount">35,000 تومان</span>
+            </div>
+        </div>
+
+        <h3>🎯 انتخاب روش پرداخت</h3>
+        <div class="payment-methods">
+            <div class="method" onclick="selectMethod('zarinpal')">
+                <div>🏦</div>
+                <div>زرین‌پال</div>
+            </div>
+            <div class="method" onclick="selectMethod('wallet')">
+                <div>👛</div>
+                <div>کیف پول</div>
+            </div>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>در حال اتصال به درگاه پرداخت...</p>
+        </div>
+
+        <button class="btn-payment" onclick="processPayment()">
+            💰 پرداخت آنلاین
+        </button>
+
+        <button class="btn-payment" style="background:linear-gradient(45deg,#6b7280,#4b5563)" onclick="payLater()">
+            ⏰ پرداخت نقدی به راننده
+        </button>
+    </div>
+
+    <script>
+        let selectedMethod = 'zarinpal';
+
+        function selectMethod(method) {
+            selectedMethod = method;
+            document.querySelectorAll('.method').forEach(m => {
+                m.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+
+        function processPayment() {
+            document.getElementById('loading').style.display = 'block';
+            
+            // شبیه‌سازی اتصال به درگاه پرداخت
+            setTimeout(() => {
+                if (selectedMethod === 'zarinpal') {
+                    window.location.href = '/zarinpal-payment?amount=35000';
+                } else {
+                    processWalletPayment();
+                }
+            }, 2000);
+        }
+
+        function processWalletPayment() {
+            // شبیه‌سازی پرداخت با کیف پول
+            setTimeout(() => {
+                alert('✅ پرداخت با کیف پول موفقیت‌آمیز بود!');
+                document.getElementById('loading').style.display = 'none';
+            }, 1500);
+        }
+
+        function payLater() {
+            if(confirm('آیا مایلید هزینه سفر را به صورت نقدی به راننده پرداخت کنید؟')) {
+                alert('✅ سفر شما با پرداخت نقدی تأیید شد!');
+                window.location.href = '/';
+            }
+        }
+
+        // مقداردهی اولیه
+        document.querySelector('.method').classList.add('selected');
+    </script>
+</body>
+</html>
