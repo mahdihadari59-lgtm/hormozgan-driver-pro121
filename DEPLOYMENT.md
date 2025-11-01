@@ -3,14 +3,19 @@
 ## سرورهای موجود:
 - **server-v7.js** - سرور اصلی با AI کامل
 - **app.js** - سرور جایگزین
+- **servers/** - سایر سرورها
+
+## اسکریپت‌های مدیریت:
+- **scripts/project-sync.sh** - همگام‌سازی پروژه
+- **scripts/check-github.sh** - بررسی وضعیت GitHub
 
 ## استقرار سریع:
-\`\`\`bash
+```bash
+# نصب وابستگی‌ها
 npm install
-npm start
-\`\`\`
 
-## آدرس‌ها:
-- رابط اصلی: http://localhost:8080
-- API چت: POST http://localhost:8080/ai-chat
-- پشتیبانی: 07635108
+# اجرای سرور اصلی
+npm start
+
+# اجرای نسخه توسعه
+npm run dev
