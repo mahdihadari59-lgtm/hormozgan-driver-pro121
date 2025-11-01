@@ -3,53 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hormozgan Driver Pro</title>
+    <title>Hormozgan Driver Pro v5.0 🚗</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Tahoma; }
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; text-align: center; }
-        .header { padding: 40px 0; }
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 30px 0; }
-        .menu-item { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; text-decoration: none; color: white; transition: 0.3s; }
-        .menu-item:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
-        .status { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-top: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .menu-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: #333;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            background: white;
+        }
+        .menu-item .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .menu-item .title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .info-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .info-box p {
+            margin: 8px 0;
+            color: #333;
+            font-size: 0.95rem;
+        }
+        .info-box .highlight {
+            color: #667eea;
+            font-weight: bold;
+        }
+        @media (max-width: 480px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 2rem; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🚗 Hormozgan Driver Pro v5.0</h1>
+            <h1>Hormozgan Driver Pro v5.0 🚗</h1>
             <p>سامانه کامل رانندگان حرفه‌ای هرمزگان</p>
         </div>
-        
-        <div class="menu">
-            <a href="/music" class="menu-item">🎵 موزیک پلیر</a>
-            <a href="/calls" class="menu-item">📞 سیستم تماس</a>
-            <a href="/ai-chat" class="menu-item">🤖 چت هوش مصنوعی</a>
-            <a href="/driver-profile" class="menu-item">👤 پروفایل راننده</a>
-            <a href="/map" class="menu-item">🗺️ نقشه آنلاین</a>
-            <a href="/festivals" class="menu-item">🎉 جشن‌های بومی</a>
+        <div class="menu-grid">
+            <a href="/calls" class="menu-item">
+                <div class="icon">📱</div>
+                <div class="title">سیستم تماس</div>
+            </a>
+            <a href="/ai-chat" class="menu-item">
+                <div class="icon">🤖</div>
+                <div class="title">چت AI ساحل</div>
+            </a>
+            <a href="/driver-dashboard" class="menu-item">
+                <div class="icon">📊</div>
+                <div class="title">داشبورد راننده</div>
+            </a>
+            <a href="/driver-profile" class="menu-item">
+                <div class="icon">👤</div>
+                <div class="title">پروفایل راننده</div>
+            </a>
+            <a href="/contact" class="menu-item">
+                <div class="icon">🎉</div>
+                <div class="title">جشن‌های بومی</div>
+            </a>
+            <a href="/dashboard" class="menu-item">
+                <div class="icon">🗺️</div>
+                <div class="title">نقشه آنلاین</div>
+            </a>
         </div>
-        
-        <div class="status">
-            <p>✅ سرور فعال - پورت 3000</p>
-            <p>🕐 آخرین بروزرسانی: <span id="time"></span></p>
+        <div class="info-box">
+            <p>✅ <span class="highlight">سرور فعال - پورت 8080</span></p>
+            <p>⏰ <span class="highlight">آخرین بروزرسانی: 1404/08/12</span></p>
+            <p>📞 <span class="highlight">پشتیبانی: 07635108</span></p>
         </div>
     </div>
-
-    <script>
-        document.getElementById('time').textContent = new Date().toLocaleString('fa-IR');
-        
-        // تست اتصال به سرور
-        fetch('/api/status')
-            .then(response => response.json())
-            .then(data => {
-                console.log('✅ سرور فعال:', data);
-            })
-            .catch(error => {
-                console.log('❌ خطا در اتصال به سرور');
-            });
-    </script>
 </body>
 </html>
