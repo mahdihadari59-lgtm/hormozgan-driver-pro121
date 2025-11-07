@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ورود | Hormozgan Driver Pro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.logo {
+  text-align: center;
+  font-size: 3.5em;
+  margin-bottom: 10px;
+}
+
+h1 {
+  text-align: center;
+  color: #38bdf8;
+  margin-bottom: 30px;
+  font-size: 1.8em;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: #64748b;
+}
+
+input {
+  width: 100%;
+  padding: 14px 45px 14px 15px;
+  border-radius: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 1em;
+  transition: all 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5e1;
+}
+
+.forgot-link {
+  color: #38bdf8;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.forgot-link:hover {
+  color: #0ea5e9;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(45deg, #2563eb, #38bdf8);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(45deg, #1e40af, #0ea5e9);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(56, 189, 248, 0.4);
+}
+
+.btn-primary:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+  color: #64748b;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+  padding: 0 15px;
+}
+
+.link {
+  text-align: center;
+  color: #38bdf8;
+  text-decoration: none;
+  display: block;
+  margin-top: 15px;
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: #0ea5e9;
+}
+
+.alert {
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  display: none;
+  text-align: center;
+}
+
+.alert.success {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  color: #86efac;
+}
+
+.alert.error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.quick-login {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 12px;
+}
+
+.quick-login h3 {
+  color: #a5b4fc;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.quick-btn {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.quick-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(-3px);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="logo">🚖</div>
+  <h1>ورود به حساب</h1>
+  
+  <div id="alert" class="alert"></div>
+
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    
+    <div class="form-group">
+      <label>📱 شماره موبایل</label>
+      <div class="input-wrapper">
+        <span class="input-icon">📞</span>
+        <input type="tel" id="phone" placeholder="09123456789" pattern="09[0-9]{9}" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>🔐 رمز عبور</label>
+      <div class="input-wrapper">
+        <span class="input-icon">🔒</span>
+        <input type="password" id="password" placeholder="رمز عبور خود را وارد کنید" required>
+      </div>
+    </div>
+
+    <div class="remember-forgot">
+      <label class="remember">
+        <input type="checkbox" id="remember">
+        <span>مرا به خاطر بسپار</span>
+      </label>
+      <a href="#" class="forgot-link">فراموشی رمز عبور؟</a>
+    </div>
+
+    <button type="submit" class="btn-primary" id="submitBtn">
+      🔓 ورود
+    </button>
+
+    <div class="divider">
+      <span>یا</span>
+    </div>
+
+    <a href="/register.html" class="link">حساب کاربری ندارید؟ ثبت‌نام کنید</a>
+    <a href="/" class="link">🏠 بازگشت به صفحه اصلی</a>
+  </form>
+
+  <!-- ورود سریع برای تست -->
+  <div class="quick-login">
+    <h3>🚀 ورود سریع (تست)</h3>
+    <button class="quick-btn" onclick="quickLogin('passenger')">👤 ورود به عنوان مسافر</button>
+    <button class="quick-btn" onclick="quickLogin('driver')">🚗 ورود به عنوان راننده</button>
+  </div>
+
+</div>
+
+<script>
+function showAlert(message, type) {
+  const alert = document.getElementById('alert');
+  alert.textContent = message;
+  alert.className = `alert ${type}`;
+  alert.style.display = 'block';
+  
+  setTimeout(() => {
+    alert.style.display = 'none';
+  }, 5000);
+}
+
+async function handleLogin(e) {
+  e.preventDefault();
+  
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = '⏳ در حال ورود...';
+  
+  const data = {
+    phone: document.getElementById('phone').value,
+    password: document.getElementById('password').value
+  };
+  
+  try {
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      showAlert('✅ ورود موفقیت‌آمیز! در حال انتقال...', 'success');
+      
+      // ذخیره توکن و اطلاعات کاربر
+      localStorage.setItem('token', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
+      
+      // انتقال به صفحه مناسب
+      setTimeout(() => {
+        if (result.user.userType === 'driver') {
+          window.location.href = '/driver-dashboard.html';
+        } else {
+          window.location.href = '/';
+        }
+      }, 1500);
+    } else {
+      showAlert('❌ ' + result.error, 'error');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '🔓 ورود';
+    }
+  } catch (error) {
+    showAlert('❌ خطا در اتصال به سرور', 'error');
+    submitBtn.disabled = false;
+    submitBtn.textContent = '🔓 ورود';
+  }
+}
+
+function quickLogin(type) {
+  if (type === 'passenger') {
+    document.getElementById('phone').value = '09123456789';
+    document.getElementById('password').value = 'test123';
+  } else {
+    document.getElementById('phone').value = '09131234567';
+    document.getElementById('password').value = 'driver123';
+  }
+  showAlert('📝 اطلاعات تست وارد شد', 'success');
+}
+</script>
+
+</body>
+</html>

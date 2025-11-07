@@ -1,0 +1,41 @@
+{
+  "name": "hormozgan-driver-pro",
+  "version": "3.0.0",
+  "description": "AI Sahel - سیستم کامل مدیریت رانندگان و گردشگری هرمزگان",
+  "main": "server-final-tourism.js",
+  "scripts": {
+    "start": "node server-final-tourism.js",
+    "dev": "node server-v7.js",
+    "deploy": "node server-final-tourism.js",
+    "backup": "node servers/server-v7-backup.js",
+    "ai": "node ai-assistant.js",
+    "db": "node database-manager.js",
+    "tourism": "node server-final-tourism.js",
+    "legacy": "node server-v7.js"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "http-proxy": "^1.18.1",
+    "pg": "^8.16.3",
+    "socket.io": "^4.8.1"
+  },
+  "keywords": [
+    "ai",
+    "driver",
+    "hormozgan",
+    "assistant",
+    "tourism",
+    "management",
+    "tourist"
+  ],
+  "author": "Mahdi Hadari",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121"
+  }
+}

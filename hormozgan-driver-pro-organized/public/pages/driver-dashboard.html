@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد راننده - هرمزگان</title>
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .action-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            font-family: 'Vazirmatn';
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .action-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 500px; margin: 0 auto;">
+        <h1>📊 داشبورد راننده</h1>
+        <p>خوش آمدید، علی محمدی 👋</p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div>سفر امروز</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">۲۸۰,۰۰۰</div>
+                <div>درآمد امروز (تومان)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.9</div>
+                <div>امتیاز شما ★</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">۹۸%</div>
+                <div>رضایت مسافران</div>
+            </div>
+        </div>
+        
+        <h3>دسترسی سریع:</h3>
+        <div class="quick-actions">
+            <button class="action-btn">🚗 شروع سفر</button>
+            <button class="action-btn">💰 درآمدها</button>
+            <button class="action-btn">📅 برنامه‌ریزی</button>
+            <button class="action-btn">⭐ نظرات</button>
+            <button class="action-btn">🛠️ پشتیبانی</button>
+            <button class="action-btn">⚙️ تنظیمات</button>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="/" style="color: #38bdf8;">← بازگشت به صفحه اصلی</a>
+        </div>
+    </div>
+</body>
+</html>

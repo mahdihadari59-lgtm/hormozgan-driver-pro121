@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دستیار هوش مصنوعی - هرمزگان</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .user-message {
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .ai-message {
+            background: rgba(255,255,255,0.1);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-time {
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Vazirmatn';
+        }
+        
+        .send-btn {
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .send-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .quick-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Vazirmatn';
+            transition: 0.3s;
+        }
+        
+        .quick-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .ai-typing {
+            display: none;
+            padding: 10px;
+            color: #38bdf8;
+            font-style: italic;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-btn">← بازگشت</a>
+    
+    <div class="header">
+        <h1>🤖 دستیار هوش مصنوعی</h1>
+        <p>پشتیبانی 24 ساعته برای رانندگان هرمزگان</p>
+    </div>
+
+    <div class="chat-container">
+        <!-- دکمه‌های سریع -->
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="sendQuickMessage('ساعات کاری رانندگی؟')">🕒 ساعات کاری</button>
+            <button class="quick-btn" onclick="sendQuickMessage('نحوه دریافت درآمد؟')">💰 درآمدها</button>
+            <button class="quick-btn" onclick="sendQuickMessage('قوانین جدید ترافیک؟')">🚦 قوانین ترافیک</button>
+            <button class="quick-btn" onclick="sendQuickMessage('مناسبت‌های هرمزگان؟')">🎉 مناسبت‌ها</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <!-- پیام خوش آمدگویی -->
+            <div class="message ai-message">
+                <div class="message-text">
+                    <strong>👋 سلام! من دستیار هوشمند هرمزگان درایور هستم</strong><br>
+                    چگونه می‌توانم کمک کنم؟ می‌توانید در مورد:<br>
+                    • ساعات کاری و درآمد<br>
+                    • قوانین ترافیک و مقررات<br>
+                    • مناسبت‌های محلی هرمزگان<br>
+                    • پشتیبانی فنی<br>
+                    سوال بپرسید.
+                </div>
+                <div class="message-time">هم اکنون</div>
+            </div>
+        </div>
+
+        <div class="ai-typing" id="aiTyping">
+            🤖 در حال تایپ...
+        </div>
+
+        <div class="input-container">
+            <input type="text" class="message-input" id="messageInput" 
+                   placeholder="پیام خود را بنویسید..." 
+                   onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">📤 ارسال</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const aiTyping = document.getElementById('aiTyping');
+
+        // پاسخ‌های هوش مصنوعی
+        const aiResponses = {
+            'ساعات کاری رانندگی': `🕒 **ساعات کاری رانندگان هرمزگان:**\n\n• شیفت صبح: ۶:۰۰ تا ۱۴:۰۰\n• شیفت عصر: ۱۴:۰۰ تا ۲۲:۰۰\n• شیفت شب: ۲۲:۰۰ تا ۶:۰۰\n\n💡 **نکته:** در مناسبت‌های خاص مانند جشن‌های محلی، ساعات کاری انعطاف‌پذیر است.`,
+
+            'نحوه دریافت درآمد': `💰 **سیستم درآمدزایی:**\n\n• پرداخت روزانه: تسویه حساب هر ۲۴ ساعت\n• کارمزد پلتفرم: ۱۵٪ از هر سفر\n• پاداش‌های ویژه: رانندگان فعال تا ۵۰٪ تخفیف کارمزد\n• درآمد متوسط: ۲۵۰-۴۰۰ هزار تومان در روز\n\n📱 برای جزئیات بیشتر به بخش مالی مراجعه کنید.`,
+
+            'قوانین جدید ترافیک': `🚦 **قوانین ترافیک هرمزگان:**\n\n• سرعت مجاز در شهر: ۵۰ کیلومتر بر ساعت\n• مناطق ممنوعه تردد: مرکز تاریخی بندرعباس\n• ساعات تردد کامیون‌ها: ۲۲:۰۰ تا ۶:۰۰\n• پارکینگ‌های رایگان: ۱۲ منطقه در مرکز شهر\n\n⚠️ توجه: در ایام جشن‌های محلی محدودیت‌های ترافیکی اعمال می‌شود.`,
+
+            'مناسبت‌های هرمزگان': `🎉 **جشن‌های بومی هرمزگان:**\n\n• جشن دریا و ماهیگیران (۲۰ مرداد)\n• جشنواره هنرهای دستی بافت (۱ شهریور)\n• جشن برداشت انار و مرکبات (۱۵ شهریور)\n• جشن چشمه‌های گرم گنو (۵ مهر)\n• جشنواره دلفین‌های خلیج فارس (۲۵ مهر)\n\n🎊 در این مناسبت‌ها تخفیف ویژه ۲۰-۳۵٪ برای رانندگان فعال!`,
+
+            'default': `🤖 **دستیار هوش مصنوعی هرمزگان درایور:**\n\nمتوجه سوال شما شدم! برای اطلاعات دقیق‌تر در مورد:\n\n• 🕒 **ساعات کاری** - سوال کنید "ساعات کاری رانندگی؟"\n• 💰 **درآمد و مالی** - سوال کنید "نحوه دریافت درآمد؟"\n• 🚦 **قوانین ترافیک** - سوال کنید "قوانین جدید ترافیک؟"\n• 🎉 **مناسبت‌ها** - سوال کنید "مناسبت‌های هرمزگان؟"\n\nیا سوال خود را به صورت دقیق‌تر مطرح کنید.`
+        };
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                addMessage(message, 'user');
+                messageInput.value = '';
+                
+                // شبیه‌سازی تایپ هوش مصنوعی
+                aiTyping.style.display = 'block';
+                
+                setTimeout(() => {
+                    aiTyping.style.display = 'none';
+                    const response = getAIResponse(message);
+                    addMessage(response, 'ai');
+                }, 1500);
+            }
+        }
+
+        function sendQuickMessage(message) {
+            messageInput.value = message;
+            sendMessage();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const time = new Date().toLocaleTimeString('fa-IR', { 
+                hour: '2-digit', minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-text">${formatMessage(text)}</div>
+                <div class="message-time">${time}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            message = message.toLowerCase();
+            
+            for (const [key, response] of Object.entries(aiResponses)) {
+                if (message.includes(key.toLowerCase())) {
+                    return response;
+                }
+            }
+            
+            return aiResponses.default;
+        }
+
+        function formatMessage(text) {
+            // تبدیل خطوط جدید به <br>
+            return text.replace(/\n/g, '<br>');
+        }
+
+        // پیام خوش آمدگویی اتوماتیک
+        setTimeout(() => {
+            addMessage("👋 به دستیار هوشمند هرمزگان درایور خوش آمدید! چگونه می‌توانم کمک کنم؟", 'ai');
+        }, 1000);
+    </script>
+</body>
+</html>

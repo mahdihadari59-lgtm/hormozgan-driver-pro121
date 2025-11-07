@@ -1,0 +1,12 @@
+{
+  "name": "@hormozgan/ml-models",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "train": "node train-models.js"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.15.0",
+    "@tensorflow/tfjs-node": "^4.15.0"
+  }
+}

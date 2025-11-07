@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موزیک پلیر حرفه‌ای - هرمزگان</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+        
+        .player-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .album-art {
+            width: 280px;
+            height: 280px;
+            margin: 20px auto;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .album-art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .song-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .song-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .song-artist {
+            color: #38bdf8;
+            opacity: 0.8;
+        }
+        
+        .progress-container {
+            background: rgba(255,255,255,0.1);
+            height: 6px;
+            border-radius: 10px;
+            margin: 25px 0;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+            height: 100%;
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        
+        .time-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .control-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.1);
+        }
+        
+        .play-btn {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+        }
+        
+        .play-btn:hover {
+            transform: scale(1.15);
+        }
+        
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .volume-slider {
+            flex: 1;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #38bdf8;
+            cursor: pointer;
+        }
+        
+        .playlist {
+            flex: 1;
+            overflow-y: auto;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .playlist-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 8px;
+        }
+        
+        .playlist-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .playlist-item.active {
+            background: linear-gradient(45deg, rgba(56, 189, 248, 0.2), rgba(37, 99, 235, 0.2));
+            border: 1px solid rgba(56, 189, 248, 0.5);
+        }
+        
+        .playlist-art {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+        
+        .playlist-info {
+            flex: 1;
+        }
+        
+        .playlist-title {
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .playlist-artist {
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+        
+        .playlist-duration {
+            font-size: 0.8em;
+            opacity: 0.6;
+        }
+        
+        .equalizer {
+            display: flex;
+            align-items: end;
+            gap: 3px;
+            height: 20px;
+            margin-left: 10px;
+        }
+        
+        .bar {
+            width: 3px;
+            background: #38bdf8;
+            border-radius: 2px;
+            animation: equalize 1.5s infinite ease-in-out;
+        }
+        
+        .bar:nth-child(1) { animation-delay: 0s; height: 8px; }
+        .bar:nth-child(2) { animation-delay: 0.1s; height: 12px; }
+        .bar:nth-child(3) { animation-delay: 0.2s; height: 16px; }
+        .bar:nth-child(4) { animation-delay: 0.3s; height: 12px; }
+        .bar:nth-child(5) { animation-delay: 0.4s; height: 8px; }
+        
+        @keyframes equalize {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .visualizer {
+            height: 80px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            gap: 2px;
+            padding: 10px;
+        }
+        
+        .visualizer-bar {
+            width: 4px;
+            background: linear-gradient(to top, #38bdf8, #2563eb);
+            border-radius: 2px;
+            animation: visualizer 1.5s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-btn">← بازگشت</a>
+    
+    <div class="header">
+        <h1>🎵 موزیک پلیر حرفه‌ای</h1>
+        <p>پخش آنلاین ترانه‌های محلی و مدرن هرمزگان</p>
+    </div>
+
+    <div class="player-container">
+        <!-- آلبوم آرت -->
+        <div class="album-art" id="albumArt">
+            🎵
+        </div>
+        
+        <!-- اطلاعات آهنگ -->
+        <div class="song-info">
+            <div class="song-title" id="songTitle">نام آهنگ</div>
+            <div class="song-artist" id="songArtist">نام هنرمند</div>
+        </div>
+        
+        <!-- نوار پیشرفت -->
+        <div class="progress-container" id="progressContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="time-display">
+            <span id="currentTime">0:00</span>
+            <span id="duration">0:00</span>
+        </div>
+        
+        <!-- ویوالایزر -->
+        <div class="visualizer" id="visualizer">
+            <div class="visualizer-bar" style="animation-delay: 0s"></div>
+            <div class="visualizer-bar" style="animation-delay: 0.1s"></div>
+            <div class="visualizer-bar" style="animation-delay: 0.2s"></div>
+            <div class="visualizer-bar" style="animation-delay: 0.3s"></div>
+            <div class="visualizer-bar" style="animation-delay: 0.4s"></div>
+            <div class="visualizer-bar" style="animation-delay: 0.5s"></div>
+            <div class="visualizer-bar" style="animation-delay: 0.6s"></div>
+            <div class="visualizer-bar" style="animation-delay: 0.7s"></div>
+        </div>
+        
+        <!-- کنترل‌ها -->
+        <div class="controls">
+            <button class="control-btn" onclick="previousSong()">⏮️</button>
+            <button class="control-btn" onclick="shufflePlaylist()">🔀</button>
+            <button class="control-btn play-btn" onclick="togglePlay()" id="playBtn">▶️</button>
+            <button class="control-btn" onclick="repeatToggle()" id="repeatBtn">🔁</button>
+            <button class="control-btn" onclick="nextSong()">⏭️</button>
+        </div>
+        
+        <!-- کنترل صدا -->
+        <div class="volume-container">
+            <span>🔊</span>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="70">
+        </div>
+        
+        <!-- پلی‌لیست -->
+        <div class="playlist" id="playlist">
+            <!-- پلی‌لیست توسط JavaScript پر می‌شود -->
+        </div>
+    </div>
+
+    <script>
+        // لیست آهنگ‌های واقعی با لینک‌های آنلاین
+        const songs = [
+            {
+                title: "Zareban",
+                artist: "Sorena x Farshad x Pishro x Putak x Naaji",
+                src: "https://dl.musicman.ir/1403/06/28/Sorena%20x%20Farshad%20x%20Pishro%20x%20Putak%20x%20Naaji%20-%20Zareban.mp3",
+                cover: "🎤",
+                duration: "3:45"
+            },
+            {
+                title: "Be Yade To",
+                artist: "Mohsen Chavoshi",
+                src: "https://dl.musicman.ir/1402/11/15/Mohsen%20Chavoshi%20-%20Be%20Yade%20To.mp3",
+                cover: "🎸",
+                duration: "4:20"
+            },
+            {
+                title: "Del Divaneh",
+                artist: "Behnam Bani",
+                src: "https://dl.musicman.ir/1403/04/01/Behnam%20Bani%20-%20Del%20Divaneh.mp3",
+                cover: "🎹",
+                duration: "3:55"
+            },
+            {
+                title: "Ghasde Ak",
+                artist: "Shadmehr Aghili",
+                src: "https://dl.musicman.ir/1402/09/10/Shadmehr%20Aghili%20-%20Ghasde%20Ak.mp3",
+                cover: "🎤",
+                duration: "4:10"
+            },
+            {
+                title: "Remix Nostalgiya",
+                artist: "DJ Hormozgan",
+                src: "https://dl.musicman.ir/1403/07/15/DJ%20Hormozgan%20-%20Remix%20Nostalgiya.mp3",
+                cover: "🎧",
+                duration: "5:30"
+            },
+            {
+                title: "Bandari Dance",
+                artist: "Traditional",
+                src: "https://dl.musicman.ir/1403/05/20/Hormozgan%20Bandari%20-%20Traditional.mp3",
+                cover: "🥁",
+                duration: "3:15"
+            }
+        ];
+
+        const audio = new Audio();
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        let isRepeating = false;
+        let updateTimer;
+
+        // المنت‌های DOM
+        const playBtn = document.getElementById('playBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressContainer = document.getElementById('progressContainer');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const playlistEl = document.getElementById('playlist');
+        const songTitle = document.getElementById('songTitle');
+        const songArtist = document.getElementById('songArtist');
+        const albumArt = document.getElementById('albumArt');
+        const repeatBtn = document.getElementById('repeatBtn');
+        const visualizer = document.getElementById('visualizer');
+
+        // مقداردهی اولیه
+        function initPlayer() {
+            loadSong(currentSongIndex);
+            renderPlaylist();
+            updateVisualizer();
+        }
+
+        // بارگذاری آهنگ
+        function loadSong(index) {
+            const song = songs[index];
+            audio.src = song.src;
+            songTitle.textContent = song.title;
+            songArtist.textContent = song.artist;
+            albumArt.innerHTML = song.cover;
+            durationEl.textContent = song.duration;
+            
+            // آپدیت پلی‌لیست
+            document.querySelectorAll('.playlist-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+        }
+
+        // رندر پلی‌لیست
+        function renderPlaylist() {
+            playlistEl.innerHTML = songs.map((song, index) => `
+                <div class="playlist-item ${index === currentSongIndex ? 'active' : ''}" 
+                     onclick="playSong(${index})">
+                    <div class="playlist-art">${song.cover}</div>
+                    <div class="playlist-info">
+                        <div class="playlist-title">${song.title}</div>
+                        <div class="playlist-artist">${song.artist}</div>
+                    </div>
+                    <div class="playlist-duration">${song.duration}</div>
+                    ${index === currentSongIndex && isPlaying ? `
+                        <div class="equalizer">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        // پخش آهنگ
+        function playSong(index) {
+            currentSongIndex = index;
+            loadSong(index);
+            playAudio();
+        }
+
+        // کنترل پخش
+        function togglePlay() {
+            if (isPlaying) {
+                pauseAudio();
+            } else {
+                playAudio();
+            }
+        }
+
+        function playAudio() {
+            audio.play();
+            isPlaying = true;
+            playBtn.innerHTML = '⏸️';
+            startProgressUpdate();
+            renderPlaylist();
+        }
+
+        function pauseAudio() {
+            audio.pause();
+            isPlaying = false;
+            playBtn.innerHTML = '▶️';
+            clearInterval(updateTimer);
+            renderPlaylist();
+        }
+
+        // آهنگ بعدی
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songs.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) {
+                playAudio();
+            }
+        }
+
+        // آهنگ قبلی
+        function previousSong() {
+            currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+            loadSong(currentSongIndex);
+            if (isPlaying) {
+                playAudio();
+            }
+        }
+
+        // شافل
+        function shufflePlaylist() {
+            for (let i = songs.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [songs[i], songs[j]] = [songs[j], songs[i]];
+            }
+            currentSongIndex = 0;
+            loadSong(currentSongIndex);
+            renderPlaylist();
+        }
+
+        // تکرار
+        function repeatToggle() {
+            isRepeating = !isRepeating;
+            repeatBtn.style.background = isRepeating ? 'rgba(56, 189, 248, 0.3)' : '';
+            audio.loop = isRepeating;
+        }
+
+        // آپدیت پیشرفت
+        function startProgressUpdate() {
+            clearInterval(updateTimer);
+            updateTimer = setInterval(updateProgress, 1000);
+        }
+
+        function updateProgress() {
+            if (audio.duration) {
+                const progressPercent = (audio.currentTime / audio.duration) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+                
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+                durationEl.textContent = formatTime(audio.duration);
+            }
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // کنترل صدا
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value / 100;
+        });
+
+        // کلیک روی نوار پیشرفت
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            
+            audio.currentTime = (clickX / width) * duration;
+        });
+
+        // ویوالایزر
+        function updateVisualizer() {
+            const bars = visualizer.querySelectorAll('.visualizer-bar');
+            bars.forEach(bar => {
+                const randomHeight = Math.random() * 80 + 20;
+                bar.style.height = `${randomHeight}%`;
+            });
+            
+            if (isPlaying) {
+                requestAnimationFrame(updateVisualizer);
+            }
+        }
+
+        // ایونت‌های audio
+        audio.addEventListener('ended', () => {
+            if (!isRepeating) {
+                nextSong();
+            }
+        });
+
+        audio.addEventListener('play', () => {
+            updateVisualizer();
+        });
+
+        audio.addEventListener('pause', () => {
+            // توقف انیمیشن ویوالایزر
+        });
+
+        // راه‌اندازی پلیر
+        initPlayer();
+
+        // پیام کنسول برای دیباگ
+        console.log('🎵 موزیک پلیر حرفه‌ای آماده است!');
+        console.log('📻 تعداد آهنگ‌ها:', songs.length);
+    </script>
+</body>
+</html>

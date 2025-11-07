@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هم‌راز - سامانه هوشمند رانندگی و توریسم</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 40px;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.15);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+        
+        .service-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .service-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .service-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .service-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border: none;
+        }
+        
+        .btn-large {
+            padding: 18px 35px;
+            font-size: 1.2rem;
+        }
+        
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            margin-bottom: 20px;
+        }
+        
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .server-status {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .status-online {
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .status-offline {
+            color: #ef4444;
+            font-weight: bold;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- بخش هیرو -->
+        <div class="hero-section">
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span>سیستم هم‌راز - نسخه کامل</span>
+            </div>
+            
+            <h1 class="hero-title">🚗 هم‌راز - پلتفرم هوشمند</h1>
+            <p class="hero-subtitle">
+                اولین سامانه جامع مدیریت سفر، درآمد و خدمات توریستی در استان هرمزگان
+            </p>
+            
+            <div class="stats-overview">
+                <div class="stat-item">
+                    <span class="stat-number">۵۰+</span>
+                    <span class="stat-label">راننده فعال</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">۱۲۰۰+</span>
+                    <span class="stat-label">سفر موفق</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">۱۵۰M+</span>
+                    <span class="stat-label">درآمد کل</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">۴.۸/۵</span>
+                    <span class="stat-label">رضایت کاربران</span>
+                </div>
+            </div>
+            
+            <div class="server-status" id="serverStatus">
+                <p>در حال بررسی وضعیت سرور...</p>
+            </div>
+            
+            <div class="btn-group">
+                <a href="http://localhost:8080/admin-dashboard" class="btn btn-primary btn-large">🎯 مدیریت سیستم</a>
+                <a href="http://localhost:8080/driver-dashboard" class="btn btn-large">🚗 داشبورد راننده</a>
+                <a href="http://localhost:8080/video-demo" class="btn btn-large">🎬 دمو ویدیو</a>
+            </div>
+        </div>
+
+        <!-- خدمات اصلی -->
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">🚗</span>
+                <h3 class="service-title">سیستم رانندگی هوشمند</h3>
+                <p class="service-description">
+                    مدیریت حرفه‌ای سفرها، پیگیری درآمد، تحلیل عملکرد و بهینه‌سازی زمان کاری
+                </p>
+                <div class="btn-group">
+                    <a href="http://localhost:8080/driver-dashboard" class="btn">🎯 داشبورد راننده</a>
+                    <a href="http://localhost:8080/driver-dashboard-advanced" class="btn">🚀 نسخه پیشرفته</a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <span class="service-icon">🏝️</span>
+                <h3 class="service-title">گردشگری هرمزگان</h3>
+                <p class="service-description">
+                    معرفی جاذبه‌های طبیعی، فستیوال‌ها و خدمات توریستی استان هرمزگان
+                </p>
+                <div class="btn-group">
+                    <a href="http://localhost:8080/tourism" class="btn">🏝️ گردشگری</a>
+                    <a href="http://localhost:8080/festivals" class="btn">🎉 فستیوال‌ها</a>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <span class="service-icon">💳</span>
+                <h3 class="service-title">سیستم مالی یکپارچه</h3>
+                <p class="service-description">
+                    درگاه پرداخت امن، مدیریت درآمد، تحلیل مالی و برنامه‌ریزی سرمایه
+                </p>
+                <div class="btn-group">
+                    <a href="http://localhost:8080/payment" class="btn">💳 درگاه پرداخت</a>
+                    <a href="http://localhost:8080/driver-dashboard/income" class="btn">📊 تحلیل درآمد</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- دسترسی سریع -->
+        <div style="text-align: center; margin: 50px 0;">
+            <h3 style="font-size: 2rem; margin-bottom: 30px;">🚀 دسترسی سریع به تمام بخش‌ها</h3>
+            <div class="btn-group">
+                <a href="http://localhost:8080/admin-dashboard" class="btn btn-primary">🏠 دشبورد مدیریت</a>
+                <a href="http://localhost:8080/driver-dashboard" class="btn">🎯 داشبورد راننده</a>
+                <a href="http://localhost:8080/tourism" class="btn">🏝️ بخش توریسم</a>
+                <a href="http://localhost:8080/demo" class="btn">📺 دمو پروژه</a>
+                <a href="http://localhost:8080/video-demo" class="btn">🎬 دمو ویدیو</a>
+                <a href="http://localhost:8080/map" class="btn">🗺️ نقشه هوشمند</a>
+            </div>
+        </div>
+
+        <!-- اطلاعات سرور -->
+        <div class="server-status">
+            <h3>🔧 اطلاعات فنی سیستم</h3>
+            <p>سرور: Node.js + Express</p>
+            <p>پورت: 8080</p>
+            <p>وضعیت: <span id="statusText">در حال بررسی...</span></p>
+            <p>آدرس سرور: http://localhost:8080</p>
+        </div>
+    </div>
+
+    <script>
+        // بررسی وضعیت سرور
+        function checkServerStatus() {
+            fetch('http://localhost:8080/api/live-stats')
+                .then(response => {
+                    if (response.ok) {
+                        document.getElementById('serverStatus').innerHTML = 
+                            '<p class="status-online">✅ سرور Express در حال اجرا روی پورت 8080</p>';
+                        document.getElementById('statusText').textContent = '🟢 آنلاین';
+                        document.getElementById('statusText').className = 'status-online';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('serverStatus').innerHTML = 
+                        '<p class="status-offline">❌ سرور Express در دسترس نیست. لطفا سرور را اجرا کنید.</p>' +
+                        '<p>دستور اجرا: <code>node server-final-complete.js</code></p>';
+                    document.getElementById('statusText').textContent = '🔴 آفلاین';
+                    document.getElementById('statusText').className = 'status-offline';
+                });
+        }
+
+        // بررسی اولیه و هر 10 ثانیه
+        checkServerStatus();
+        setInterval(checkServerStatus, 10000);
+
+        // نمایش پیام راهنمایی
+        console.log('🚀 برای دسترسی کامل به سیستم، سرور Express را اجرا کنید:');
+        console.log('   node server-final-complete.js');
+        console.log('📱 سپس به آدرس مراجعه کنید: http://localhost:8080');
+    </script>
+</body>
+</html>

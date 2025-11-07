@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نقشه هوشمند - هرمزگان</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white; height: 100vh; display: flex; flex-direction: column;
+        }
+        .header {
+            background: rgba(255,255,255,0.1); padding: 15px; text-align: center;
+            backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .map-container { flex: 1; position: relative; }
+        #map { width: 100%; height: 100%; background: #2d3748; }
+        .controls {
+            position: absolute; top: 15px; left: 15px; right: 15px;
+            background: rgba(15,23,42,0.9); padding: 15px; border-radius: 15px;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);
+        }
+        .categories {
+            display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;
+        }
+        .category-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            color: white; padding: 8px 12px; border-radius: 20px; cursor: pointer;
+            font-size: 0.8em; transition: 0.3s;
+        }
+        .category-btn.active { background: #38bdf8; }
+        .location-card {
+            background: rgba(255,255,255,0.1); margin: 10px 0; padding: 12px;
+            border-radius: 10px; border-right: 4px solid #38bdf8;
+        }
+        .back-btn {
+            position: absolute; top: 15px; right: 15px; z-index: 1000;
+            background: rgba(255,255,255,0.1); color: white; padding: 8px 12px;
+            border-radius: 8px; text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-btn">← بازگشت</a>
+    
+    <div class="header">
+        <h2>🗺️ نقشه هوشمند رانندگان</h2>
+        <p>مکان‌های ضروری در هرمزگان</p>
+    </div>
+
+    <div class="map-container">
+        <div id="map"></div>
+        
+        <div class="controls">
+            <input type="text" placeholder="🔍 جستجوی مکان..." style="
+                width: 100%; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.3);
+                background: rgba(255,255,255,0.1); color: white; font-family: 'Vazirmatn';
+            ">
+            
+            <div class="categories">
+                <button class="category-btn active">همه</button>
+                <button class="category-btn">⛽ بنزین</button>
+                <button class="category-btn">🏥 بیمارستان</button>
+                <button class="category-btn">🚓 پلیس</button>
+                <button class="category-btn">🍽️ رستوران</button>
+                <button class="category-btn">🅿️ پارکینگ</button>
+            </div>
+            
+            <div style="max-height: 200px; overflow-y: auto; margin-top: 10px;">
+                <div class="location-card">
+                    <strong>⛽ پمپ بنزین ستاره</strong>
+                    <p style="font-size: 0.8em; opacity: 0.8;">بلوار امام رضا - 07634456789</p>
+                </div>
+                <div class="location-card">
+                    <strong>🏥 بیمارستان خلیج فارس</strong>
+                    <p style="font-size: 0.8em; opacity: 0.8;">بلوار طالقانی - 07633340000</p>
+                </div>
+                <div class="location-card">
+                    <strong>🚓 کلانتری مرکزی</strong>
+                    <p style="font-size: 0.8em; opacity: 0.8;">میدان امام - 110</p>
+                </div>
+                <div class="location-card">
+                    <strong>🍽️ رستوران دریایی هرمز</strong>
+                    <p style="font-size: 0.8em; opacity: 0.8;">اسکله بندرعباس - 07634452345</p>
+                </div>
+                <div class="location-card">
+                    <strong>🅿️ پارکینگ مرکز خرید</strong>
+                    <p style="font-size: 0.8em; opacity: 0.8;">مجتمع تجاری ستاره - 07634457890</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // شبیه‌سازی نقشه ساده
+        const map = document.getElementById('map');
+        
+        // ایجاد نقشه ساده با CSS
+        map.innerHTML = `
+            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                <div style="font-size: 4em; margin-bottom: 20px;">🗺️</div>
+                <h2>نقشه هوشمند هرمزگان</h2>
+                <p style="opacity: 0.7; text-align: center; margin: 10px 20px;">
+                    این نقشه موقعیت‌های ضروری برای رانندگان را نمایش می‌دهد
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 1.5em;">⛽</div>
+                        <div>پمپ بنزین</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 1.5em;">🏥</div>
+                        <div>بیمارستان</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 1.5em;">🚓</div>
+                        <div>کلانتری</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 1.5em;">🍽️</div>
+                        <div>رستوران</div>
+                    </div>
+                </div>
+                <button onclick="showNavigation()" style="
+                    background: linear-gradient(45deg, #38bdf8, #2563eb);
+                    color: white; border: none; padding: 12px 24px;
+                    border-radius: 10px; margin-top: 20px; cursor: pointer;
+                ">🚗 شروع مسیریابی</button>
+            </div>
+        `;
+
+        function showNavigation() {
+            alert('🚗 مسیریابی شروع شد!\n\n📍 مکان‌های نزدیک شما:\n• پمپ بنزین ستاره - ۲ کیلومتر\n• بیمارستان خلیج فارس - ۳ کیلومتر\n• کلانتری مرکزی - ۱.۵ کیلومتر');
+        }
+
+        // کنترل دسته‌بندی‌ها
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        console.log('🗺️ نقشه هوشمند ساده آماده است!');
+    </script>
+</body>
+</html>

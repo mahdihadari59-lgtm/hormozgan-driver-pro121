@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نقشه هوشمند هرمزگان</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Vazirmatn', sans-serif; }
+        #map { height: 100vh; width: 100%; }
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="map-controls">
+        <button onclick="findNearbyDrivers()">🔍 رانندگان نزدیک</button>
+        <button onclick="showTouristSpots()">🏝️ مکان‌های گردشگری</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Initialize Map
+        const map = L.map('map').setView([27.1833, 56.2667], 12);
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+        
+        // Socket.io connection
+        const socket = io();
+        
+        // User location marker
+        let userMarker;
+        let driverMarkers = [];
+        let touristMarkers = [];
+        
+        // Initialize map with user location
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const { latitude, longitude } = position.coords;
+                
+                userMarker = L.marker([latitude, longitude])
+                    .addTo(map)
+                    .bindPopup('موقعیت شما')
+                    .openPopup();
+                
+                map.setView([latitude, longitude], 15);
+                
+                // Send location to server
+                socket.emit('map:init', {
+                    userId: 'user_' + Date.now(),
+                    userType: 'passenger',
+                    location: { lat: latitude, lng: longitude }
+                });
+            });
+        }
+        
+        // Find nearby drivers
+        function findNearbyDrivers() {
+            const center = map.getCenter();
+            socket.emit('map:get-nearby-drivers', {
+                lat: center.lat,
+                lng: center.lng,
+                radius: 2000
+            });
+        }
+        
+        // Show tourist spots
+        function showTouristSpots() {
+            // در پروژه واقعی از API استفاده می‌شود
+            const spots = [
+                { name: 'جزیره هرمز', lat: 27.0598, lng: 56.4767, type: 'island' },
+                { name: 'جزیره قشم', lat: 26.9478, lng: 56.2721, type: 'island' },
+                { name: 'دره ستارگان', lat: 26.8583, lng: 55.9167, type: 'nature' }
+            ];
+            
+            // Clear previous markers
+            touristMarkers.forEach(marker => map.removeLayer(marker));
+            touristMarkers = [];
+            
+            // Add new markers
+            spots.forEach(spot => {
+                const marker = L.marker([spot.lat, spot.lng])
+                    .addTo(map)
+                    .bindPopup(`
+                        <strong>${spot.name}</strong><br>
+                        نوع: ${spot.type}<br>
+                        <button onclick="navigateToSpot(${spot.lat}, ${spot.lng})">مسیریابی</button>
+                    `);
+                touristMarkers.push(marker);
+            });
+        }
+        
+        // Handle nearby drivers response
+        socket.on('map:nearby-drivers', (drivers) => {
+            // Clear previous markers
+            driverMarkers.forEach(marker => map.removeLayer(marker));
+            driverMarkers = [];
+            
+            // Add driver markers
+            drivers.forEach(driver => {
+                const marker = L.marker([driver.location[0], driver.location[1]], {
+                    icon: L.divIcon({
+                        className: 'driver-marker',
+                        html: '🚗',
+                        iconSize: [30, 30]
+                    })
+                })
+                .addTo(map)
+                .bindPopup(`
+                    <strong>${driver.name}</strong><br>
+                    ⭐ ${driver.rating}<br>
+                    🕐 ${driver.eta}<br>
+                    <button onclick="requestRide(${driver.id})">درخواست سفر</button>
+                `);
+                driverMarkers.push(marker);
+            });
+        });
+        
+        // Navigation function
+        function navigateToSpot(lat, lng) {
+            if (userMarker) {
+                const userLatLng = userMarker.getLatLng();
+                
+                // Add route line (ساده‌شده)
+                const route = L.polyline([
+                    [userLatLng.lat, userLatLng.lng],
+                    [lat, lng]
+                ], { color: 'blue' }).addTo(map);
+                
+                // Calculate distance
+                const distance = map.distance(userLatLng, L.latLng(lat, lng));
+                alert(`فاصله تا مقصد: ${Math.round(distance)} متر`);
+            }
+        }
+        
+        // Request ride
+        function requestRide(driverId) {
+            alert(`درخواست سفر برای راننده ${driverId} ارسال شد`);
+            // در پروژه واقعی به API ارسال می‌شود
+        }
+        
+        // Real-time location updates
+        socket.on('user:moved', (data) => {
+            console.log('User moved:', data);
+            // به‌روزرسانی موقعیت سایر کاربران
+        });
+    </script>
+</body>
+</html>

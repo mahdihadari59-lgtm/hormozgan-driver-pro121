@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>گردشگری هرمزگان - هرمزگان درایور پرو</title>
+    <link rel="stylesheet" href="/css/tourism.css">
+    <style>
+        .nav-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .nav-bar a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <a href="/mobile-app">🏠 صفحه اصلی</a>
+            <a href="/tourism">🎯 گردشگری</a>
+            <a href="/ai-chat">🤖 چت هوشمند</a>
+            <a href="/smart-map">🗺️ نقشه</a>
+            <a href="/driver-dashboard">👨‍💼 پنل راننده</a>
+        </div>
+
+        <header class="tourism-header">
+            <h1>🎯 خدمات گردشگری هرمزگان</h1>
+            <p>کشف جاذبه‌های بی‌نظیر استان هرمزگان با هرمزگان درایور پرو</p>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="جستجوی مکان‌های گردشگری...">
+            <button onclick="searchSpots()">🔍 جستجو</button>
+        </div>
+
+        <div class="filters">
+            <select id="typeFilter">
+                <option value="">همه انواع</option>
+                <option value="historical">تاریخی</option>
+                <option value="beach">ساحلی</option>
+                <option value="natural">طبیعی</option>
+                <option value="cultural">فرهنگی</option>
+            </select>
+
+            <label>
+                <input type="checkbox" id="freeEntranceFilter">
+                ورودی رایگان
+            </label>
+
+            <button onclick="loadSpots()">اعمال فیلتر</button>
+        </div>
+
+        <div class="content">
+            <div class="spots-section">
+                <h2>📍 مکان‌های گردشگری</h2>
+                <div id="spotsList" class="spots-grid"></div>
+            </div>
+
+            <div class="tours-section">
+                <h2>🎪 تورهای موجود</h2>
+                <div id="toursList" class="tours-grid"></div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>📊 آمار گردشگری</h2>
+            <div id="statsInfo"></div>
+        </div>
+    </div>
+
+    <script src="/js/tourism.js"></script>
+    <script>
+        // بارگذاری آمار
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/tourism/stats');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.data;
+                    document.getElementById('statsInfo').innerHTML = `
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3>${stats.totalSpots || 0}</h3>
+                                <p>مکان گردشگری</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>${stats.totalTours || 0}</h3>
+                                <p>تور فعال</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>${stats.averageRating ? stats.averageRating.toFixed(1) : '0.0'}</h3>
+                                <p>میانگین امتیاز</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('خطا در دریافت آمار:', error);
+            }
+        }
+
+        // بارگذاری اولیه
+        loadSpots();
+        loadTours();
+        loadStats();
+    </script>
+</body>
+</html>

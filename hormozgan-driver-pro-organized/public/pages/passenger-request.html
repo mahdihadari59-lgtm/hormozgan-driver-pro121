@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درخواست سفر - Hormozgan Driver Pro</title>
+    <style>
+        body { font-family: Tahoma; direction: rtl; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; }
+        .form-group { margin-bottom: 20px; }
+        input, select { width: 100%; padding: 12px; border: none; border-radius: 10px; background: rgba(255,255,255,0.1); color: white; margin-top: 5px; }
+        .btn { padding: 15px; background: #27ae60; color: white; border: none; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.1em; }
+        .payment-section { display: none; margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚗 درخواست سفر</h1>
+        <form id="rideForm">
+            <div class="form-group">
+                <label>مبدا:</label>
+                <input type="text" name="origin" placeholder="آدرس مبدا" required>
+            </div>
+            <div class="form-group">
+                <label>مقصد:</label>
+                <input type="text" name="destination" placeholder="آدرس مقصد" required>
+            </div>
+            <div class="form-group">
+                <label>نوع سفر:</label>
+                <select name="rideType">
+                    <option value="economy">اقتصادی</option>
+                    <option value="comfort">راحت</option>
+                </select>
+            </div>
+            <button type="submit" class="btn">درخواست راننده</button>
+        </form>
+        
+        <div class="payment-section" id="paymentSection">
+            <h3>💰 مبلغ: <span id="price">0</span> تومان</h3>
+            <button class="btn" style="background: #f59e0b;" onclick="pay()">پرداخت با زرین پال</button>
+        </div>
+        
+        <a href="/" style="display: block; text-align: center; margin-top: 20px; color: white;">بازگشت</a>
+    </div>
+
+    <script>
+        let currentOrder = null;
+        
+        document.getElementById('rideForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            const response = await fetch('/api/request-ride', {
+                method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            if (result.success) {
+                currentOrder = result.order;
+                document.getElementById('price').textContent = result.order.price.toLocaleString();
+                document.getElementById('paymentSection').style.display = 'block';
+            }
+        });
+        
+        async function pay() {
+            if (!currentOrder) return;
+            
+            const response = await fetch('/api/payment/create', {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    orderId: currentOrder.id,
+                    amount: currentOrder.price,
+                    description: 'پرداخت سفر'
+                })
+            });
+            
+            const result = await response.json();
+            if (result.success) {
+                window.location.href = result.paymentUrl;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "project": "hormozgan-driver-pro",
+  "version": "2.0.0",
+  "mainServer": "server-v7.js",
+  "backupServer": "app.js",
+  "port": 8080,
+  "features": {
+    "aiChat": true,
+    "notifications": true,
+    "driverManagement": true,
+    "payment": true,
+    "analytics": true
+  },
+  "contacts": {
+    "support": "07635108",
+    "security": "09164321660",
+    "driver": "09179940272"
+  }
+}

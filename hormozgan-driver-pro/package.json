@@ -1,0 +1,40 @@
+{
+  "name": "hormozgan-driver-pro",
+  "version": "5.0.0",
+  "description": "AI-Powered Driver Assistance System for Hormozgan",
+  "main": "server-pro.js",
+  "scripts": {
+    "start": "node server-pro.js",
+    "dev": "nodemon server-pro.js",
+    "setup": "./setup.sh",
+    "deploy": "node deploy.js",
+    "test": "node test-server.js"
+  },
+  "keywords": [
+    "ai",
+    "driver",
+    "assistance",
+    "hormozgan",
+    "traffic",
+    "weather"
+  ],
+  "author": "Hormozgan Driver Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "compression": "^1.7.4",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/hormozgan-driver-pro.git"
+  }
+}

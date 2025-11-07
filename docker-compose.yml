@@ -1,22 +1,51 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgis/postgis:15-3.3
+  app:
+    build: .
+    ports:
+      - "8080:8080"
     environment:
-      POSTGRES_DB: hormozgan_driver
-      POSTGRES_USER: developer
-      POSTGRES_PASSWORD: dev123456
+      - NODE_ENV=production
+      - PORT=8080
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 3072M
+        reservations:
+          cpus: '1'
+          memory: 2048M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    image: nginx:alpine
     ports:
-      - "5432:5432"
+      - "80:80"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - app
+    restart: unless-stopped
 
-  redis:
-    image: redis:7.2-alpine
+  prometheus:
+    image: prom/prometheus:latest
     ports:
-      - "6379:6379"
-    command: redis-server --appendonly yes
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    restart: unless-stopped
 
-volumes:
-  postgres_data:
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    restart: unless-stopped

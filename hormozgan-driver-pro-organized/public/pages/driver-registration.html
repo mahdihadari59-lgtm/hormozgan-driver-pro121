@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت‌نام راننده حرفه‌ای - هرمزگان</title>
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #38bdf8;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Vazirmatn';
+        }
+        .btn {
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            width: 100%;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👨‍💼 ثبت‌نام راننده حرفه‌ای</h1>
+        <p>به خانواده رانندگان هرمزگان بپیوندید</p>
+        
+        <form>
+            <div class="form-group">
+                <label>نام و نام خانوادگی</label>
+                <input type="text" placeholder="مثل: علی محمدی">
+            </div>
+            
+            <div class="form-group">
+                <label>شماره موبایل</label>
+                <input type="tel" placeholder="0912XXX">
+            </div>
+            
+            <div class="form-group">
+                <label>نوع وسیله نقلیه</label>
+                <select>
+                    <option>سدان</option>
+                    <option>کراس اوور</option>
+                    <option>ون</option>
+                    <option>موتورسیکلت</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>پلاک خودرو</label>
+                <input type="text" placeholder="54 الف 123">
+            </div>
+            
+            <button class="btn">ثبت درخواست</button>
+        </form>
+        
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="/" style="color: #38bdf8;">← بازگشت به صفحه اصلی</a>
+        </div>
+    </div>
+</body>
+</html>

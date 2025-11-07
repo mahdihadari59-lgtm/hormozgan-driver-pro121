@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI سخنگو - قوانین راهنمایی و رانندگی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+        }
+        
+        .voice-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .voice-btn {
+            background: linear-gradient(45deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Vazirmatn';
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        
+        .voice-btn.stop {
+            background: linear-gradient(45deg, #ef4444, #dc2626);
+        }
+        
+        .voice-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .user-message {
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .ai-message {
+            background: rgba(255,255,255,0.1);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-time {
+            font-size: 0.8em;
+            opacity: 0.7;
+            margin-top: 5px;
+        }
+        
+        .speaking-indicator {
+            display: none;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        .law-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .law-category {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .law-category:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .input-container {
+            display: flex;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .message-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Vazirmatn';
+        }
+        
+        .send-btn {
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-btn">← بازگشت</a>
+    
+    <div class="header">
+        <h1>🚦 AI سخنگو - قوانین رانندگی</h1>
+        <p>دستیار صوتی هوشمند برای قوانین راهنمایی و رانندگی</p>
+        
+        <div class="voice-controls">
+            <button class="voice-btn" onclick="startVoiceRecognition()">
+                🎤 شروع صحبت
+            </button>
+            <button class="voice-btn stop" onclick="stopVoiceRecognition()" style="display: none;">
+                ⏹️ توقف
+            </button>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <!-- دسته‌بندی قوانین -->
+        <div class="law-categories">
+            <div class="law-category" onclick="askAboutLaw('سرعت مجاز')">
+                🚗 سرعت مجاز
+            </div>
+            <div class="law-category" onclick="askAboutLaw('حق تقدم')">
+                🛑 حق تقدم
+            </div>
+            <div class="law-category" onclick="askAboutLaw('علائم راهنمایی')">
+                📋 علائم راهنمایی
+            </div>
+            <div class="law-category" onclick="askAboutLaw('جرایم رانندگی')">
+                ⚖️ جرایم رانندگی
+            </div>
+            <div class="law-category" onclick="askAboutLaw('وسایل نقلیه')">
+                🚛 وسایل نقلیه
+            </div>
+            <div class="law-category" onclick="askAboutLaw('مقررات پارکینگ')">
+                🅿️ مقررات پارکینگ
+            </div>
+        </div>
+
+        <!-- نشانگر صحبت کردن -->
+        <div class="speaking-indicator" id="speakingIndicator">
+            🎤 در حال گوش دادن... صحبت کنید
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <!-- پیام خوش آمدگویی -->
+            <div class="message ai-message">
+                <div class="message-text">
+                    <strong>🚦 به AI سخنگو قوانین رانندگی خوش آمدید!</strong><br><br>
+                    می‌توانید:<br>
+                    • 🎤 با دکمه "شروع صحبت" با من صحبت کنید<br>
+                    • 📝 سوال خود را تایپ کنید<br>
+                    • 🚗 روی دسته‌بندی‌ها کلیک کنید<br><br>
+                    من در مورد قوانین راهنمایی و رانندگی به شما کمک می‌کنم!
+                </div>
+                <div class="message-time">هم اکنون</div>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <input type="text" class="message-input" id="messageInput" 
+                   placeholder="سوال خود درباره قوانین رانندگی بنویسید..." 
+                   onkeypress="handleKeyPress(event)">
+            <button class="send-btn" onclick="sendMessage()">📤 ارسال</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const speakingIndicator = document.getElementById('speakingIndicator');
+        const startBtn = document.querySelector('.voice-btn');
+        const stopBtn = document.querySelector('.voice-btn.stop');
+
+        let recognition;
+        let isListening = false;
+
+        // قوانین رانندگی
+        const trafficLaws = {
+            'سرعت مجاز': `🚗 **سرعت مجاز در مناطق مختلف:**\n\n• آزادراه‌ها: ۱۱۰-۱۲۰ کیلومتر بر ساعت\n• بزرگراه‌ها: ۸۰-۱۰۰ کیلومتر بر ساعت\n• معابر شهری: ۵۰-۶۰ کیلومتر بر ساعت\n• مناطق مسکونی: ۳۰ کیلومتر بر ساعت\n• نزدیکی مدارس: ۲۰ کیلومتر بر ساعت\n\n⚠️ **جریمه سرعت غیرمجاز:**\n- تا ۲۰ کیلومتر بیش‌تر: ۵۰,۰۰۰ تومان\n- ۲۰ تا ۵۰ کیلومتر: ۱۰۰,۰۰۰ تومان\n- بیش از ۵۰ کیلومتر: ۲۰۰,۰۰۰ تومان + تعلیق گواهینامه`,
+
+            'حق تقدم': `🛑 **قوانین حق تقدم:**\n\n• اولویت با وسایل نقلیه امدادی\n• خودرویی که از سمت راست می‌آید\n• در میدان‌ها، حق تقدم با خودروی داخل میدان\n• در تقاطع‌های هم‌سطح بدون علامت، حق تقدم با وسیله‌ای است که در سمت راست شماست\n• عابر پیاده در گذرگاه عابر پیاده حق تقدم مطلق دارد\n\n🎯 **نکته:** همیشه احتیاط کنید حتی اگر حق تقدم با شماست!`,
+
+            'علائم راهنمایی': `📋 **انواع علائم راهنمایی و رانندگی:**\n\n🔴 **علائم بازدارنده (دایره قرمز):**\n- توقف ممنوع\n- ورود ممنوع\n- سبقت ممنوع\n- دور زدن ممنوع\n\n🟡 **علائم هشداردهنده (مثلث زرد):**\n- پیچ خطرناک\n- عبور عابر پیاده\n- راه باریک می‌شود\n- پرتاب سنگ\n\n🟢 **علائم اطلاعاتی (مستطیل آبی):**\n- ایستگاه اتوبوس\n- بیمارستان\n- پمپ بنزین\n- پارکینگ`,
+
+            'جرایم رانندگی': `⚖️ **جرایم مهم رانندگی:**\n\n• عبور از چراغ قرمز: ۵۰۰,۰۰۰ تومان\n• صحبت با تلفن همراه: ۲۰۰,۰۰۰ تومان\n• عدم بستن کمربند ایمنی: ۱۰۰,۰۰۰ تومان\n• رانندگی بدون گواهینامه: ۳۰۰,۰۰۰ تومان\n• حمل بار اضافی: ۱۵۰,۰۰۰ تومان\n• استعمال دخانیات: ۵۰,۰۰۰ تومان\n\n💡 **تخفیف جریمه:**\n- پرداخت در ۱۰ روز اول: ۳۰٪ تخفیف\n- پرداخت در ۲۰ روز اول: ۲۰٪ تخفیف`,
+
+            'وسایل نقلیه': `🚛 **مقررات وسایل نقلیه:**\n\n🚗 **خودروهای سواری:**\n- معاینه فنی سالیانه الزامی\n- بیمه شخص ثالث الزامی\n- کارت خودرو همیشه همراه راننده\n\n🚐 **ون و مینی‌بوس:**\n- حداکثر سرعت: ۸۰ کیلومتر بر ساعت\n- ممنوعیت تردد در برخی خیابان‌ها\n- گواهینامه راننده: پایه ۲\n\n🚚 **کامیون و کامیونت:**\n- تردد در شهر: ۲۲:۰۰ تا ۶:۰۰\n- گواهینامه: پایه ۱ یا ۲\n- معاینه فنی ۶ ماهه`,
+
+            'مقررات پارکینگ': `🅿️ **قوانین پارکینگ و توقف:**\n\n✅ **مناطق مجاز پارک:**\n- پارکینگ‌های عمومی\n- کنار خیابان با فاصله ۱۵ متری تقاطع\n- فاصله ۵ متری از شیرهای آتش‌نشانی\n\n❌ **مناطق ممنوعه پارک:**\n- روی خط عابر پیاده\n- کنار چراغ راهنمایی\n- حریم تقاطع‌ها\n- کنار ایستگاه اتوبوس\n- مسیر وسایل نقلیه امدادی\n\n💰 **جریمه پارک غیرمجاز:** ۱۰۰,۰۰۰ تومان`
+        };
+
+        // بررسی پشتیبانی از Speech Recognition
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'fa-IR';
+
+            recognition.onstart = function() {
+                isListening = true;
+                speakingIndicator.style.display = 'block';
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'flex';
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                messageInput.value = transcript;
+                sendMessage();
+            };
+
+            recognition.onend = function() {
+                isListening = false;
+                speakingIndicator.style.display = 'none';
+                startBtn.style.display = 'flex';
+                stopBtn.style.display = 'none';
+            };
+
+            recognition.onerror = function(event) {
+                console.error('خطا در تشخیص صدا:', event.error);
+                addMessage('⚠️ خطا در تشخیص صدا. لطفا دوباره تلاش کنید.', 'ai');
+                speakingIndicator.style.display = 'none';
+                startBtn.style.display = 'flex';
+                stopBtn.style.display = 'none';
+            };
+        } else {
+            startBtn.disabled = true;
+            startBtn.innerHTML = '❌ پشتیبانی نمی‌شود';
+            startBtn.style.background = '#6b7280';
+        }
+
+        function startVoiceRecognition() {
+            if (recognition && !isListening) {
+                recognition.start();
+            }
+        }
+
+        function stopVoiceRecognition() {
+            if (recognition && isListening) {
+                recognition.stop();
+            }
+        }
+
+        function askAboutLaw(lawType) {
+            messageInput.value = lawType;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (message) {
+                addMessage(message, 'user');
+                messageInput.value = '';
+                
+                setTimeout(() => {
+                    const response = getAIResponse(message);
+                    addMessage(response, 'ai');
+                    speakResponse(response);
+                }, 1000);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const time = new Date().toLocaleTimeString('fa-IR', { 
+                hour: '2-digit', minute: '2-digit' 
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="message-text">${formatMessage(text)}</div>
+                <div class="message-time">${time}</div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function getAIResponse(message) {
+            message = message.toLowerCase();
+            
+            for (const [key, response] of Object.entries(trafficLaws)) {
+                if (message.includes(key.toLowerCase())) {
+                    return response;
+                }
+            }
+            
+            return `🤖 **دستیار قوانین رانندگی:**\n\nسوال شما درباره "${message}" را متوجه شدم!\n\nلطفاً یکی از موضوعات زیر را انتخاب کنید:\n\n• 🚗 سرعت مجاز\n• 🛑 حق تقدم\n• 📋 علائم راهنمایی\n• ⚖️ جرایم رانندگی\n• 🚛 وسایل نقلیه\n• 🅿️ مقررات پارکینگ\n\nیا سوال خود را دقیق‌تر مطرح کنید.`;
+        }
+
+        function formatMessage(text) {
+            return text.replace(/\n/g, '<br>');
+        }
+
+        function speakResponse(text) {
+            if ('speechSynthesis' in window) {
+                // حذف علائم و اموجی‌ها برای خوانش بهتر
+                const cleanText = text.replace(/[🤖🚗🛑📋⚖️🚛🅿️🎤⚠️✅❌💡🎯🔴🟡🟢•\-]/g, '');
+                
+                const speech = new SpeechSynthesisUtterance(cleanText);
+                speech.lang = 'fa-IR';
+                speech.rate = 0.9;
+                speech.pitch = 1;
+                
+                window.speechSynthesis.speak(speech);
+            }
+        }
+
+        // پیام خوش آمدگویی صوتی
+        setTimeout(() => {
+            const welcomeMsg = "به ای آی سخنگو قوانین رانندگی خوش آمدید. چگونه می توانم کمک کنم؟";
+            if ('speechSynthesis' in window) {
+                const speech = new SpeechSynthesisUtterance(welcomeMsg);
+                speech.lang = 'fa-IR';
+                speech.rate = 0.9;
+                window.speechSynthesis.speak(speech);
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+// =========================================
+// 🎬 بخش دمو ویدیو حرفه‌ای
+// =========================================
+
+// صفحه دمو ویدیو حرفه‌ای
+app.get('/video-demo', (req, res) => {
+    res.sendFile(path.join(__dirname, 'video-demo.html'));
+});
+
+// صفحه دمو ساده‌تر (اگر نیاز باشد)
+app.get('/demo', (req, res) => {
+    res.send(`
+    <!DOCTYPE html>
+    <html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>دمو پروژه - هم‌راز</title>
+        <style>
+            body { 
+                font-family: Arial, sans-serif; 
+                padding: 20px; 
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                text-align: center;
+            }
+            .container {
+                background: rgba(255,255,255,0.1);
+                padding: 40px;
+                border-radius: 20px;
+                margin: 20px auto;
+                max-width: 800px;
+                backdrop-filter: blur(10px);
+            }
+            .btn {
+                display: inline-block;
+                background: rgba(255,255,255,0.2);
+                color: white;
+                padding: 15px 30px;
+                margin: 10px;
+                border-radius: 10px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+            .btn:hover {
+                background: rgba(255,255,255,0.3);
+                transform: translateY(-2px);
+            }
+            .btn-primary {
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>🎬 دموهای پروژه هم‌راز</h1>
+        <div class="container">
+            <h2>انتخاب نوع دمو</h2>
+            <p>برای مشاهده دموهای مختلف پروژه از لینک‌های زیر استفاده کنید</p>
+            
+            <div style="margin-top: 30px;">
+                <a href="/video-demo" class="btn btn-primary">🚀 دمو ویدیو حرفه‌ای</a>
+                <a href="/driver-dashboard" class="btn">🎯 دمو داشبورد راننده</a>
+                <a href="/driver-dashboard-advanced" class="btn">📊 دمو داشبورد پیشرفته</a>
+                <a href="/tourism" class="btn">🏝️ دمو بخش توریسم</a>
+                <a href="/index" class="btn">🏠 بازگشت به صفحه اصلی</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    `);
+});

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رسید پرداخت - ویرایش</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        
+        .receipt-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #38bdf8;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-family: 'Vazirmatn';
+            font-size: 1em;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #38bdf8;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #38bdf8, #2563eb);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Vazirmatn';
+            font-size: 1em;
+            margin: 5px;
+            transition: 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .receipt-preview {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px dashed rgba(255,255,255,0.2);
+        }
+        
+        .preview-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .back-btn {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-btn">← بازگشت</a>
+        
+        <div class="header">
+            <h1>🧾 رسید پرداخت - ویرایش</h1>
+            <p>اطلاعات رسید را وارد کنید</p>
+        </div>
+        
+        <div class="receipt-form">
+            <form id="receiptForm">
+                <div class="form-group">
+                    <label for="transactionId">شماره تراکنش</label>
+                    <input type="text" id="transactionId" placeholder="TX-123456789">
+                </div>
+                
+                <div class="form-group">
+                    <label for="transactionDate">تاریخ تراکنش</label>
+                    <input type="text" id="transactionDate" placeholder="1403/08/12">
+                </div>
+                
+                <div class="form-group">
+                    <label for="transactionTime">زمان تراکنش</label>
+                    <input type="text" id="transactionTime" placeholder="14:30:25">
+                </div>
+                
+                <div class="form-group">
+                    <label for="amount">مبلغ (ریال)</label>
+                    <input type="text" id="amount" placeholder="2,500,000">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fromCard">کارت مبدأ</label>
+                    <input type="text" id="fromCard" placeholder="5859-47**-****-2826">
+                </div>
+                
+                <div class="form-group">
+                    <label for="toCard">کارت مقصد</label>
+                    <input type="text" id="toCard" placeholder="6280-023-****-2037">
+                </div>
+                
+                <div class="form-group">
+                    <label for="fromBank">بانک مبدأ</label>
+                    <select id="fromBank">
+                        <option value="">انتخاب بانک</option>
+                        <option value="ملی">ملی</option>
+                        <option value="ملت">ملت</option>
+                        <option value="صادرات">صادرات</option>
+                        <option value="پارسیان">پارسیان</option>
+                        <option value="سامان">سامان</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="toBank">بانک مقصد</label>
+                    <select id="toBank">
+                        <option value="">انتخاب بانک</option>
+                        <option value="ملی">ملی</option>
+                        <option value="ملت">ملت</option>
+                        <option value="صادرات">صادرات</option>
+                        <option value="پارسیان">پارسیان</option>
+                        <option value="سامان">سامان</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="trackingCode">کد رهگیری</label>
+                    <input type="text" id="trackingCode" placeholder="RHG-1234-5678">
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">شرح تراکنش</label>
+                    <textarea id="description" rows="3" placeholder="پرداخت سفر هرمزگان"></textarea>
+                </div>
+                
+                <div class="actions">
+                    <button type="button" class="btn" onclick="previewReceipt()">👁️ پیش‌نمایش</button>
+                    <button type="button" class="btn" onclick="saveReceipt()">💾 ذخیره</button>
+                    <button type="button" class="btn btn-secondary" onclick="clearForm()">🗑️ پاک کردن</button>
+                    <button type="button" class="btn btn-secondary" onclick="fillSample()">📝 پر کردن نمونه</button>
+                </div>
+            </form>
+            
+            <!-- پیش‌نمایش رسید -->
+            <div class="receipt-preview" id="receiptPreview" style="display: none;">
+                <h3 style="text-align: center; margin-bottom: 15px;">پیش‌نمایش رسید</h3>
+                <div class="preview-row">
+                    <span>شماره تراکنش:</span>
+                    <span id="previewId">-</span>
+                </div>
+                <div class="preview-row">
+                    <span>تاریخ و زمان:</span>
+                    <span id="previewDate">-</span>
+                </div>
+                <div class="preview-row">
+                    <span>مبلغ:</span>
+                    <span id="previewAmount">-</span>
+                </div>
+                <div class="preview-row">
+                    <span>کارت مبدأ:</span>
+                    <span id="previewFrom">-</span>
+                </div>
+                <div class="preview-row">
+                    <span>کارت مقصد:</span>
+                    <span id="previewTo">-</span>
+                </div>
+                <div class="preview-row">
+                    <span>شرح:</span>
+                    <span id="previewDesc">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // پیش‌نمایش رسید
+        function previewReceipt() {
+            const preview = document.getElementById('receiptPreview');
+            const transactionId = document.getElementById('transactionId').value || 'TX-123456789';
+            const date = document.getElementById('transactionDate').value || '1403/08/12';
+            const time = document.getElementById('transactionTime').value || '14:30:25';
+            const amount = document.getElementById('amount').value || '2,500,000';
+            const fromCard = document.getElementById('fromCard').value || '5859-47**-****-2826';
+            const toCard = document.getElementById('toCard').value || '6280-023-****-2037';
+            const description = document.getElementById('description').value || 'پرداخت سفر هرمزگان';
+            
+            document.getElementById('previewId').textContent = transactionId;
+            document.getElementById('previewDate').textContent = `${date} - ${time}`;
+            document.getElementById('previewAmount').textContent = amount + ' ریال';
+            document.getElementById('previewFrom').textContent = fromCard;
+            document.getElementById('previewTo').textContent = toCard;
+            document.getElementById('previewDesc').textContent = description;
+            
+            preview.style.display = 'block';
+        }
+        
+        // ذخیره رسید
+        function saveReceipt() {
+            const transactionId = document.getElementById('transactionId').value;
+            if (!transactionId) {
+                alert('⚠️ لطفا شماره تراکنش را وارد کنید');
+                return;
+            }
+            
+            // جمع‌آوری داده‌ها
+            const receiptData = {
+                id: transactionId,
+                date: document.getElementById('transactionDate').value,
+                time: document.getElementById('transactionTime').value,
+                amount: document.getElementById('amount').value,
+                fromCard: document.getElementById('fromCard').value,
+                toCard: document.getElementById('toCard').value,
+                fromBank: document.getElementById('fromBank').value,
+                toBank: document.getElementById('toBank').value,
+                trackingCode: document.getElementById('trackingCode').value,
+                description: document.getElementById('description').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            // ذخیره در localStorage
+            const receipts = JSON.parse(localStorage.getItem('hormozganReceipts') || '[]');
+            receipts.push(receiptData);
+            localStorage.setItem('hormozganReceipts', JSON.stringify(receipts));
+            
+            alert('✅ رسید با موفقیت ذخیره شد\n\nشماره تراکنش: ' + transactionId);
+            console.log('💾 رسید ذخیره شد:', receiptData);
+        }
+        
+        // پاک کردن فرم
+        function clearForm() {
+            if (confirm('آیا از پاک کردن تمام فیلدها مطمئن هستید؟')) {
+                document.getElementById('receiptForm').reset();
+                document.getElementById('receiptPreview').style.display = 'none';
+            }
+        }
+        
+        // پر کردن داده‌های نمونه
+        function fillSample() {
+            document.getElementById('transactionId').value = 'TX-' + Math.random().toString().substr(2, 9);
+            document.getElementById('transactionDate').value = '1403/08/' + (Math.floor(Math.random() * 30) + 1);
+            document.getElementById('transactionTime').value = 
+                (Math.floor(Math.random() * 12) + 10) + ':' + 
+                (Math.floor(Math.random() * 60)).toString().padStart(2, '0') + ':' + 
+                (Math.floor(Math.random() * 60)).toString().padStart(2, '0');
+            document.getElementById('amount').value = (Math.floor(Math.random() * 100) + 10) + ',000,000';
+            document.getElementById('fromCard').value = '5859-47**-****-' + (Math.floor(Math.random() * 9000) + 1000);
+            document.getElementById('toCard').value = '6280-023-****-' + (Math.floor(Math.random() * 9000) + 1000);
+            document.getElementById('fromBank').value = ['ملی', 'ملت', 'صادرات'][Math.floor(Math.random() * 3)];
+            document.getElementById('toBank').value = ['پارسیان', 'سامان', 'ملت'][Math.floor(Math.random() * 3)];
+            document.getElementById('trackingCode').value = 'RHG-' + (Math.floor(Math.random() * 9000) + 1000) + '-' + (Math.floor(Math.random() * 9000) + 1000);
+            document.getElementById('description').value = 'پرداخت سفر هرمزگان - سفر شماره ' + (Math.floor(Math.random() * 100) + 1);
+            
+            alert('📝 فرم با داده‌های نمونه پر شد');
+        }
+        
+        // بارگذاری اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧾 صفحه ویرایش رسید آماده است!');
+        });
+    </script>
+</body>
+</html>

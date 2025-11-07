@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>داشبورد راننده پیشرفته - هم‌راز</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.5);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .user-header {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .user-info h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        .user-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-box {
+            padding: 15px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .card-large {
+            grid-column: span 2;
+        }
+
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .modern-table th {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .modern-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modern-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(45deg, var(--success), #34d399);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .rating {
+            color: #fbbf24;
+            font-size: 1.2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .card-large {
+                grid-column: 1;
+            }
+            .user-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .quick-access-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .quick-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+        }
+
+        .quick-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .quick-btn-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- هدر کاربر -->
+        <div class="glass-card user-header fade-in">
+            <div class="user-avatar">
+                <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem;">
+                    👤
+                </div>
+            </div>
+            <div class="user-info">
+                <h1>علی محمدی، خوش آمدید!</h1>
+                <p>امروز: چهارشنبه ۱۴ بهمن ۱۴۰۳ | ساعت ۰۰:۴۸</p>
+            </div>
+            <div class="user-actions">
+                <button class="btn btn-primary" onclick="startNewTrip()">🚗 شروع سفر جدید</button>
+            </div>
+            
+            <div class="user-stats">
+                <div class="stat-box">
+                    <span class="stat-value">۱۲</span>
+                    <span class="stat-label">سفر امروز</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">۴.۹M</span>
+                    <span class="stat-label">درآمد امروز (تومان)</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">۴.۹/۵</span>
+                    <span class="stat-label">امتیاز شما</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- دکمه‌های دسترسی سریع -->
+        <div class="glass-card fade-in">
+            <h3 class="card-title">⚡ دسترسی سریع</h3>
+            <div class="quick-access-buttons">
+                <a href="/driver-dashboard/income" class="quick-btn">
+                    <span class="quick-btn-icon">📊</span>
+                    <div>تحلیل درآمد</div>
+                </a>
+                <a href="/driver-dashboard/calculator" class="quick-btn">
+                    <span class="quick-btn-icon">🧮</span>
+                    <div>ماشین حساب</div>
+                </a>
+                <a href="/driver-dashboard/savings" class="quick-btn">
+                    <span class="quick-btn-icon">💰</span>
+                    <div>پس‌انداز</div>
+                </a>
+                <a href="/driver-dashboard/schedule" class="quick-btn">
+                    <span class="quick-btn-icon">🕒</span>
+                    <div>برنامه‌ریزی</div>
+                </a>
+                <a href="/driver-dashboard/reviews" class="quick-btn">
+                    <span class="quick-btn-icon">⭐</span>
+                    <div>نظرات</div>
+                </a>
+                <a href="/driver-dashboard/support" class="quick-btn">
+                    <span class="quick-btn-icon">🛠</span>
+                    <div>پشتیبانی</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Grid اصلی داشبورد -->
+        <div class="dashboard-grid">
+            
+            <!-- بخش ۱: تحلیل درآمد هفتگی -->
+            <div class="glass-card card-large fade-in">
+                <div class="card-title">📊 تحلیل درآمد هفتگی</div>
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>روز</th>
+                            <th>تعداد سفر</th>
+                            <th>درآمد ناخالص</th>
+                            <th>کمیسیون</th>
+                            <th>درآمد خالص</th>
+                            <th>رشد</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>شنبه</td>
+                            <td>۱۵</td>
+                            <td>۵,۲۰۰,۰۰۰</td>
+                            <td>۷۸۰,۰۰۰</td>
+                            <td>۴,۴۲۰,۰۰۰</td>
+                            <td style="color: var(--success)">↑ ۸%</td>
+                        </tr>
+                        <tr>
+                            <td>یکشنبه</td>
+                            <td>۱۸</td>
+                            <td>۶,۱۰۰,۰۰۰</td>
+                            <td>۹۱۵,۰۰۰</td>
+                            <td>۵,۱۸۵,۰۰۰</td>
+                            <td style="color: var(--success)">↑ ۱۵%</td>
+                        </tr>
+                        <tr>
+                            <td>دوشنبه</td>
+                            <td>۱۲</td>
+                            <td>۴,۳۰۰,۰۰۰</td>
+                            <td>۶۴۵,۰۰۰</td>
+                            <td>۳,۶۵۵,۰۰۰</td>
+                            <td style="color: var(--danger)">↓ ۵%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="btn btn-outline" onclick="showFullReport()">مشاهده گزارش کامل</button>
+                </div>
+            </div>
+
+            <!-- بخش ۲: ماشین حساب هوشمند -->
+            <div class="glass-card fade-in">
+                <div class="card-title">🧮 ماشین حساب هوشمند</div>
+                <div class="form-group">
+                    <label class="form-label">مبلغ سفر (تومان)</label>
+                    <input type="number" class="form-control" id="tripAmount" placeholder="۱,۰۰۰,۰۰۰" value="1000000">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">زمان سفر (دقیقه)</label>
+                    <input type="number" class="form-control" id="tripTime" placeholder="۳۰" value="30">
+                </div>
+                <div id="calculationResults" style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>کمیسیون (۱۵%):</div>
+                        <div id="commission">۱۵۰,۰۰۰ تومان</div>
+                        <div>مالیات (۹%):</div>
+                        <div id="tax">۹۰,۰۰۰ تومان</div>
+                        <div style="font-weight: bold;">درآمد خالص:</div>
+                        <div style="font-weight: bold;" id="netIncome">۷۶۰,۰۰۰ تومان</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="calculateTrip()">محاسبه</button>
+            </div>
+
+            <!-- بخش ۳: برنامه‌ریزی مالی -->
+            <div class="glass-card fade-in">
+                <div class="card-title">💰 برنامه‌ریزی مالی</div>
+                <div class="form-group">
+                    <label class="form-label">هدف پس‌انداز ماهانه</label>
+                    <input type="number" class="form-control" id="savingsGoal" placeholder="۱۰,۰۰۰,۰۰۰" value="10000000">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">مقدار فعلی</label>
+                    <input type="number" class="form-control" id="currentSavings" placeholder="۶,۵۰۰,۰۰۰" value="6500000">
+                </div>
+                <div class="progress-bar">
+                    <div class="progress" id="savingsProgress" style="width: 65%"></div>
+                </div>
+                <div style="text-align: center; margin: 10px 0;">
+                    <span id="progressText">۶۵% از هدف محقق شد</span>
+                </div>
+                <button class="btn btn-success" style="width: 100%;" onclick="updateProgress()">بروزرسانی پیشرفت</button>
+            </div>
+
+            <!-- بخش ۴: مدیریت زمان کاری -->
+            <div class="glass-card fade-in">
+                <div class="card-title">🕒 مدیریت زمان کاری</div>
+                <div class="form-group">
+                    <label class="form-label">نوع شیفت</label>
+                    <select class="form-control" id="workType">
+                        <option>عادی (۸ ساعته)</option>
+                        <option>فشرده (۱۲ ساعته)</option>
+                        <option>پاره وقت (۴ ساعته)</option>
+                        <option>شبانه (۱۰ ساعته)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ساعت شروع</label>
+                    <input type="time" class="form-control" value="08:00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">ساعت پایان</label>
+                    <input type="time" class="form-control" value="16:00">
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <div>ساعات کاری امروز: <strong>۸ ساعت</strong></div>
+                    <div>درآمد ساعتی: <strong>۶۱۲,۵۰۰ تومان</strong></div>
+                </div>
+                <button class="btn btn-primary" style="width: 100%;" onclick="saveSchedule()">ذخیره تنظیمات</button>
+            </div>
+
+            <!-- بخش ۵: نظرات کاربران -->
+            <div class="glass-card card-large fade-in">
+                <div class="card-title">⭐ نظرات کاربران</div>
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>کاربر</th>
+                            <th>امتیاز</th>
+                            <th>نظر</th>
+                            <th>تاریخ</th>
+                            <th>عملکرد</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>محمد رضایی</td>
+                            <td><span class="rating">★★★★★</span></td>
+                            <td>راننده بسیار مودب و رانندگی عالی. خودرو تمیز و مطبوع</td>
+                            <td>۲ روز پیش</td>
+                            <td><button class="btn btn-outline" style="padding: 5px 10px;" onclick="replyToReview(1)">پاسخ</button></td>
+                        </tr>
+                        <tr>
+                            <td>فاطمه کریمی</td>
+                            <td><span class="rating">★★★★☆</span></td>
+                            <td>مسیر بهینه‌ای انتخاب شد اما کمی تاخیر داشت</td>
+                            <td>۳ روز پیش</td>
+                            <td><button class="btn btn-outline" style="padding: 5px 10px;" onclick="replyToReview(2)">پاسخ</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 20px; text-align: center;">
+                    <button class="btn btn-outline" onclick="showAllReviews()">مشاهده همه نظرات</button>
+                </div>
+            </div>
+
+            <!-- بخش ۶: پشتیبانی مالی -->
+            <div class="glass-card fade-in">
+                <div class="card-title">🛠 پشتیبانی مالی</div>
+                <div style="display: grid; gap: 10px; margin: 20px 0;">
+                    <button class="btn btn-outline" onclick="openFinancialConsultation()">💬 مشاوره مالی رایگان</button>
+                    <button class="btn btn-outline" onclick="generateCustomReport()">📋 گزارش مالی سفارشی</button>
+                    <button class="btn btn-outline" onclick="updateSettings()">🔄 به‌روزرسانی تنظیمات</button>
+                    <button class="btn btn-outline" onclick="showPerformanceAnalysis()">📊 تحلیل عملکرد</button>
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin: 15px 0;">
+                    <div style="font-weight: bold; margin-bottom: 10px;">پشتیبانی آنلاین</div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn btn-success" style="flex: 1; padding: 8px;" onclick="contactWhatsApp()">واتساپ</button>
+                        <button class="btn btn-primary" style="flex: 1; padding: 8px;" onclick="contactPhone()">تلفن</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // توابع اصلی
+        function calculateTrip() {
+            const amount = parseInt(document.getElementById('tripAmount').value) || 0;
+            const commission = amount * 0.15;
+            const tax = amount * 0.09;
+            const netIncome = amount - commission - tax;
+
+            document.getElementById('commission').textContent = commission.toLocaleString() + ' تومان';
+            document.getElementById('tax').textContent = tax.toLocaleString() + ' تومان';
+            document.getElementById('netIncome').textContent = netIncome.toLocaleString() + ' تومان';
+        }
+
+        function updateProgress() {
+            const goal = parseInt(document.getElementById('savingsGoal').value) || 1;
+            const current = parseInt(document.getElementById('currentSavings').value) || 0;
+            const progress = (current / goal) * 100;
+
+            document.getElementById('savingsProgress').style.width = Math.min(progress, 100) + '%';
+            document.getElementById('progressText').textContent = Math.min(progress, 100).toFixed(0) + '% از هدف محقق شد';
+        }
+
+        // توابع جدید برای قابلیت‌ها
+        function startNewTrip() {
+            alert('🚗 سیستم شروع سفر فعال شد!');
+            // پیاده‌سازی منطق شروع سفر
+        }
+
+        function showFullReport() {
+            alert('📈 گزارش کامل در حال بارگذاری...');
+            // هدایت به صفحه گزارش کامل
+        }
+
+        function saveSchedule() {
+            alert('✅ برنامه‌ریزی ذخیره شد');
+            // ذخیره تنظیمات د

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚗 Hormozgan Driver Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .app-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+        }
+        
+        .logo {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+        
+        /* دکمه‌های شیشه‌ای */
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 12px 0;
+            color: white;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .btn-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .btn-desc {
+            font-size: 0.85em;
+            opacity: 0.8;
+        }
+        
+        /* بخش‌های رنگی مختلف */
+        .btn-driver { border-left: 4px solid #38bdf8; }
+        .btn-security { border-left: 4px solid #f59e0b; }
+        .btn-payment { border-left: 4px solid #10b981; }
+        .btn-festivals { border-left: 4px solid #8b5cf6; }
+        .btn-ai { border-left: 4px solid #ec4899; }
+        .btn-register { border-left: 4px solid #06b6d4; }
+        .btn-music { border-left: 4px solid #f97316; }
+        .btn-map { border-left: 4px solid #84cc16; }
+        .btn-receipt { border-left: 4px solid #a855f7; }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            opacity: 0.6;
+            font-size: 0.8em;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 30px 0 15px 0;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- هدر اپ -->
+        <div class="header">
+            <div class="logo">🚗</div>
+            <h1>Hormozgan Driver Pro</h1>
+            <div class="subtitle">سرویس حرفه‌ای رانندگان هرمزگان</div>
+        </div>
+        
+        <div class="section-title">خدمات اصلی</div>
+        
+        <!-- منوی اصلی با دکمه‌های شیشه‌ای -->
+        <a href="/driver-dashboard" class="glass-btn btn-driver">
+            <span class="btn-icon">👨‍💼</span>
+            <div class="btn-title">داشبورد راننده</div>
+            <div class="btn-desc">مدیریت سفرها و درآمد</div>
+        </a>
+        
+        <a href="/driver-registration" class="glass-btn btn-register">
+            <span class="btn-icon">📝</span>
+            <div class="btn-title">ثبت‌نام راننده</div>
+            <div class="btn-desc">عضویت در سرویس حرفه‌ای</div>
+        </a>
+        
+        <a href="/payment" class="glass-btn btn-payment">
+            <span class="btn-icon">💳</span>
+            <div class="btn-title">درگاه پرداخت</div>
+            <div class="btn-desc">تراکنش‌های امن مالی</div>
+        </a>
+        
+        <div class="section-title">سرگرمی و فرهنگ</div>
+        
+        <a href="/music-player" class="glass-btn btn-music">
+            <span class="btn-icon">🎵</span>
+            <div class="btn-title">موزیک پلیر</div>
+            <div class="btn-desc">پخش آنلاین آهنگ‌های محلی</div>
+        </a>
+        
+        <a href="/festivals" class="glass-btn btn-festivals">
+            <span class="btn-icon">🎉</span>
+            <div class="btn-title">جشن‌های بومی</div>
+            <div class="btn-desc">مناسبت‌های محلی هرمزگان</div>
+        </a>
+        
+        <div class="section-title">هوش مصنوعی و مسیریابی</div>
+        
+        <a href="/ai-chat" class="glass-btn btn-ai">
+            <span class="btn-icon">🤖</span>
+            <div class="btn-title">دستیار هوش مصنوعی</div>
+            <div class="btn-desc">پشتیبانی 24 ساعته</div>
+        </a>
+        
+        <a href="/traffic-ai" class="glass-btn btn-ai">
+            <span class="btn-icon">🚦</span>
+            <div class="btn-title">AI سخنگو قوانین</div>
+            <div class="btn-desc">مشاوره صوتی قوانین رانندگی</div>
+        </a>
+        
+        <a href="/smart-map" class="glass-btn btn-map">
+            <span class="btn-icon">🗺️</span>
+            <div class="btn-title">نقشه هوشمند</div>
+            <div class="btn-desc">مکان‌های ضروری برای رانندگان</div>
+        </a>
+        
+        <div class="section-title">امنیت و مدیریت</div>
+        
+        <a href="/security" class="glass-btn btn-security">
+            <span class="btn-icon">🛡️</span>
+            <div class="btn-title">امنیت و حفاظت</div>
+            <div class="btn-desc">سیستم نظارت و ایمنی</div>
+        </a>
+        
+        <a href="/payment-receipt-edit" class="glass-btn btn-receipt">
+            <span class="btn-icon">🧾</span>
+            <div class="btn-title">ویرایش رسید پرداخت</div>
+            <div class="btn-desc">ایجاد و مدیریت رسیدها</div>
+        </a>
+        
+        <!-- دکمه‌های اضافی -->
+        <a href="/calls" class="glass-btn">
+            <span class="btn-icon">📞</span>
+            <div class="btn-title">تماس‌های اضطراری</div>
+        </a>
+        
+        <a href="/welcome" class="glass-btn">
+            <span class="btn-icon">👋</span>
+            <div class="btn-title">صفحه خوش آمدگویی</div>
+        </a>
+        
+        <div class="footer">
+            Hormozgan Driver Pro v5.0 © 2025
+        </div>
+    </div>
+</body>
+</html>

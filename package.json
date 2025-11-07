@@ -12,10 +12,13 @@
     "db": "node database-manager.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "helmet": "^7.1.0",
     "cors": "^2.8.5",
-    "express-rate-limit": "^7.1.5"
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "http-proxy": "^1.18.1",
+    "path": "^0.12.7",
+    "ws": "^8.18.3"
   },
   "keywords": [
     "ai",

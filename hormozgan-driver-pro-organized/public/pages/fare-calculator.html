@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💰 محاسبه کرایه - Hormozgan Driver Pro</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #5568d3;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        
+        .result.show {
+            display: block;
+        }
+        
+        .price {
+            font-size: 2.5em;
+            color: #667eea;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .breakdown {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            color: #666;
+        }
+        
+        .breakdown-item span:last-child {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 محاسبه کرایه</h1>
+        
+        <div class="form-group">
+            <label>📍 مبدا</label>
+            <input type="text" id="origin" placeholder="مثال: میدان آزادی">
+        </div>
+        
+        <div class="form-group">
+            <label>📍 مقصد</label>
+            <input type="text" id="destination" placeholder="مثال: فرودگاه">
+        </div>
+        
+        <div class="form-group">
+            <label>🛣️ مسافت (کیلومتر)</label>
+            <input type="number" id="distance" placeholder="5" value="5" min="1" max="100">
+        </div>
+        
+        <div class="form-group">
+            <label>⏱️ زمان تقریبی (دقیقه)</label>
+            <input type="number" id="duration" placeholder="15" value="15" min="1" max="180">
+        </div>
+        
+        <div class="form-group">
+            <label>🚗 نوع سرویس</label>
+            <select id="serviceType">
+                <option value="economy">اقتصادی</option>
+                <option value="comfort" selected>راحت</option>
+                <option value="premium">VIP</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>🕐 زمان سفر</label>
+            <select id="timeType">
+                <option value="normal">عادی</option>
+                <option value="peak" selected>ساعت شلوغی</option>
+                <option value="night">شب</option>
+            </select>
+        </div>
+        
+        <button class="btn" onclick="calculateFare()">محاسبه کرایه</button>
+        
+        <div class="result" id="result">
+            <div class="price" id="totalPrice">0 تومان</div>
+            
+            <div class="breakdown">
+                <div class="breakdown-item">
+                    <span>💵 کرایه پایه</span>
+                    <span id="baseFare">0 تومان</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>🛣️ هزینه مسافت</span>
+                    <span id="distanceFare">0 تومان</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>⏱️ هزینه زمان</span>
+                    <span id="timeFare">0 تومان</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>📈 ضریب زمان</span>
+                    <span id="multiplier">1x</span>
+                </div>
+                <div class="breakdown-item">
+                    <span>🚗 نوع سرویس</span>
+                    <span id="serviceMultiplier">1x</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateFare() {
+            const distance = parseFloat(document.getElementById('distance').value) || 0;
+            const duration = parseFloat(document.getElementById('duration').value) || 0;
+            const serviceType = document.getElementById('serviceType').value;
+            const timeType = document.getElementById('timeType').value;
+
+            // نرخ‌ها
+            const BASE_FARE = 15000;
+            const PER_KM = 8000;
+            const PER_MINUTE = 1500;
+
+            // ضرایب نوع سرویس
+            const serviceMultipliers = {
+                economy: 0.9,
+                comfort: 1.0,
+                premium: 1.5
+            };
+
+            // ضرایب زمان
+            const timeMultipliers = {
+                normal: 1.0,
+                peak: 1.3,
+                night: 1.2
+            };
+
+            // محاسبه
+            const baseFare = BASE_FARE;
+            const distanceFare = distance * PER_KM;
+            const timeFare = duration * PER_MINUTE;
+            
+            const serviceMultiplier = serviceMultipliers[serviceType];
+            const timeMultiplier = timeMultipliers[timeType];
+            
+            const subtotal = baseFare + distanceFare + timeFare;
+            const total = Math.round(subtotal * serviceMultiplier * timeMultiplier);
+
+            // نمایش نتایج
+            document.getElementById('baseFare').textContent = baseFare.toLocaleString('fa-IR') + ' تومان';
+            document.getElementById('distanceFare').textContent = distanceFare.toLocaleString('fa-IR') + ' تومان';
+            document.getElementById('timeFare').textContent = timeFare.toLocaleString('fa-IR') + ' تومان';
+            document.getElementById('multiplier').textContent = timeMultiplier + 'x';
+            document.getElementById('serviceMultiplier').textContent = serviceMultiplier + 'x';
+            document.getElementById('totalPrice').textContent = total.toLocaleString('fa-IR') + ' تومان';
+
+            document.getElementById('result').classList.add('show');
+        }
+
+        // Auto calculate on input change
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('change', calculateFare);
+        });
+
+        // Initial calculation
+        calculateFare();
+    </script>
+</body>
+</html>
