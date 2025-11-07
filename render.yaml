@@ -14,7 +14,9 @@ services:
       - key: JWT_SECRET
         generateValue: true
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: hormozgan-db
+          property: connectionString
 
   - type: web
     name: hormozgan-payment-service
@@ -33,6 +35,4 @@ services:
 
 databases:
   - name: hormozgan-db
-    databaseName: hormozgan_driver
-    user: hormozgan_user
     plan: free
