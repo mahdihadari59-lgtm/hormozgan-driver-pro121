@@ -473,6 +473,26 @@ app.get('/', (req, res) => {
                     <p><strong>موسیقی:</strong> ${musicPlayer.status}</p>
                     <p><strong>تماس:</strong> ${videoCallSystem.status}</p>
                 </div>
+                  <div class="card entertainment-card">
+    <h2>🎵 سیستم سرگرمی و ارتباطی</h2>
 
-                <div class="card ai-card">
-                    <h2>🤖 دیکتاتور قوانین رانن
+    <div class="entertainment-section">
+        <button class="entertainment-btn" onclick="controlMusic('play')">
+            🎵 پخش موسیقی
+        </button>
+
+        <button class="entertainment-btn" onclick="startCall(1)">
+            📞 تماس پشتیبانی
+        </button>
+
+        <button class="entertainment-btn" onclick="startCall(3)">
+            🚦 تماس ترافیک
+        </button>
+    </div>
+
+    <p><strong>موسیقی:</strong> ${musicPlayer.status}</p>
+    <p><strong>تماس:</strong> ${videoCallSystem.status}</p>
+</div>
+
+<div class="card ai-card">
+    <h2>🤖 دیتاکتور قوانین رانندگی</h2>
