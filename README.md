@@ -105,6 +105,315 @@ e Calculator
 > ```bash
 > Node.js >= 18.0.0
 > npm یا yarn یا pnpm
+
+📊 راهنمای جامع به‌روزرسانی Hormozgan Driver Pro
+🎯 مرحله اول: تجزیه و تحلیل (روزهای 1-2)
+1️⃣ بررسی ساختار فعلی
+☑️ بررسی فایل‌های موجود در cPanel
+☑️ شناسایی فایل‌های قدیمی و غیرفعال
+☑️ بروزرسانی فهرست فایل‌ها
+☑️ مستندسازی وضعیت موجود
+2️⃣ فهرست فایل‌های قدیمی‌ای که باید حذف شوند
+❌ old.about.html
+❌ Ferr.index.html
+❌ copymove.html.tt
+❌ فایل‌های بدون استفاده‌ای
+❌ نسخه‌های قدیمی HTML
+3️⃣ فایل‌های جدیدی که باید اضافه شوند
+✅ live-maps/ (سیستم نقشه‌های زنده)
+✅ ai-sahel-pro-v3.html (هوش مصنوعی)
+✅ booking.html (سیستم رزرو)
+✅ dashboard/ (پنل‌های کاربری)
+✅ api/ (سرویس‌های backend)
+🔧 مرحله دوم: ساختار جدید (روزهای 3-5)
+📁 ساختار درخت‌ی پیشنهادی
+public_html/
+├── 📄 index.html (صفحه اصلی - نسخه جدید)
+├── 📄 robots.txt
+├── 📄 sitemap.xml
+├── 📄 .htaccess
+│
+├── 📁 pages/ (صفحات اصلی)
+│   ├── about.html
+│   ├── services.html
+│   ├── contact.html
+│   ├── booking.html ✨ جدید
+│   ├── register.html
+│   └── login.html
+│
+├── 📁 admin/ (پنل مدیریت)
+│   ├── dashboard.html
+│   ├── bookings.html
+│   ├── drivers.html
+│   ├── analytics.html
+│   └── settings.html
+│
+├── 📁 user-dashboard/ (پنل کاربر)
+│   ├── profile.html
+│   ├── my-bookings.html
+│   ├── payments.html
+│   └── settings.html
+│
+├── 📁 ai/ (سیستم هوش مصنوعی)
+│   ├── sahel-pro-v3.html ✨ جدید
+│   ├── chatbot.html
+│   ├── analytics.html
+│   └── training.html
+│
+├── 📁 maps/ (نقشه‌های تعاملی)
+│   ├── live-maps/
+│   │   ├── index.html
+│   │   ├── driver-map.html
+│   │   ├── tourist-map.html
+│   │   └── traffic-map.html
+│   └── maps-backend/
+│       ├── live-traffic.php
+│       ├── route-calculator.php
+│       └── navigation-engine.php
+│
+├── 📁 api/ (سرویس‌های backend)
+│   ├── booking.php
+│   ├── payment.php
+│   ├── drivers.php
+│   ├── users.php
+│   ├── sms.php
+│   ├── maps.php
+│   ├── ai-chat.php
+│   └── analytics.php
+│
+├── 📁 assets/ (منابع استاتیک)
+│   ├── 📁 css/
+│   │   ├── style.css (استایل اصلی)
+│   │   ├── admin.css
+│   │   ├── responsive.css
+│   │   ├── animations.css
+│   │   └── dark-mode.css
+│   │
+│   ├── 📁 js/
+│   │   ├── main.js
+│   │   ├── admin.js
+│   │   ├── booking.js
+│   │   ├── payment.js
+│   │   ├── maps.js
+│   │   ├── chatbot.js
+│   │   ├── analytics.js
+│   │   └── utils.js
+│   │
+│   ├── 📁 images/
+│   │   ├── 📁 heroes/
+│   │   ├── 📁 services/
+│   │   ├── 📁 cities/
+│   │   ├── 📁 icons/
+│   │   ├── 📁 logos/
+│   │   └── 📁 backgrounds/
+│   │
+│   └── 📁 fonts/
+│       ├── vazir.woff2
+│       └── vazir.ttf
+│
+├── 📁 database/
+│   ├── schema.sql (ساختار دیتابیس)
+│   ├── migrations/
+│   │   ├── 001_create_tables.sql
+│   │   ├── 002_add_ai_tables.sql
+│   │   ├── 003_add_payments.sql
+│   │   └── 004_add_analytics.sql
+│   └── sample-data.sql
+│
+├── 📁 config/
+│   ├── database.php
+│   ├── api.php
+│   ├── payment-gateway.php
+│   ├── sms-service.php
+│   └── email-service.php
+│
+└── 📁 docs/
+    ├── README.md
+    ├── API-DOCS.md
+    ├── SETUP.md
+    ├── DEPLOYMENT.md
+    └── CHANGELOG.md
+💻 مرحله سوم: توسعه فایل‌های جدید (روزهای 6-15)
+📝 1. فایل index.html جدید (صفحه اصلی)
+ویژگی‌های جدید:
+✨ طراحی مدرن با Dark Mode
+🎨 انیمیشن‌های جذاب
+📱 رسپانسیو کامل
+⚡ بارگذاری سریع
+🔍 SEO بهتر
+🎯 UX بهتر
+📝 2. سیستم رزرو (booking.html)
+بخش‌های اصلی:
+✅ جستجوی تاکسی (Real-time)
+✅ انتخاب نوع خودرو
+✅ نمایش قیمت فوری
+✅ مدیریت سفارش
+✅ درگاه پرداخت
+✅ پیگیری سفر
+✅ ارزیابی سفر
+📝 3. هوش مصنوعی (ai-sahel-pro-v3.html)
+ویژگی‌های AI:
+🤖 چت‌بات ساحل
+📊 تحلیل داده‌ها
+🗺️ بهینه‌سازی مسیر
+🔮 پیش‌بینی تقاضا
+📈 گزارشات تحلیلی
+💡 توصیه‌های هوشمند
+📝 4. سیستم نقشه‌های زنده (live-maps/)
+ویژگی‌ها:
+🗺️ نقشه تعاملی
+🚗 موقعیت رانندگان
+🚦 وضعیت ترافیک
+📍 جستجوی آدرس
+📏 محاسبه مسیر
+⏱️ تخمین زمان
+🗄️ مرحله چهارم: تنظیم دیتابیس (روز 16-17)
+SQL Schema:
+-- جداول اصلی
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
+    phone VARCHAR(20),
+    password VARCHAR(255),
+    role ENUM('customer', 'driver', 'admin'),
+    status ENUM('active', 'inactive', 'suspended'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    driver_id INT,
+    pickup_location VARCHAR(255),
+    dropoff_location VARCHAR(255),
+    car_type VARCHAR(50),
+    price DECIMAL(10, 2),
+    status ENUM('pending', 'accepted', 'completed', 'cancelled'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (driver_id) REFERENCES users(id)
+);
+
+CREATE TABLE payments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    booking_id INT,
+    amount DECIMAL(10, 2),
+    payment_method VARCHAR(50),
+    status ENUM('pending', 'completed', 'failed'),
+    transaction_id VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (booking_id) REFERENCES bookings(id)
+);
+
+CREATE TABLE ai_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    query TEXT,
+    response TEXT,
+    user_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+🔐 مرحله پنجم: درگاه‌های خارجی (روز 18-19)
+1️⃣ درگاه پرداخت (Payment Gateway)
+// config/payment-gateway.php
+return [
+    'zarinpal' => [
+        'merchant_id' => 'YOUR_MERCHANT_ID',
+        'api_url' => 'https://api.zarinpal.com/rest/',
+        'enabled' => true
+    ],
+    'paypal' => [
+        'client_id' => 'YOUR_CLIENT_ID',
+        'secret' => 'YOUR_SECRET',
+        'enabled' => false
+    ]
+];
+2️⃣ سرویس پیامک (SMS Service)
+// config/sms-service.php
+return [
+    'provider' => 'kavenegar', // یا payamak
+    'api_key' => 'YOUR_API_KEY',
+    'sender' => 'HDP',
+    'enabled' => true
+];
+3️⃣ سرویس ایمیل
+// config/email-service.php
+return [
+    'from' => 'info@hormozgandriver.ir',
+    'from_name' => 'تاکسی هرمزگان پرو',
+    'smtp_host' => 'mail.hormozgandriver.ir',
+    'smtp_port' => 587,
+    'smtp_user' => 'info@hormozgandriver.ir',
+    'smtp_pass' => 'YOUR_PASSWORD'
+];
+🚀 مرحله ششم: استقرار و تست (روز 20-21)
+✅ Checklist استقرار:
+Pre-Deployment:
+☑️ تست تمام صفحات
+☑️ تست فرم‌ها
+☑️ تست پیوند‌ها
+☑️ تست درگاه‌های خارجی
+☑️ تست سرعت بارگذاری
+☑️ تست نسخه‌ی موبایل
+☑️ تست HTTPS و SSL
+☑️ بکاپ گیری کامل
+
+Deployment:
+☑️ آپلود فایل‌ها
+☑️ تنظیم دسترسی‌ها
+☑️ فعال‌سازی درگاه‌ها
+☑️ کوکی و Session
+☑️ Cache و CDN
+☑️ Monitoring و Logging
+
+Post-Deployment:
+☑️ تست عملکردی کامل
+☑️ نظارت بر خطاها
+☑️ Backup خودکار
+☑️ بهینه‌سازی Performance
+📈 مرحله هفتم: نظارت و بهینه‌سازی (مستمر)
+🔍 KPIs مهم:
+📊 Performance:
+- Page Load Time < 3s
+- Core Web Vitals: بخش سبز
+- Uptime: > 99.9%
+
+📱 User Experience:
+- Booking Conversion: > 15%
+- User Retention: > 80%
+- NPS Score: > 70
+
+💰 Business:
+- Daily Bookings: رشد 20% ماه‌وار
+- Revenue per Booking: ثابت/رشد
+- Customer Satisfaction: > 4.5/5
+🔐 نکات امنیتی حیاتی
+⚠️ Security Checklist:
+☑️ Input Validation (تمام فرم‌ها)
+☑️ SQL Injection Prevention
+☑️ XSS Protection
+☑️ CSRF Protection
+☑️ Rate Limiting
+☑️ SSL/TLS (HTTPS)
+☑️ Password Hashing (bcrypt)
+☑️ Two-Factor Authentication (اختیاری)
+☑️ GDPR Compliance
+☑️ Regular Security Audits
+📞 تماس و پشتیبانی
+📧 Email: info@hormozgandriver.ir
+📱 Phone: 0916-462-1660
+💬 Telegram: @hormozgandriver
+🌐 Website: hormozgandriver.ir
+📝 نکات مهم
+Backup: قبل از هر تغییر، backup گیری کنید
+Version Control: از Git استفاده کنید
+Testing: هر تغییری را تست کنید
+Documentation: مستندات را به‌روز نگه دارید
+Communication: تغییرات را اطلاع دهید
+آخرین به‌روزرسانی: نوامبر 2025
+وضعیت پروژه: در حال توسعه فعال 🚀
 > دانلود و نصب
 > # کلون کردن پروژه
 > git clone https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git
