@@ -1,0 +1,55 @@
+📖 فهرست دستورات کامل
+
+🎯 مدیریت پروژه:
+  npm start           # راه‌اندازی سرور اصلی
+  npm run dev         # راه‌اندازی با قابلیت مشاهده تغییرات
+  npm run build       # ساخت پروژه برای دپلوی
+  npm run deploy      # دپلوی خودکار روی پلتفرم‌ها
+  npm run setup       # نصب و راه‌اندازی اولیه
+  npm test            # اجرای تست‌های سیستم
+
+🔧 توسعه و دیباگ:
+  node --watch server.js  # راه‌اندازی با auto-reload
+  npm list            # نمایش وابستگی‌های نصب شده
+  npm outdated         # بررسی بروزرسانی‌های موجود
+  npm audit           # بررسی امنیتی وابستگی‌ها
+
+🚀 دپلوی روی پلتفرم‌ها:
+  # Netlify
+  netlify deploy --prod
+  
+  # Vercel
+  vercel --prod
+  
+  # Railway
+  railway up
+
+📊 مانیتورینگ:
+  # مشاهده لاگ‌ها
+  tail -f logs/server.log
+  
+  # بررسی حافظه
+  node -e "console.log(process.memoryUsage())"
+  
+  # بررسی پورت
+  netstat -tulpn | grep :3000
+
+🛠️ ابزارهای مفید:
+  # بررسی نسخه Node.js
+  node --version
+  
+  # بررسی سلامت API
+  curl http://localhost:3000/health
+  
+  # تست دستیار هوشمند
+  curl -X POST http://localhost:3000/api/ai/ask -H "Content-Type: application/json" -d '{"question":"سلام"}'
+
+🎮 دستورات سریع تست:
+  # تست موسیقی
+  curl -X POST http://localhost:3000/api/music/play
+  
+  # تست تماس
+  curl -X POST http://localhost:3000/api/call/start/1
+  
+  # تست قوانین
+  curl http://localhost:3000/api/traffic/regulations

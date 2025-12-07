@@ -1,14 +1,14 @@
 [build]
-  base = "apps/driver-service"
-  publish = "apps/driver-service"
-  command = ""
+  command = "npm run build"
+  publish = "."
 
 [build.environment]
   NODE_VERSION = "18"
-  PUPPETEER_SKIP_DOWNLOAD = "true"
-  PUPPETEER_SKIP_CHROMIUM_DOWNLOAD = "true"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[functions]
+  directory = "functions"

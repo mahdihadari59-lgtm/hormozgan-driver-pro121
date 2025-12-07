@@ -9,14 +9,18 @@
     "deploy": "node server-final.js",
     "backup": "node servers/server-v7-backup.js",
     "ai": "node ai-assistant.js",
-    "db": "node database-manager.js"
+    "db": "node database-manager.js",
+    "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "axios": "^1.13.2",
     "cors": "^2.8.5",
-    "express": "^5.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
     "express-rate-limit": "^8.0.0",
-    "helmet": "^8.0.0",
+    "helmet": "^8.1.0",
     "http-proxy": "^1.18.1",
+    "morgan": "^1.10.1",
     "path": "^0.12.7",
     "ws": "^8.18.3"
   },
@@ -32,6 +36,6 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121"
+    "url": "https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git"
   }
 }
