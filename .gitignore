@@ -19,3 +19,17 @@ tmp/
 .DS_Store
 .idea/
 .vscode/
+
+# Backups
+backups/
+*.tar.gz
+
+# Binaries
+ngrok
+**/ngrok
+
+# Large media
+*.mp3
+*.mp4
+*.zip
+*.7z
