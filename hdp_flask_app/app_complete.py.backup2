@@ -1,0 +1,315 @@
+from flask import Flask, render_template, request, jsonify
+from services.rag_engine_final import RAGEngineFinal
+from flask_cors import CORS
+import json
+import os
+from traffic_algorithm import register_traffic_routes
+
+app = Flask(__name__)
+CORS(app)
+
+# ============ بارگذاری دانشنامه ============
+knowledge = {}
+kb_path = 'data/hormozgan_knowledge.json'
+
+if os.path.exists(kb_path):
+    with open(kb_path, 'r', encoding='utf-8') as f:
+        knowledge = json.load(f)
+    print(f"✅ دانشنامه loaded: {len(knowledge)} topics")
+else:
+    print("⚠️ دانشنامه یافت نشد")
+rag = RAGEngineFinal(knowledge)
+
+
+# ============ ثبت مسیرهای ترافیک ============
+register_traffic_routes(app)
+
+# ============ مسیرهای اصلی ============
+@app.route('/')
+def index():
+    return f'''
+    <!DOCTYPE html>
+    <html dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <title>HDP ONE</title>
+        <style>
+            body {{ font-family: Tahoma; background: linear-gradient(135deg,#667eea,#764ba2); padding:50px; color:white; text-align:center; }}
+            .btn {{ display:inline-block; background:rgba(255,255,255,0.2); padding:12px 24px; border-radius:30px; margin:10px; text-decoration:none; color:white; }}
+        </style>
+    </head>
+    <body>
+        <h1>🚕 HDP ONE</h1>
+        <p>سیستم هوشمند هرمزگان</p>
+        <p>📚 {len(knowledge)} موضوع در دانشنامه</p>
+        <div>
+            <a href="/chat" class="btn">💬 چت هوشمند</a>
+            <a href="/traffic" class="btn">🚦 وضعیت ترافیک</a>
+        </div>
+        <p style="margin-top:50px;">👨‍💻 مهدی حیدری پوری | ۱۴۰۴</p>
+    </body>
+    </html>
+    '''
+
+@app.route('/chat')
+def chat():
+    return '''
+    <!DOCTYPE html>
+    <html dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <title>HDP Chat</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body { font-family: Tahoma; background: linear-gradient(135deg,#1a1a2e,#16213e); padding:20px; color:white; }
+            .chat-container { max-width:500px; margin:auto; background:rgba(255,255,255,0.1); border-radius:20px; overflow:hidden; }
+            .header { background:#e74c3c; padding:20px; text-align:center; }
+            .messages { height:400px; overflow-y:auto; padding:15px; }
+            .message { margin-bottom:15px; display:flex; }
+            .user { justify-content:flex-end; }
+            .bot { justify-content:flex-start; }
+            .bubble { max-width:80%; padding:10px 15px; border-radius:20px; }
+            .user .bubble { background:#e74c3c; color:white; }
+            .bot .bubble { background:rgba(255,255,255,0.2); color:white; }
+            .input-area { display:flex; padding:15px; gap:10px; background:rgba(0,0,0,0.3); }
+            .input-area input { flex:1; padding:12px; border:none; border-radius:25px; }
+            .input-area button { padding:12px 20px; background:#e74c3c; color:white; border:none; border-radius:25px; cursor:pointer; }
+        </style>
+    </head>
+    <body>
+        <div class="chat-container">
+            <div class="header"><h3>🚕 HDP Chat</h3><p>دستیار هوشمند هرمزگان</p></div>
+            <div class="messages" id="messages">
+                <div class="message bot"><div class="bubble">👋 سلام! به HDP ONE خوش آمدید. چطور می‌توانم کمک کنم؟</div></div>
+            </div>
+            <div class="input-area">
+                <input type="text" id="input" placeholder="سوال خود را بنویسید..." onkeypress="if(event.key==='Enter') send()">
+                <button onclick="send()">📤</button>
+            </div>
+        </div>
+        <script>
+            async function send() {
+                const input = document.getElementById('input');
+                const msg = input.value.trim();
+                if (!msg) return;
+                const messages = document.getElementById('messages');
+                messages.innerHTML += `<div class="message user"><div class="bubble">${escapeHtml(msg)}</div></div>`;
+                input.value = '';
+                messages.scrollTop = messages.scrollHeight;
+                try {
+                    const res = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({message: msg})
+                    });
+                    const data = await res.json();
+                    messages.innerHTML += `<div class="message bot"><div class="bubble">${escapeHtml(data.response)}</div></div>`;
+                } catch(e) {
+                    messages.innerHTML += `<div class="message bot"><div class="bubble">❌ خطا در ارتباط</div></div>`;
+                }
+                messages.scrollTop = messages.scrollHeight;
+            }
+            function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+        </script>
+    </body>
+    </html>
+    '''
+
+@app.route('/traffic')
+def traffic_page():
+    """صفحه اختصاصی ترافیک"""
+    return '''
+    <!DOCTYPE html>
+    <html dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <title>وضعیت ترافیک بندرعباس</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body { font-family: Tahoma; background: linear-gradient(135deg,#1a1a2e,#16213e); padding:20px; color:white; }
+            .container { max-width:800px; margin:auto; }
+            .card { background: rgba(255,255,255,0.1); border-radius:15px; padding:20px; margin-bottom:20px; backdrop-filter:blur(10px); }
+            .zone { border-right: 4px solid #e74c3c; padding:15px; margin:10px 0; background: rgba(0,0,0,0.3); border-radius:10px; }
+            .status-badge { display:inline-block; padding:5px 12px; border-radius:20px; font-size:12px; margin-right:10px; }
+            .critical { background:#e74c3c; color:white; }
+            .heavy { background:#f39c12; color:black; }
+            .normal { background:#2ecc71; color:white; }
+            .light { background:#3498db; color:white; }
+            .index { font-size:24px; font-weight:bold; }
+            .refresh-btn { background:#e74c3c; color:white; border:none; padding:10px 20px; border-radius:25px; cursor:pointer; margin-top:10px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🚦 وضعیت ترافیک بندرعباس</h1>
+            <p id="datetime" style="color:#aaa"></p>
+            
+            <div class="card">
+                <h3>📍 وضعیت کلی شهر</h3>
+                <div id="cityStatus"></div>
+                <div id="alternativeRoutes" style="margin-top:15px; font-size:14px;"></div>
+            </div>
+            
+            <div class="card">
+                <h3>🗺️ مناطق چهارگانه</h3>
+                <div id="zones"></div>
+            </div>
+            
+            <div class="card">
+                <h3>⚠️ نقاط حادثه‌خیز</h3>
+                <div id="hotspots"></div>
+            </div>
+            
+            <div class="card">
+                <h3>⏰ ساعات اوج ترافیک</h3>
+                <div id="peakHours"></div>
+            </div>
+            
+            <button class="refresh-btn" onclick="loadData()">🔄 به‌روزرسانی</button>
+        </div>
+        
+        <script>
+            async function loadData() {
+                try {
+                    const res = await fetch('/api/traffic/status');
+                    const data = await res.json();
+                    
+                    document.getElementById('datetime').innerHTML = `📅 ${data.datetime}`;
+                    
+                    // وضعیت کلی
+                    const cityDiv = document.getElementById('cityStatus');
+                    cityDiv.innerHTML = `
+                        <div class="zone">
+                            <span class="status-badge ${getStatusClass(data.city_congestion_index)}">شاخص ${data.city_congestion_index}/10</span>
+                            <strong>${data.city_status}</strong>
+                        </div>
+                    `;
+                    
+                    // مسیرهای جایگزین
+                    const altDiv = document.getElementById('alternativeRoutes');
+                    if(data.alternative_routes && data.alternative_routes.length > 0) {
+                        altDiv.innerHTML = `<strong>🔄 مسیرهای جایگزین:</strong><ul>${data.alternative_routes.map(r => `<li>${r}</li>`).join('')}</ul>`;
+                    }
+                    
+                    // مناطق
+                    const zonesDiv = document.getElementById('zones');
+                    zonesDiv.innerHTML = '';
+                    for(const [key, zone] of Object.entries(data.zones)) {
+                        zonesDiv.innerHTML += `
+                            <div class="zone">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
+                                    <strong>${zone.name}</strong>
+                                    <span class="status-badge ${getStatusClass(zone.index)}">شاخص ${zone.index}/10</span>
+                                </div>
+                                <div>${zone.status}</div>
+                                <div style="font-size:12px; color:#aaa; margin-top:5px;">${zone.desc || ''}</div>
+                            </div>
+                        `;
+                    }
+                    
+                    // نقاط حادثه‌خیز
+                    const hotspotsRes = await fetch('/api/traffic/hotspots');
+                    const hotspotsData = await hotspotsRes.json();
+                    const hotspotsDiv = document.getElementById('hotspots');
+                    hotspotsDiv.innerHTML = hotspotsData.hotspots.map(h => `
+                        <div style="margin:10px 0; padding:10px; background:rgba(0,0,0,0.3); border-radius:8px;">
+                            <strong>⚠️ ${h.name}</strong> - <span style="color:#e74c3c">${h.risk}</span>
+                            <div style="font-size:12px;">${h.description}</div>
+                        </div>
+                    `).join('');
+                    
+                    // ساعات اوج
+                    if(data.peak_hours) {
+                        document.getElementById('peakHours').innerHTML = `
+                            <ul>
+                                <li>🌅 صبح: ${data.peak_hours.morning}</li>
+                                <li>🌞 ظهر: ${data.peak_hours.noon}</li>
+                                <li>🌙 عصر: ${data.peak_hours.evening}</li>
+                            </ul>
+                        `;
+                    }
+                    
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+            
+            function getStatusClass(index) {
+                if(index >= 9) return 'critical';
+                if(index >= 7) return 'heavy';
+                if(index >= 5) return 'normal';
+                return 'light';
+            }
+            
+            loadData();
+            setInterval(loadData, 60000);
+        </script>
+    </body>
+    </html>
+    '''
+
+# ============ API چت ============
+@app.route('/api/health')
+def health():
+    return jsonify({'ok': True, 'status': 'online', 'topics': len(knowledge)})
+
+@app.route('/api/chat', methods=['POST'])
+def chat_api():
+    data = request.json or {}
+    msg = data.get("message", "").strip()
+    result = search_in_knowledge(msg)
+    if result:
+        return jsonify({'response': str(result)[:2000], 'source': 'knowledge'})
+    return jsonify({'response': '🤔 متوجه نشدم. سوال خود را واضح‌تر بپرسید.', 'source': 'fallback'})
+
+if __name__ == '__main__':
+    print("🚀 HDP ONE Flask Server - Complete Edition")
+    print("📍 http://localhost:5000")
+    print("💬 Chat: http://localhost:5000/chat")
+    print("🚦 Traffic: http://localhost:5000/traffic")
+    print("📊 API Health: http://localhost:5000/api/health")
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
+# بهبود جستجو - اولویت با کلیدواژه‌های دقیق
+def search_in_knowledge(query):
+    """جستجوی پیشرفته در دانشنامه"""
+    q = query.strip()
+    
+    # جستجوی دقیق
+    if q in knowledge:
+        return knowledge[q]
+    
+    # کلیدواژه‌های خاص
+    special = {
+        "ساعت حرکت قشم": "ساعت حرکت قشم",
+        "لندینگ کرافت": "لندینگ کرافت", 
+        "وکلا بندرعباس": "وکلا بندرعباس",
+        "پارک های بندرعباس": "پارک های بندرعباس",
+        "پارک ساحلی سورو": "پارک ساحلی سورو",
+    }
+    
+    if q in special and special[q] in knowledge:
+        return knowledge[special[q]]
+    
+    # جستجوی شامل
+    for key, value in knowledge.items():
+        if q in key or key in q:
+            return value
+    
+    # گویش بندری
+    bandari = {
+        "واویلا": "واویلا = وای خدای من! (ابراز تعجب در گویش بندری)",
+        "اَبی چِش": "اَبی چِش = حالت چطوره؟ (احوالپرسی بندری)"
+    }
+    if q in bandari:
+        return bandari[q]
+    
+    return None
+# استفاده از تابع جدید در chat_api
+# (کد قبلی را با تابع جدید جایگزین کنید)
+
+# جایگزینی تابع جستجو در chat_api
+# (کد قبلی را override می‌کنیم)
+
+
+

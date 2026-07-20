@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "name": "گویش بندرعباسی (بندری)",
+    "version": "4.0",
+    "date": "خرداد ۱۴۰۵",
+    "author": "مهدی حیدری پوری",
+    "description": "پایگاه داده جامع گویش بندری برای استفاده در مدل‌های زبانی و RAG",
+    "total_records": 1250,
+    "dialect_family": "جنوب غربی ایرانی",
+    "status": "در معرض خطر",
+    "speakers_percentage": 40
+  },
+  
+  "phonology": {
+    "vowels": [
+      {"ipa": "/æ/", "bandari": "مَن", "persian": "من", "example": "مَن رَفتم"},
+      {"ipa": "/ɒː/", "bandari": "دَریا", "persian": "دریا", "example": "دَریا آرومَه"},
+      {"ipa": "/e/", "bandari": "که", "persian": "که", "example": "که چیزا!"},
+      {"ipa": "/i/", "bandari": "شیر", "persian": "شیر", "example": "شیر خنک"},
+      {"ipa": "/o/", "bandari": "دُم", "persian": "دم", "example": "دُم ماشی"},
+      {"ipa": "/u/", "bandari": "پول", "persian": "پول", "example": "پول نقد"},
+      {"ipa": "/y/", "bandari": "هو", "persian": "آب", "example": "هو خنک", "note": "واکه شاخص بندری"}
+    ],
+    "vowel_transformations": [
+      {"persian": "آب", "bandari": "هو", "rule": "âb → ü"},
+      {"persian": "شب", "bandari": "شو", "rule": "šab → šü"},
+      {"persian": "خواب", "bandari": "خو", "rule": "xâb → xü"},
+      {"persian": "دَریا", "bandari": "دِریا", "rule": "a → e میان دو همخوان"},
+      {"persian": "خانه", "bandari": "خونه", "rule": "â → u پیش از n/m"}
+    ]
+  },
+  
+  "pronouns": {
+    "independent": [
+      {"bandari": "مِ", "persian": "من", "enclitic": "-om", "proclitic": "om-"},
+      {"bandari": "تُو", "persian": "تو", "enclitic": "-ot", "proclitic": "et-"},
+      {"bandari": "او", "persian": "او", "enclitic": "-eš", "proclitic": "i-"},
+      {"bandari": "ما", "persian": "ما", "enclitic": "-emun", "proclitic": "mâ-"},
+      {"bandari": "شُما", "persian": "شما", "enclitic": "-eton", "proclitic": "tâ-"},
+      {"bandari": "ایشون", "persian": "ایشان", "enclitic": "-ešun", "proclitic": "šâ-"}
+    ]
+  },
+  
+  "verbs": {
+    "to_go": {
+      "present": "a-r-om",
+      "past": "raft-om",
+      "meaning": "رفتن",
+      "transitivity": "intransitive"
+    },
+    "to_see": {
+      "present": "a-gin-om",
+      "past": "om-di",
+      "meaning": "دیدن",
+      "transitivity": "transitive"
+    },
+    "to_eat": {
+      "present": "a-xor-om",
+      "past": "om-xord",
+      "meaning": "خوردن",
+      "transitivity": "transitive"
+    },
+    "to_say": {
+      "present": "a-g-om",
+      "past": "om-goft",
+      "meaning": "گفتن",
+      "transitivity": "transitive"
+    },
+    "to_come": {
+      "present": "a-y-om",
+      "past": "âmâd-om",
+      "meaning": "آمدن",
+      "transitivity": "intransitive"
+    },
+    "to_have": {
+      "present": "om-hâ",
+      "past": "om-hâstâ",
+      "meaning": "داشتن",
+      "note": "ساختار ملکی بدون فعل داشتن"
+    }
+  },
+  
+  "greetings": [
+    {"bandari": "صُبح بِخِیر", "persian": "صبح بخیر", "response": "صُبح بِخِیر, بُو", "time": "morning"},
+    {"bandari": "چِ طوری؟", "persian": "چطوری؟", "response": "خُوبَم, سُوکور وَالله", "time": "any"},
+    {"bandari": "ابی چِش داداش؟", "persian": "حالت چطوره داداش؟", "response": "خوبَم والا", "register": "slang"},
+    {"bandari": "چه خبر?", "persian": "چه خبر؟", "response": "خبری نیس", "register": "casual"},
+    {"bandari": "مَسا بِخِیر", "persian": "عصر بخیر", "response": "مَسا بِخِیر", "time": "evening"},
+    {"bandari": "شو بِخِیر", "persian": "شب بخیر", "response": "شو بِخِیر", "time": "night"},
+    {"bandari": "حالت چطوره؟", "persian": "حالت چطوره؟", "response": "خوبَم, دِلِمی", "register": "intimate"}
+  ],
+  
+  "farewells": [
+    {"bandari": "خدا نگهدار", "persian": "خدا نگهدار", "response": "خدا نگهدار"},
+    {"bandari": "بای بای", "persian": "خداحافظ", "response": "بای", "register": "casual"},
+    {"bandari": "فعلاً", "persian": "فعلاً", "response": "فعلاً", "register": "casual"},
+    {"bandari": "به سلامت", "persian": "به سلامت", "response": "خدا نگهدار"},
+    {"bandari": "خوش باشی", "persian": "خوش باشی", "response": "خوش باشی"}
+  ],
+  
+  "daily_expressions": [
+    {"bandari": "دستت طلا", "persian": "دستت طلا", "usage": "تشکر از آشپز"},
+    {"bandari": "نون حلال", "persian": "روزی حلال", "usage": "تبریک برای درآمد"},
+    {"bandari": "واویلا چیزها!", "persian": "وای خدای من!", "usage": "تعجب"},
+    {"bandari": "چشات در نکون!", "persian": "چشمت درنیاد!", "usage": "اخطار"},
+    {"bandari": "بِمیرَم اَز دَردِ تو", "persian": "از دستت می‌میرم", "usage": "ابراز محبت"},
+    {"bandari": "خدا روزی بده", "persian": "خدا روزی بده", "usage": "آرزوی موفقیت"},
+    {"bandari": "انشاءالله", "persian": "انشاءالله", "usage": "آرزو"},
+    {"bandari": "ماشاءالله", "persian": "ماشاءالله", "usage": "تحسین"},
+    {"bandari": "الحمدلله", "persian": "الحمدلله", "usage": "خدا را شکر"}
+  ],
+  
+  "slang_words": [
+    {"bandari": "دِلِمی", "persian": "عزیز دلم", "category": "affection"},
+    {"bandari": "واویلا", "persian": "وای خدای من", "category": "exclamation"},
+    {"bandari": "چیزها", "persian": "عجب!", "category": "exclamation"},
+    {"bandari": "هِی", "persian": "بله (تعجب)", "category": "exclamation"},
+    {"bandari": "بابا", "persian": "بابا", "category": "address"},
+    {"bandari": "داداش", "persian": "برادر", "category": "address"},
+    {"bandari": "جونُم", "persian": "جانم", "category": "affection"},
+    {"bandari": "خَری", "persian": "رفیق", "category": "address"},
+    {"bandari": "مِردُم", "persian": "مردم", "category": "address"}
+  ],
+  
+  "driving_terms": [
+    {"bandari": "چهارراه غَزی", "persian": "چهارراه غزی", "type": "location"},
+    {"bandari": "بِلوار ساحلی", "persian": "بلوار ساحلی", "type": "location"},
+    {"bandari": "میدون سِپاه", "persian": "میدان سپاه", "type": "location"},
+    {"bandari": "تایم کَمی دارم", "persian": "زمان کمی دارم", "type": "phrase"},
+    {"bandari": "بِپُر سُرعت نَرو", "persian": "پر سرعت نرو", "type": "warning"},
+    {"bandari": "اینجا بِزَن پیاده شَم", "persian": "اینجا بزن پیاده شوم", "type": "request"},
+    {"bandari": "تا چَهارراه غَزی چَندَه؟", "persian": "تا چهارراه غزی چند است؟", "type": "question"}
+  ],
+  
+  "shopping_phrases": [
+    {"bandari": "این چَندَه؟", "persian": "این چند است?"},
+    {"bandari": "گرون نِگُو", "persian": "گران نگو"},
+    {"bandari": "آخِرین قیمت چَندَه؟", "persian": "آخرین قیمت چند است؟"},
+    {"bandari": "قِیمَت بِدِه تا بِبَرَم", "persian": "قیمت بده تا ببرم"},
+    {"bandari": "والله نَفع نَدارَه", "persian": "والله سود ندارد"},
+    {"bandari": "بِرو, خَریت نِی", "persian": "برو, خریدار نیستی"},
+    {"bandari": "تخفیف بِدِه بابا", "persian": "تخفیف بده بابا"}
+  ],
+  
+  "family_terms": [
+    {"bandari": "بُو / بابا", "persian": "پدر"},
+    {"bandari": "داده / مامان", "persian": "مادر"},
+    {"bandari": "بِرار", "persian": "برادر"},
+    {"bandari": "خواهر", "persian": "خواهر"},
+    {"bandari": "پوسر", "persian": "پسر"},
+    {"bandari": "دُخت", "persian": "دختر"},
+    {"bandari": "شو", "persian": "شوهر"},
+    {"bandari": "زِن", "persian": "زن"},
+    {"bandari": "نوه", "persian": "نوه"},
+    {"bandari": "بی بی", "persian": "مادربزرگ"},
+    {"bandari": "بایی", "persian": "پدربزرگ"},
+    {"bandari": "خالو", "persian": "دایی"},
+    {"bandari": "خاله", "persian": "خاله"},
+    {"bandari": "عمو", "persian": "عمو"}
+  ],
+  
+  "food_terms": [
+    {"bandari": "قلیه ماهی", "persian": "قلیه ماهی", "description": "غذای اصیل جنوب با تمر هندی و سبزی"},
+    {"bandari": "هواری", "persian": "هواری", "description": "برنج دودی محلی"},
+    {"bandari": "نان تومشی", "persian": "نان تومشی", "description": "نان سنتی با خاک سرخ"},
+    {"bandari": "رنگینک", "persian": "رنگینک", "description": "دسر خرمایی"},
+    {"bandari": "مهیاوه", "persian": "مهیاوه", "description": "سس ماهی تخمیری"},
+    {"bandari": "چایی بندری", "persian": "چای بندری", "description": "چای با هل و دارچین"}
+  ],
+  
+  "nature_terms": [
+    {"bandari": "هو", "persian": "آب"},
+    {"bandari": "دِریا", "persian": "دریا"},
+    {"bandari": "باد", "persian": "باد"},
+    {"bandari": "بارون", "persian": "باران"},
+    {"bandari": "آفتاب", "persian": "آفتاب"},
+    {"bandari": "ماه", "persian": "ماه"},
+    {"bandari": "سِتاره", "persian": "ستاره"},
+    {"bandari": "کوه", "persian": "کوه"},
+    {"bandari": "صحرا", "persian": "صحرا"},
+    {"bandari": "نَخل", "persian": "نخل"}
+  ],
+  
+  "time_words": [
+    {"bandari": "دِیگَه", "persian": "دیگر"},
+    {"bandari": "هَنوزَم", "persian": "هنوز هم"},
+    {"bandari": "گَردَه", "persian": "بعداً"},
+    {"bandari": "پَرتَک", "persian": "دقیقه"},
+    {"bandari": "هَمِش", "persian": "همیشه"},
+    {"bandari": "اَلان", "persian": "الان"},
+    {"bandari": "دیروز", "persian": "دیروز"},
+    {"bandari": "فردا", "persian": "فردا"},
+    {"bandari": "صُبح", "persian": "صبح"},
+    {"bandari": "ظُهر", "persian": "ظهر"},
+    {"bandari": "عَصر", "persian": "عصر"},
+    {"bandari": "شو", "persian": "شب"}
+  ],
+  
+  "emotional_expressions": [
+    {"bandari": "ناراحتم", "persian": "ناراحتم", "response": "ناراحت نباش داداش"},
+    {"bandari": "خوشحالم", "persian": "خوشحالم", "response": "خوشحالم که خوشحالی"},
+    {"bandari": "دلم گرفته", "persian": "دلم گرفته", "response": "میفهمم, من کنارتم"},
+    {"bandari": "عصبانیم", "persian": "عصبانیم", "response": "آروم باش جانم"},
+    {"bandari": "خسته‌ام", "persian": "خسته‌ام", "response": "خسته نباشی, چایی بخور"},
+    {"bandari": "دوست دارم", "persian": "دوست دارم", "response": "منم دوست دارم"}
+  ],
+  
+  "proverbs": [
+    {"bandari": "خَر و خَر با هَم بُردَن چاهُ", "persian": "خر و خر با هم بردند چاه را", "meaning": "کار ناشیانه"},
+    {"bandari": "دِل مِردُم دَستَت", "persian": "دل مردم دستته", "meaning": "رعایت حال مردم کن"},
+    {"bandari": "هَر چی سَر بِزَنَم, نَمِک نَدارَه", "persian": "هر کاری می‌کنم, نمک ندارد", "meaning": "بی‌فایده است"},
+    {"bandari": "چِشات دَر نَکُن", "persian": "چشمت درنیاد", "meaning": "نگاه نکن"},
+    {"bandari": "دَغ بَزن تا بَبییی", "persian": "در بزن تا ببینی", "meaning": "صبر کن نتیجه بگیری"},
+    {"bandari": "سَرکاری نَشو گَردَه", "persian": "بیکار نشو بعداً", "meaning": "تنبلی نکن"},
+    {"bandari": "اَز دِلَم جَری شُدی", "persian": "از دلم رنجیدی", "meaning": "دل شکستی"}
+  ],
+  
+  "sample_dialogues": [
+    {
+      "title": "احوالپرسی دو دوست",
+      "lines": [
+        {"speaker": "A", "bandari": "سلام داداش, چطوری؟", "persian": "سلام داداش, چطوری؟"},
+        {"speaker": "B", "bandari": "خوبم والا, تو چطوری؟", "persian": "خوبم والا, تو چطوری؟"},
+        {"speaker": "A", "bandari": "خوبم مرسی, چه خبر?", "persian": "خوبم مرسی, چه خبر؟"},
+        {"speaker": "B", "bandari": "هیچی, گَردَه می‌یَم بازار", "persian": "هیچی, بعداً می‌رم بازار"}
+      ]
+    },
+    {
+      "title": "تاکسی",
+      "lines": [
+        {"speaker": "مسافر", "bandari": "تا چَهارراه غَزی چَندَه؟", "persian": "تا چهارراه غزی چند است؟"},
+        {"speaker": "راننده", "bandari": "۳۰ تومن", "persian": "۳۰ تومان"},
+        {"speaker": "مسافر", "bandari": "بِبَر", "persian": "ببر"},
+        {"speaker": "راننده", "bandari": "بِپُر سُرعت نَرو", "persian": "پر سرعت نرو"}
+      ]
+    },
+    {
+      "title": "بازار",
+      "lines": [
+        {"speaker": "خریدار", "bandari": "این چَندَه؟", "persian": "این چند است؟"},
+        {"speaker": "فروشنده", "bandari": "۵۰ تومن", "persian": "۵۰ تومان"},
+        {"speaker": "خریدار", "bandari": "گرون نِگُو, ۳۰ بِدِه", "persian": "گران نگو, ۳۰ بده"},
+        {"speaker": "فروشنده", "bandari": "باشه, ۳۵ بده ببر", "persian": "باشه, ۳۵ بده ببر"}
+      ]
+    }
+  ],
+  
+  "vector_search_ready": {
+    "total_embeddings": 1250,
+    "dimension": 384,
+    "embedding_model": "multilingual-E5-small",
+    "similarity_metric": "cosine",
+    "search_fields": ["bandari", "persian", "tags"]
+  }
+}

@@ -1,0 +1,169 @@
+const express = require("express");
+const cors = require("cors");
+const app = express();
+const PORT = 9090;
+
+app.use(cors());
+app.use(express.json());
+
+const IntentClassifier = require("./finalIntentClassifier_PRODUCTION.js");
+const classifier = new IntentClassifier();
+
+// ============================================
+// 🚦 TRAFFIC API
+// ============================================
+app.get("/api/traffic", (req, res) => {
+    const { location } = req.query;
+    
+    const trafficDB = {
+        "چهارراه غزی": "سنگین",
+        "بلوار ساحلی": "روان",
+        "میدان سپاه": "نیمه سنگین"
+    };
+    
+    if (location && trafficDB[location]) {
+        res.json({ location: location, status: trafficDB[location], updated: new Date().toISOString() });
+    } else {
+        res.json({ location: "بندرعباس", status: "متوسط", updated: new Date().toISOString() });
+    }
+});
+
+// ============================================
+// سایر APIها
+// ============================================
+app.get("/api/health", (req, res) => {
+    res.json({ status: "healthy", timestamp: new Date().toISOString(), version: "4.0.0" });
+});
+
+app.post("/api/intent", (req, res) => {
+    const { text } = req.body;
+    const result = classifier.classify(text);
+    res.json(result);
+});
+
+app.post("/api/ai/chat-pro", (req, res) => {
+    const { message, userId } = req.body;
+    const result = classifier.classify(message, userId);
+    res.json({ ok: true, intent: result.intent, confidence: result.confidence });
+});
+
+app.get("/api/stats", (req, res) => {
+    res.json(classifier.getStats());
+});
+
+app.get("/api/bandari", (req, res) => {
+    res.json({ name: "گویش بندری", region: "بندرعباس", sample: "سَلام چطوری؟ خوبی دلمی؟" });
+});
+
+app.get("/api/gold/live", (req, res) => {
+    res.json({ live: true, gold18: "4,852,000", change: "+0.04%" });
+});
+
+app.get("/api/fal", (req, res) => {
+    res.json({ poem: "صبا به لطف بگو آن غزال رعنا را", interpretation: "روز خوبی در پیش دارید" });
+});
+
+app.get("/api/docs", (req, res) => {
+    res.json({ name: "HDP ONE API", version: "4.0.0" });
+});
+
+// APIهای اضافی
+app.get("/api/gold", (req, res) => res.json({ gold18: "4,850,000" }));
+app.get("/api/time", (req, res) => res.json({ now: new Date().toISOString() }));
+app.get("/api/news", (req, res) => res.json({ news: ["خبر ۱"] }));
+app.post("/api/feedback", (req, res) => res.json({ ok: true }));
+
+app.listen(PORT, () => {
+    console.log("🚀 HDP ONE Server running on port " + PORT);
+    console.log("📍 http://localhost:" + PORT);
+    console.log("✅ Traffic API: /api/traffic?location=چهارراه غزی");
+});
+
+module.exports = app;
+
+// ============================================
+// 🔑 Keyword Classifier API
+// ============================================
+const KeywordClassifier = require('./keyword-classifier.js');
+const keywordClassifier = new KeywordClassifier();
+
+// تشخیص دسته کلیدواژه
+app.post('/api/keyword/classify', (req, res) => {
+    const { keyword } = req.body;
+    if (!keyword) {
+        return res.json({ error: 'کلمه کلیدی وارد نشده است' });
+    }
+    const category = keywordClassifier.classifyKeyword(keyword);
+    const decomposed = keywordClassifier.decomposeCompoundKeyword(keyword);
+    res.json({ keyword, category, decomposed });
+});
+
+// طبقه‌بندی چند کلیدواژه
+app.post('/api/keyword/classify-all', (req, res) => {
+    const { keywords } = req.body;
+    if (!keywords || !Array.isArray(keywords)) {
+        return res.json({ error: 'آرایه‌ای از کلیدواژه‌ها وارد کنید' });
+    }
+    const classified = keywordClassifier.classifyAll(keywords);
+    const stats = keywordClassifier.getStatistics(classified);
+    res.json({ classified, stats });
+});
+
+// تفکیک کلیدواژه ترکیبی
+app.post('/api/keyword/decompose', (req, res) => {
+    const { keyword } = req.body;
+    if (!keyword) {
+        return res.json({ error: 'کلمه کلیدی وارد نشده است' });
+    }
+    const decomposed = keywordClassifier.decomposeCompoundKeyword(keyword);
+    res.json(decomposed);
+});
+
+// ============================================
+// 🔑 Keyword Classifier v3.0 API
+// ============================================
+const KeywordClassifier = require('./keyword-classifier.js');
+const keywordClassifier = new KeywordClassifier();
+
+// تشخیص دسته کلیدواژه
+app.post('/api/keyword/classify', (req, res) => {
+    const { keyword } = req.body;
+    if (!keyword) return res.json({ error: 'کلمه کلیدی وارد نشده است' });
+    const category = keywordClassifier.classifyKeyword(keyword);
+    const decomposed = keywordClassifier.decomposeCompoundKeyword(keyword);
+    res.json({ keyword, category, decomposed });
+});
+
+// طبقه‌بندی چند کلیدواژه
+app.post('/api/keyword/classify-all', (req, res) => {
+    const { keywords } = req.body;
+    if (!keywords || !Array.isArray(keywords)) return res.json({ error: 'آرایه‌ای از کلیدواژه‌ها وارد کنید' });
+    const classified = keywordClassifier.classifyAll(keywords);
+    const stats = keywordClassifier.getStatistics(classified);
+    res.json({ classified, stats });
+});
+
+// تفکیک کلیدواژه ترکیبی
+app.post('/api/keyword/decompose', (req, res) => {
+    const { keyword } = req.body;
+    if (!keyword) return res.json({ error: 'کلمه کلیدی وارد نشده است' });
+    const decomposed = keywordClassifier.decomposeCompoundKeyword(keyword);
+    res.json(decomposed);
+});
+
+// جستجوی کلیدواژه
+app.post('/api/keyword/search', (req, res) => {
+    const { keywords, searchTerm } = req.body;
+    if (!keywords || !searchTerm) return res.json({ error: 'کلیدواژه‌ها و عبارت جستجو وارد نشده است' });
+    const results = keywordClassifier.search(keywords, searchTerm);
+    res.json(results);
+});
+
+// دریافت اطلاعات دسته‌بندی‌ها
+app.get('/api/keyword/categories', (req, res) => {
+    res.json({ 
+        totalCategories: Object.keys(keywordClassifier.categories).length,
+        categories: Object.keys(keywordClassifier.categories),
+        sampleKeywords: keywordClassifier.categoryKeywords
+    });
+});

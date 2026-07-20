@@ -1,0 +1,329 @@
+{
+  "metadata": {
+    "name": "گویش رودانی (دهبارزی)",
+    "alternative_names": ["رودانی", "دهبارزی", "رودانی هرمزگان"],
+    "version": "1.0",
+    "date": "خرداد ۱۴۰۵",
+    "author": "مهدی حیدری پوری",
+    "description": "پایگاه داده جامع گویش رودانی (دهبارز) شهرستان رودان، استان هرمزگان",
+    "region": "شهرستان رودان، شرق استان هرمزگان",
+    "center": "دهبارز (رودان)",
+    "population": "۱۲۴,۰۰۰+ نفر",
+    "total_records": 850,
+    "dialect_family": "جنوب غربی ایرانی - شاخه بندری",
+    "status": "فعال اما در معرض فرسایش"
+  },
+  
+  "phonology": {
+    "vowels": [
+      {"ipa": "/æ/", "rudani": "مَن", "persian": "من", "example": "مَن رَفتم"},
+      {"ipa": "/ɒː/", "rudani": "دَرِیا", "persian": "دریا", "example": "دَرِیا توفانی"},
+      {"ipa": "/e/", "rudani": "کِه", "persian": "که", "example": "کِه چیزا"},
+      {"ipa": "/i/", "rudani": "شیر", "persian": "شیر", "example": "شیر تازه"},
+      {"ipa": "/o/", "rudani": "دُم", "persian": "دم", "example": "دُمِ پَرنده"},
+      {"ipa": "/u/", "rudani": "پول", "persian": "پول", "example": "پول نَقد"},
+      {"ipa": "/ou/", "rudani": "رو", "persian": "رو", "example": "روز", "note": "مصوت مرکب شاخص"}
+    ],
+    "characteristics": [
+      {"feature": "کشیدگی مصوت‌ها", "example": "بِمیرِممم", "note": "کمتر از بندری"},
+      {"feature": "تغییر â به a", "example": "آب → اَو", "persian": "آب"},
+      {"feature": "حفظ /n/ انتهایی", "example": "می‌رَن", "persian": "می‌روند", "note": "برخلاف بندری"},
+      {"feature": "کشش کمتر نسبت به بندری", "example": "بِرو", "persian": "برو"},
+      {"feature": "تلفظ /q/ (قاف)", "example": "غذا → قَذا", "persian": "غذا"}
+    ]
+  },
+  
+  "pronouns": {
+    "independent": [
+      {"rudani": "مُ", "persian": "من", "enclitic": "-م/-وم", "example": "مُ رَفتم"},
+      {"rudani": "تُ", "persian": "تو", "enclitic": "-ت/-وت", "example": "تُ رَفتی"},
+      {"rudani": "او", "persian": "او", "enclitic": "-ش/-وش", "example": "او رَفت"},
+      {"rudani": "ما", "persian": "ما", "enclitic": "-مون", "example": "ما رَفتی م"},
+      {"rudani": "شُما", "persian": "شما", "enclitic": "-تون", "example": "شُما رَفتین"},
+      {"rudani": "ایشون", "persian": "ایشان", "enclitic": "-شون", "example": "ایشون رَفتِن"}
+    ]
+  },
+  
+  "verbs": {
+    "to_go": {
+      "present": "مِرُم",
+      "past": "رَفتُم",
+      "stem_present": "ر",
+      "stem_past": "رَفت",
+      "meaning": "رفتن",
+      "transitivity": "intransitive"
+    },
+    "to_come": {
+      "present": "ایُم",
+      "past": "اومَدُم",
+      "stem_present": "ا",
+      "stem_past": "اومَد",
+      "meaning": "آمدن",
+      "transitivity": "intransitive"
+    },
+    "to_see": {
+      "present": "بینُم",
+      "past": "دیدُم",
+      "stem_present": "بین",
+      "stem_past": "دید",
+      "meaning": "دیدن",
+      "transitivity": "transitive"
+    },
+    "to_eat": {
+      "present": "خورُم",
+      "past": "خوردُم",
+      "stem_present": "خور",
+      "stem_past": "خورد",
+      "meaning": "خوردن",
+      "transitivity": "transitive"
+    },
+    "to_say": {
+      "present": "گُم",
+      "past": "گُفتُم",
+      "stem_present": "گ",
+      "stem_past": "گُفت",
+      "meaning": "گفتن",
+      "transitivity": "transitive"
+    },
+    "to_do": {
+      "present": "کُنُم",
+      "past": "کَردُم",
+      "stem_present": "کُن",
+      "stem_past": "کَرد",
+      "meaning": "کردن",
+      "transitivity": "transitive"
+    },
+    "to_have": {
+      "present": "دارُم",
+      "past": "داشتم",
+      "meaning": "داشتن",
+      "note": "مشابه فارسی معیار"
+    },
+    "to_want": {
+      "present": "خوُم",
+      "past": "خاستُم",
+      "meaning": "خواستن",
+      "note": "مخفف شده"
+    }
+  },
+  
+  "greetings": [
+    {"rudani": "سَلام علیک", "persian": "سلام علیک", "response": "علیک سَلام", "time": "any"},
+    {"rudani": "صُبَح بِخِیر", "persian": "صبح بخیر", "response": "صُبَح بِخِیر", "time": "morning"},
+    {"rudani": "چَگوری؟", "persian": "چطوری؟", "response": "خوبُم, تُ چَگوری؟", "register": "casual"},
+    {"rudani": "چِه خَبَر؟", "persian": "چه خبر؟", "response": "خبری نی", "register": "casual"},
+    {"rudani": "حالِ تُ چَطورَه؟", "persian": "حال تو چطوره؟", "response": "خوبُم, نِگِران نَباش", "register": "formal"},
+    {"rudani": "خُوبی داداش؟", "persian": "خوبی داداش؟", "response": "خوبُم, تُ خُوبی؟", "register": "intimate"},
+    {"rudani": "مَسا بِخِیر", "persian": "عصر بخیر", "response": "مَسا بِخِیر", "time": "evening"},
+    {"rudani": "شَو بِخِیر", "persian": "شب بخیر", "response": "شَو بِخِیر", "time": "night"}
+  ],
+  
+  "farewells": [
+    {"rudani": "خُدا نِگَهدار", "persian": "خدا نگهدار", "response": "خُدا نِگَهدار"},
+    {"rudani": "بای", "persian": "خداحافظ", "response": "بای", "register": "casual"},
+    {"rudani": "فِعلَن", "persian": "فعلاً", "response": "فِعلَن", "register": "casual"},
+    {"rudani": "بِه سَلامَت", "persian": "به سلامت", "response": "خُدا نِگَهدار"},
+    {"rudani": "خُوش باشی", "persian": "خوش باشی", "response": "خُوش باشی"}
+  ],
+  
+  "daily_expressions": [
+    {"rudani": "دَستِت طَلا", "persian": "دستت طلا", "usage": "تشکر از آشپز"},
+    {"rudani": "نون حَلال", "persian": "روزی حلال", "usage": "تبریک برای درآمد"},
+    {"rudani": "واویلا!", "persian": "وای خدای من!", "usage": "تعجب"},
+    {"rudani": "دِلبَر", "persian": "اصلاً", "usage": "تأکید منفی"},
+    {"rudani": "هِی چیزها!", "persian": "عجب!", "usage": "تعجب"},
+    {"rudani": "دِلُم وَسِت تَنگ بُو", "persian": "دلم برایت تنگ بود", "usage": "ابراز محبت"},
+    {"rudani": "خُدا رُوزی بِدِه", "persian": "خدا روزی بده", "usage": "آرزوی موفقیت"},
+    {"rudani": "اِنشاءالله", "persian": "انشاءالله", "usage": "آرزو"},
+    {"rudani": "ماشاءالله", "persian": "ماشاءالله", "usage": "تحسین"},
+    {"rudani": "حَمدُلله", "persian": "الحمدلله", "usage": "خدا را شکر"},
+    {"rudani": "چَش", "persian": "چشم", "usage": "بله، حتماً"},
+    {"rudani": "باشه", "persian": "باشه", "usage": "موافقت"}
+  ],
+  
+  "slang_words": [
+    {"rudani": "دِلبَر", "persian": "اصلاً", "category": "emphasis"},
+    {"rudani": "چیزی نِی", "persian": "چیزی نیست", "category": "casual"},
+    {"rudani": "هِی", "persian": "بله (تعجب)", "category": "exclamation"},
+    {"rudani": "بابا", "persian": "بابا", "category": "address"},
+    {"rudani": "داداش", "persian": "برادر", "category": "address"},
+    {"rudani": "جانُم", "persian": "جانم", "category": "affection"},
+    {"rudani": "عزیزُم", "persian": "عزیزم", "category": "affection"},
+    {"rudani": "وَچ", "persian": "پسر/بچه", "category": "address"},
+    {"rudani": "دِهاتی", "persian": "روستایی", "category": "description"},
+    {"rudani": "کوهی", "persian": "کوهستانی", "category": "description"}
+  ],
+  
+  "agriculture_terms": [
+    {"rudani": "نَخل", "persian": "نخل", "description": "درخت خرما"},
+    {"rudani": "خُرما", "persian": "خرما", "description": "میوه نخل"},
+    {"rudani": "رُطَب", "persian": "رطب", "description": "خرما تازه"},
+    {"rudani": "باغ", "persian": "باغ", "description": "باغ میوه"},
+    {"rudani": "چاه", "persian": "چاه", "description": "چاه آب"},
+    {"rudani": "آبیاری", "persian": "آبیاری", "description": "آبیاری زمین"},
+    {"rudani": "زَمین", "persian": "زمین", "description": "زمین کشاورزی"},
+    {"rudani": "کِشت", "persian": "کشت", "description": "کاشت محصول"},
+    {"rudani": "دَرو", "persian": "درو", "description": "برداشت محصول"},
+    {"rudani": "اَنار", "persian": "انار", "description": "میوه انار"},
+    {"rudani": "پُرتِقال", "persian": "پرتقال", "description": "میوه پرتقال"},
+    {"rudani": "لیمو", "persian": "لیمو", "description": "لیمو ترش"},
+    {"rudani": "نارَنگ", "persian": "نارنج", "description": "میوه نارنج"},
+    {"rudani": "گَندُم", "persian": "گندم", "description": "محصول گندم"},
+    {"rudani": "جَو", "persian": "جو", "description": "محصول جو"}
+  ],
+  
+  "nature_geography": [
+    {"rudani": "کوه", "persian": "کوه", "description": "کوهستان"},
+    {"rudani": "تَنگ", "persian": "تنگه", "description": "دره باریک"},
+    {"rudani": "دَرِه", "persian": "دره", "description": "دره"},
+    {"rudani": "رود", "persian": "رود", "description": "رودخانه"},
+    {"rudani": "چِشمه", "persian": "چشمه", "description": "چشمه آب"},
+    {"rudani": "آبشار", "persian": "آبشار", "description": "آبشار"},
+    {"rudani": "دِشت", "persian": "دشت", "description": "دشت"},
+    {"rudani": "صَحرا", "persian": "صحرا", "description": "صحرا"},
+    {"rudani": "باغ", "persian": "باغ", "description": "باغ میوه"},
+    {"rudani": "نَخلِستان", "persian": "نخلستان", "description": "باغ نخل"}
+  ],
+  
+  "driving_terms": [
+    {"rudani": "جاده کوهستانی", "persian": "جاده کوهستانی", "type": "road"},
+    {"rudani": "تونِل تَنگ زاغ", "persian": "تونل تنگ زاغ", "type": "location", "note": "نقطه حادثه‌خیز"},
+    {"rudani": "پُل", "persian": "پل", "type": "location"},
+    {"rudani": "راه بَستِه", "persian": "راه بسته", "type": "warning"},
+    {"rudani": "تَردُد سَنگین", "persian": "تردد سنگین", "type": "traffic"},
+    {"rudani": "کامیون", "persian": "کامیون", "type": "vehicle"},
+    {"rudani": "تایم کَمی دارُم", "persian": "زمان کمی دارم", "type": "phrase"},
+    {"rudani": "بِ پُر سُرعت نَرو", "persian": "پر سرعت نرو", "type": "warning"},
+    {"rudani": "تا رودان چَند?", "persian": "تا رودان چند؟", "type": "question"}
+  ],
+  
+  "shopping_phrases": [
+    {"rudani": "این چَند?", "persian": "این چند؟"},
+    {"rudani": "گَرون نَگُو", "persian": "گران نگو"},
+    {"rudani": "خَری داری؟", "persian": "خرید داری؟"},
+    {"rudani": "قیمَت آخَر چَند?", "persian": "قیمت آخر چند؟"},
+    {"rudani": "تَخفیف بِدِه", "persian": "تخفیف بده"},
+    {"rudani": "نَقد نِدارُم", "persian": "نقد ندارم"},
+    {"rudani": "بَعذَن می خَرُم", "persian": "بعداً می خرم"}
+  ],
+  
+  "family_terms": [
+    {"rudani": "بابا / پِیَ", "persian": "پدر"},
+    {"rudani": "مامان / دِدِ", "persian": "مادر"},
+    {"rudani": "بِرار", "persian": "برادر"},
+    {"rudani": "خواهر", "persian": "خواهر"},
+    {"rudani": "پوسَر", "persian": "پسر"},
+    {"rudani": "دُختر", "persian": "دختر"},
+    {"rudani": "شوهَر", "persian": "شوهر"},
+    {"rudani": "زَن", "persian": "زن"},
+    {"rudani": "نَوِه", "persian": "نوه"},
+    {"rudani": "بی بی", "persian": "مادربزرگ"},
+    {"rudani": "بایی", "persian": "پدربزرگ"},
+    {"rudani": "خالو", "persian": "دایی"},
+    {"rudani": "خاله", "persian": "خاله"},
+    {"rudani": "عَمو", "persian": "عمو"},
+    {"rudani": "عَمه", "persian": "عمه"}
+  ],
+  
+  "food_terms": [
+    {"rudani": "نون", "persian": "نان"},
+    {"rudani": "بِرِنج", "persian": "برنج"},
+    {"rudani": "گوشت", "persian": "گوشت"},
+    {"rudani": "ماهی", "persian": "ماهی"},
+    {"rudani": "خُرما", "persian": "خرما"},
+    {"rudani": "اَنار", "persian": "انار"},
+    {"rudani": "پُرتِقال", "persian": "پرتقال"},
+    {"rudani": "دوغ", "persian": "دوغ"},
+    {"rudani": "چایی", "persian": "چای"},
+    {"rudani": "هَلیم", "persian": "حلیم", "note": "غذای محلی رودان"},
+    {"rudani": "آش", "persian": "آش", "note": "آش محلی"},
+    {"rudani": "قَلیه", "persian": "قلیه", "note": "خورشت محلی"}
+  ],
+  
+  "time_words": [
+    {"rudani": "دِگه", "persian": "دیگر"},
+    {"rudani": "هَنوز", "persian": "هنوز"},
+    {"rudani": "بَعذَن", "persian": "بعداً"},
+    {"rudani": "اَلان", "persian": "الان"},
+    {"rudani": "دیروز", "persian": "دیروز"},
+    {"rudani": "فَردا", "persian": "فردا"},
+    {"rudani": "پَس فردا", "persian": "پس فردا"},
+    {"rudani": "صُبح", "persian": "صبح"},
+    {"rudani": "ظُهر", "persian": "ظهر"},
+    {"rudani": "عَصر", "persian": "عصر"},
+    {"rudani": "شَو", "persian": "شب"},
+    {"rudani": "نیمه شَو", "persian": "نیمه شب"},
+    {"rudani": "سَحَر", "persian": "سحر"}
+  ],
+  
+  "emotional_expressions": [
+    {"rudani": "ناراحَتُم", "persian": "ناراحتم", "response": "ناراحَت نَباش, باشه"},
+    {"rudani": "خوشحالُم", "persian": "خوشحالم", "response": "خوشحالُم کِ خوشحالی"},
+    {"rudani": "دِلُم گِرِفتِه", "persian": "دلم گرفته", "response": "میفهمُم, گریه کُن راحت"},
+    {"rudani": "عصبیُم", "persian": "عصبانیم", "response": "آروم باش جانُم"},
+    {"rudani": "خَستُِم", "persian": "خسته‌ام", "response": "خَسته نباشی, چایی بِخور"},
+    {"rudani": "دوسِت دارُم", "persian": "دوست دارم", "response": "مَنَم دوسِت دارُم"},
+    {"rudani": "دِلَم وَسِت تَنگ بُو", "persian": "دلم برایت تنگ بود", "response": "مَنَم دِلَم وَسِت تَنگ بُو"}
+  ],
+  
+  "proverbs": [
+    {"rudani": "اَز کوه بَرسی, اَز آب نَرسی", "persian": "از کوه برسی, از آب نرسی", "meaning": "یک مشکل حل بشه, مشکل دیگه پیش میاد"},
+    {"rudani": "نَخلِ بی ثَمَر, قَدش بِه کار نَمیاد", "persian": "نخل بی ثمر, قدش به کار نمیاد", "meaning": "آدم بی فایده"},
+    {"rudani": "آب کِ رَف, باز نَمِیاد", "persian": "آب که رفت, باز نمیاد", "meaning": "فرصت از دست رفته"},
+    {"rudani": "خَر کِ خار بِخورِه, خاطِرِش جمعِه", "persian": "خر که خار بخوره, خاطرش جمع است", "meaning": "آدم ساده‌دل"},
+    {"rudani": "دَستِ تُو سنگ باشه, دَستِ ما گِل باشه", "persian": "دست تو سنگ باشه, دست ما گل باشه", "meaning": "هر کس به کار خود"}
+  ],
+  
+  "sample_dialogues": [
+    {
+      "title": "احوالپرسی دو دوست رودانی",
+      "lines": [
+        {"speaker": "A", "rudani": "سَلام داداش, چَگوری؟", "persian": "سلام داداش, چطوری؟"},
+        {"speaker": "B", "rudani": "خوبُم والا, تُ چَگوری؟", "persian": "خوبم والا, تو چطوری؟"},
+        {"speaker": "A", "rudani": "خوبُم مَرسی, چِه خَبَر؟", "persian": "خوبم مرسی, چه خبر؟"},
+        {"speaker": "B", "rudani": "خبری نی, رَفتم باغ اَنار چیدُم", "persian": "خبری نیست, رفتم باغ انار چیدم"}
+      ]
+    },
+    {
+      "title": "صحبت در باغ",
+      "lines": [
+        {"speaker": "A", "rudani": "اَمسال اَنار چَطور بوده؟", "persian": "امسال انار چطور بوده؟"},
+        {"speaker": "B", "rudani": "خوب بوده, شیرین و دونه دَرِشت", "persian": "خوب بوده, شیرین و دونه درشت"},
+        {"speaker": "A", "rudani": "نَخلات چَطور؟ خُرما خوب دادی؟", "persian": "نخل‌ها چطور؟ خرما خوب دادی؟"},
+        {"speaker": "B", "rudani": "آره والا, امسال پُر محصول بود", "persian": "آره والا, امسال پر محصول بود"}
+      ]
+    },
+    {
+      "title": "رانندگی در جاده رودان",
+      "lines": [
+        {"speaker": "مسافر", "rudani": "تا دِهبارز چَند؟", "persian": "تا دهبارز چند؟"},
+        {"speaker": "راننده", "rudani": "۸۰ تومن", "persian": "۸۰ تومان"},
+        {"speaker": "مسافر", "rudani": "گَرون نَگُو, ۷۰ بِبَر", "persian": "گران نگو, ۷۰ ببر"},
+        {"speaker": "راننده", "rudani": "باشه, بِپَر بالا", "persian": "باشه, بپر بالا"}
+      ]
+    }
+  ],
+  
+  "vector_search_ready": {
+    "total_embeddings": 850,
+    "dimension": 384,
+    "embedding_model": "multilingual-E5-small",
+    "similarity_metric": "cosine",
+    "search_fields": ["rudani", "persian", "tags", "category"],
+    "dialect_code": "RDN"
+  },
+  
+  "comparison_with_bandari": {
+    "similarities": [
+      {"feature": "واژه‌های مشترک", "examples": ["هو (آب)", "دِریا", "ماهی"]},
+      {"feature": "ساختار جمله", "note": "مشابه بندری"},
+      {"feature": "احوالپرسی", "note": "شباهت زیاد"}
+    ],
+    "differences": [
+      {"feature": "تلفظ /q/", "bandari": "غذا → قَذا", "rudani": "حفظ /q/"},
+      {"feature": "کشیدگی مصوت", "bandari": "بیشتر", "rudani": "کمتر"},
+      {"feature": "حفظ /n/", "bandari": "می‌رُن", "rudani": "می‌رَن"},
+      {"feature": "واژه کشاورزی", "bandari": "کمتر", "rudani": "بیشتر (باغداری)"}
+    ]
+  }
+}

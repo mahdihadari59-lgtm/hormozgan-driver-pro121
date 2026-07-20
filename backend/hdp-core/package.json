@@ -1,0 +1,13 @@
+{
+  "name": "hdp-core",
+  "version": "5.0.0",
+  "description": "HDP ONE Core Module - Intelligent Assistant for Hormozgan",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "keywords": ["hdp", "ai", "bandari", "hormozgan"],
+  "author": "Mehdi Heydari Poori",
+  "license": "MIT"
+}

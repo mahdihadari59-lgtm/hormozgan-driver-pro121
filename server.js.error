@@ -1,0 +1,171 @@
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+const WebSocket = require('ws');
+const http = require('http');
+
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
+const PORT = 3000;
+
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// WebSocket
+wss.on('connection', (ws) => {
+    console.log('🔗 کاربر جدید متصل شد');
+    ws.send(JSON.stringify({ type: 'welcome', message: 'به Hormozgan Driver Pro خوش آمدید' }));
+});
+
+// Routes اصلی
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/festivals', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'festivals.html'));
+});
+
+app.get('/music', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'music-player.html'));
+});
+
+app.get('/calls', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'calls.html'));
+});
+
+app.get('/ai-chat', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'ai-chat.html'));
+});
+
+app.get('/driver-profile', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'driver-profile.html'));
+});
+
+app.get('/map', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'map.html'));
+});
+
+// API Status
+app.get('/api/status', (req, res) => {
+    res.json({
+        status: 'active',
+        server: 'Hormozgan Driver Pro',
+        version: '5.0.0',
+        port: PORT,
+        timestamp: new Date().toISOString()
+    });
+});
+
+// شروع سرور
+server.listen(PORT, () => {
+    console.log(`
+╔════════════════════════════════════════╗
+║        🎊 Hormozgan Driver Pro       ║
+╠════════════════════════════════════════╣
+║   🚀 سرور روی پورت ${PORT} اجرا شد    ║
+║                                        ║
+║   📱 http://localhost:${PORT}/           ║
+║                                        ║
+║   ✅ سرور فعال و آماده خدمات!        ║
+╚════════════════════════════════════════╝
+    `);
+});
+
+// ============ API Chat ============
+app.post('/api/chat', (req, res) => {
+    const { message } = req.body;
+    
+    if (!message) {
+        return res.status(400).json({ error: 'پیام وارد نشده است' });
+    }
+    
+    // پاسخ‌های اولیه
+    let reply = 'منظور شما را متوجه نشدم. لطفاً یکی از موارد زیر را بپرسید:\n• سلام\n• ترافیک\n• آب و هوا\n• مسیریابی\n• پشتیبانی';
+    
+    const responses = {
+        'سلام': 'سلام! 🌊 به چت‌بات هرمزگان خوش آمدید. چطور می‌توانم کمک کنم؟',
+        'ترافیک': '🚦 وضعیت ترافیک بندرعباس:\n• بلوار پاسداران: روان\n• خیابان ساحلی: نیمه سنگین\n• میدان شهدا: سنگین',
+        'آب و هوا': '🌤️ هوای بندرعباس:\n• دما: ۳۸ درجه سانتی‌گراد\n• وضعیت: آفتابی\n• رطوبت: ۶۵٪',
+        'مسیریابی': '🗺️ لطفاً مبدا و مقصد خود را وارد کنید تا بهترین مسیر را پیدا کنم.',
+        'پشتیبانی': '📞 پشتیبانی:\n• تلفن: ۰۷۶-۳۵۱۰۸\n• ساعت پاسخگویی: ۸ صبح تا ۸ شب'
+    };
+    
+    for (const [key, value] of Object.entries(responses)) {
+        if (message.includes(key)) {
+            reply = value;
+            break;
+        }
+    }
+    
+    res.json({ reply });
+});
+
+// ============ WebSocket Chat ============
+const WebSocket = require('ws');
+
+// ایجاد WebSocket Server روی پورت 8081 (جدا از HTTP)
+const wssChat = new WebSocket.Server({ port: 8081 });
+
+wssChat.on('connection', (ws) => {
+    console.log('🟢 کاربر جدید به WebSocket متصل شد!');
+    
+    // ارسال پیام خوش‌آمدگویی
+    ws.send(JSON.stringify({ 
+        type: 'welcome', 
+        message: 'سلام! 🌊 به چت‌بات ویس‌سوکت هرمزگان خوش آمدید.' 
+    }));
+
+    ws.on('message', (message) => {
+        try {
+            const data = JSON.parse(message);
+            console.log('📩 پیام دریافتی:', data);
+            
+            // پردازش پیام
+            const reply = processMessage(data.message || data.text || '');
+            
+            // ارسال پاسخ
+            ws.send(JSON.stringify({
+                type: 'reply',
+                message: reply,
+                timestamp: new Date().toISOString()
+            }));
+            
+        } catch (error) {
+            console.error('❌ خطا در پردازش پیام:', error);
+            ws.send(JSON.stringify({
+                type: 'error',
+                message: 'خطا در پردازش پیام'
+            }));
+        }
+    });
+
+    ws.on('close', () => {
+        console.log('🔴 کاربر از WebSocket قطع شد');
+    });
+});
+
+// تابع پردازش پیام
+function processMessage(text) {
+    const responses = {
+        'سلام': 'سلام! 🌊 به چت‌بات هرمزگان خوش آمدید. چطور می‌توانم کمک کنم؟',
+        'ترافیک': '🚦 وضعیت ترافیک بندرعباس:\n• بلوار پاسداران: روان\n• خیابان ساحلی: نیمه سنگین\n• میدان شهدا: سنگین',
+        'آب و هوا': '🌤️ هوای بندرعباس:\n• دما: ۳۸ درجه سانتی‌گراد\n• وضعیت: آفتابی\n• رطوبت: ۶۵٪',
+        'مسیریابی': '🗺️ لطفاً مبدا و مقصد خود را وارد کنید تا بهترین مسیر را پیدا کنم.',
+        'پشتیبانی': '📞 پشتیبانی:\n• تلفن: ۰۷۶-۳۵۱۰۸\n• ساعت پاسخگویی: ۸ صبح تا ۸ شب'
+    };
+    
+    for (const [key, value] of Object.entries(responses)) {
+        if (text.includes(key)) {
+            return value;
+        }
+    }
+    
+    return 'منظور شما را متوجه نشدم. لطفاً یکی از موارد زیر را بپرسید:\n• سلام\n• ترافیک\n• آب و هوا\n• مسیریابی\n• پشتیبانی';
+}
+
+console.log('🔊 WebSocket Server running on ws://localhost:8081');

@@ -1,33 +1,21 @@
-# Dependencies
 node_modules/
-npm-debug.log*
-package-lock.json
-
-# Environment
+venv/
 .env
-.env.local
-.env.*.local
-
-# Build
+.env.*
+*.log
+*.sqlite
+*.db
+*.db-shm
+*.db-wal
+__pycache__/
+*.pyc
 dist/
 build/
-*.log
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-
-# Test
 coverage/
-.nyc_output/
-
-# Temp
-*.tmp
-temp/
-*.backup
-
-# Local Netlify folder
-.netlify
+.cache/
+tmp/
+*.zip
+*.tar.gz
+.DS_Store
+.idea/
+.vscode/

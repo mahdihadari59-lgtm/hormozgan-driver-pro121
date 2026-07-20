@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDP ONE - مسیریابی هوشمند محلات بندرعباس</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { text-align: center; color: white; margin-bottom: 30px; }
+        .header h1 { font-size: 2rem; margin-bottom: 10px; }
+        .main-grid { display: grid; grid-template-columns: 350px 1fr; gap: 20px; }
+        .control-panel {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .map-container {
+            background: #1e1e2e;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 550px;
+        }
+        #map { width: 100%; height: 100%; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; color: white; margin-bottom: 8px; font-weight: bold; }
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #f0b90b, #e6a800);
+            border: none;
+            border-radius: 8px;
+            color: #1a1a2e;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .btn-secondary { background: rgba(255,255,255,0.2); color: white; }
+        .result {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            color: #ddd;
+            font-size: 13px;
+        }
+        .result h4 { color: #f0b90b; margin-bottom: 10px; }
+        .route-info { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+        .info-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 10px;
+            flex: 1;
+            text-align: center;
+        }
+        .info-card .value { font-size: 18px; font-weight: bold; color: #f0b90b; }
+        .traffic-heavy { color: #ef4444; }
+        .traffic-moderate { color: #f59e0b; }
+        .traffic-light { color: #10b981; }
+        .curl-box {
+            background: #0d1117;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 11px;
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+        @media (max-width: 768px) { .main-grid { grid-template-columns: 1fr; } }
+    </style>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🗺️ HDP ONE - مسیریابی هوشمند محلات</h1>
+        <p>سیستم یکپارچه مسیریابی و پایش ترافیک استان هرمزگان</p>
+    </div>
+    <div class="main-grid">
+        <div class="control-panel">
+            <h3 style="color: white; margin-bottom: 20px;">📍 مسیریابی هوشمند</h3>
+            <div class="input-group">
+                <label>🚗 مبدأ (محله)</label>
+                <input type="text" id="origin" placeholder="مثال: چهارراه غزی, سورو, نایبند" value="چهارراه غزی">
+            </div>
+            <div class="input-group">
+                <label>🏁 مقصد (محله)</label>
+                <input type="text" id="destination" placeholder="مثال: بلوار ساحلی, پل سفید" value="بلوار ساحلی">
+            </div>
+            <button id="calculateBtn">🔍 محاسبه و رسم مسیر</button>
+            <button id="clearBtn" class="btn-secondary">🗑️ پاک کردن نقشه</button>
+            <div id="result" class="result">
+                <h4>📋 اطلاعات مسیر</h4>
+                <p>مسیری را انتخاب کنید...</p>
+            </div>
+            <div class="curl-box" id="curlBox">
+                <small>📋 cURL درخواست:</small>
+                <pre style="margin-top: 5px;">curl -X POST http://localhost:9090/api/neighborhoods/route -H "Content-Type: application/json" -d '{"from":"چهارراه غزی","to":"بلوار ساحلی"}'</pre>
+            </div>
+        </div>
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+<script>
+    const NESHAN_KEY = "web.1d9ca3f28ca3447e868bbc096c1c3b07";
+    let map, currentRoute = null, markers = [];
+    const neighborhoods = {
+        'سورو': [27.1850, 56.2600], 'نایبند': [27.1780, 56.2700], 'پل سفید': [27.1900, 56.2750],
+        'طاقی': [27.1750, 56.2800], 'چهارراه غزی': [27.1833, 56.2667], 'میدان سپاه': [27.1880, 56.2720],
+        'بلوار ساحلی': [27.1860, 56.2580], 'فرهنگ شهر': [27.1800, 56.2850],
+        'پاساژ سلمان': [27.1820, 56.2780], 'میدان ولیعصر': [27.1920, 56.2820]
+    };
+    function initMap() {
+        map = L.map('map').setView([27.1833, 56.2667], 13);
+        L.tileLayer(`https://{s}.neshan.org/traffic/{z}/{x}/{y}.png?key=${NESHAN_KEY}`, {
+            attribution: '© نشان', subdomains: '1234', maxZoom: 18
+        }).addTo(map);
+    }
+    function addMarker(lat, lng, title, color) {
+        const iconUrl = color === 'green' ? 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png' :
+                       (color === 'red' ? 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png' :
+                       'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png');
+        const marker = L.marker([lat, lng], { icon: L.icon({ iconUrl: iconUrl, iconSize: [25, 41], iconAnchor: [12, 41] }) })
+            .addTo(map).bindPopup(title);
+        markers.push(marker);
+        return marker;
+    }
+    function clearMap() {
+        markers.forEach(m => map.removeLayer(m));
+        markers = [];
+        if (currentRoute) { map.removeLayer(currentRoute); currentRoute = null; }
+    }
+    function drawRoute(points, color = '#f0b90b') {
+        if (currentRoute) map.removeLayer(currentRoute);
+        currentRoute = L.polyline(points, { color: color, weight: 5, opacity: 0.8 }).addTo(map);
+        map.fitBounds(currentRoute.getBounds());
+    }
+    function displayResult(data) {
+        const statusClass = data.status === 'سنگین ⚠️' ? 'traffic-heavy' : 
+                           (data.status === 'نیمه سنگین 🟡' ? 'traffic-moderate' : 'traffic-light');
+        document.getElementById('result').innerHTML = `
+            <h4>📋 اطلاعات مسیر</h4>
+            <div class="route-info">
+                <div class="info-card"><div class="value">${data.distance || 'نامشخص'}</div><small>📏 فاصله</small></div>
+                <div class="info-card"><div class="value">${data.duration || 'نامشخص'}</div><small>⏱️ زمان تخمینی</small></div>
+                <div class="info-card"><div class="value ${statusClass}">${data.status || 'معمولی'}</div><small>🚦 وضعیت ترافیک</small></div>
+            </div>
+            ${data.source ? `<p style="margin-top: 10px; font-size: 11px; color: #888;">🗂️ منبع: ${data.source}</p>` : ''}
+        `;
+        const origin = document.getElementById('origin').value;
+        const dest = document.getElementById('destination').value;
+        document.getElementById('curlBox').innerHTML = `
+            <small>📋 cURL درخواست شما:</small>
+            <pre style="margin-top: 5px;">curl -X POST http://localhost:9090/api/neighborhoods/route -H "Content-Type: application/json" -d '{"from":"${origin}","to":"${dest}"}'</pre>
+        `;
+    }
+    async function calculateRoute() {
+        const origin = document.getElementById('origin').value;
+        const dest = document.getElementById('destination').value;
+        if (!origin || !dest) { alert('لطفاً مبدأ و مقصد را وارد کنید'); return; }
+        clearMap();
+        const originCoords = neighborhoods[origin];
+        const destCoords = neighborhoods[dest];
+        if (originCoords) addMarker(originCoords[0], originCoords[1], `📍 مبدأ: ${origin}`, 'green');
+        if (destCoords) addMarker(destCoords[0], destCoords[1], `🏁 مقصد: ${dest}`, 'red');
+        try {
+            const response = await fetch('/api/neighborhoods/route', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ from: origin, to: dest })
+            });
+            const data = await response.json();
+            if (data.success) {
+                displayResult(data);
+                if (originCoords && destCoords) drawRoute([originCoords, destCoords]);
+            } else {
+                document.getElementById('result').innerHTML = `<h4>❌ خطا</h4><p>${data.error || 'مسیری یافت نشد'}</p>`;
+            }
+        } catch(e) {
+            document.getElementById('result').innerHTML = `<h4>❌ خطا در ارتباط</h4><p>${e.message}</p>`;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        initMap();
+        document.getElementById('calculateBtn').addEventListener('click', calculateRoute);
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            clearMap();
+            document.getElementById('result').innerHTML = '<h4>📋 اطلاعات مسیر</h4><p>مسیری را انتخاب کنید...</p>';
+        });
+    });
+</script>
+</body>
+</html>

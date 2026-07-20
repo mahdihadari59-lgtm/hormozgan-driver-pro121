@@ -1,0 +1,292 @@
+{
+  "metadata": {
+    "name": "پایگاه داده گویش‌های استان هرمزگان",
+    "version": "1.0",
+    "date": "خرداد ۱۴۰۵",
+    "author": "مهدی حیدری پوری",
+    "description": "دیتابیس جامع گویش‌های لنگه‌ای، خمیری، قشمی، جاسکی و مینابی",
+    "total_dialects": 5,
+    "total_records": 2200,
+    "region": "استان هرمزگان، جنوب ایران"
+  },
+
+  "dialects": {
+    "langari": {
+      "name": "گویش لنگه‌ای",
+      "region": "بندر لنگه و روستاهای اطراف",
+      "population_approx": 150000,
+      "status": "فعال",
+      "features": [
+        {"feature": "تأثیر زبان عربی", "description": "به دلیل همجواری با کشورهای عربی"},
+        {"feature": "واژگان دریایی", "description": "لنج‌سازی، صیادی، تجارت دریایی"},
+        {"feature": "کشیدگی مصوت‌ها", "description": "تلفظ کشیده و آهنگین"}
+      ],
+      
+      "greetings": [
+        {"langari": "سَلام چَکری؟", "persian": "سلام چطوری؟", "response": "خوبُم والله"},
+        {"langari": "صُبح بخیر", "persian": "صبح بخیر", "response": "صُبح بخیر"},
+        {"langari": "چَکری داداش؟", "persian": "چطوری داداش؟", "response": "خوبُم مَرسی"},
+        {"langari": "مَسا بخیر", "persian": "عصر بخیر", "response": "مَسا بخیر"},
+        {"langari": "شو بخیر", "persian": "شب بخیر", "response": "شو بخیر"}
+      ],
+      
+      "daily_words": [
+        {"langari": "چَک", "persian": "چطور", "example": "چَکَری؟ (چطوری؟)"},
+        {"langari": "هَل", "persian": "بگذار", "example": "هَل کُن (بگذار کنم)"},
+        {"langari": "بَو", "persian": "باشد", "example": "بَو باشه (باشد)"},
+        {"langari": "لَنج", "persian": "قایق بزرگ", "example": "لَنج دَریایی"},
+        {"langari": "دُو", "persian": "اسکله", "example": "دُو کُهنه (اسکله قدیم)"},
+        {"langari": "بندر", "persian": "بندر", "example": "بندر لنگه"}
+      ],
+      
+      "fishing_terms": [
+        {"langari": "صیاد", "persian": "ماهیگیر"},
+        {"langari": "تور", "persian": "تور ماهیگیری"},
+        {"langari": "قایق", "persian": "قایق"},
+        {"langari": "موج", "persian": "موج دریا"},
+        {"langari": "ماهی حلواسفید", "persian": "نوعی ماهی"},
+        {"langari": "میگو", "persian": "میگو"},
+        {"langari": "لنج", "persian": "لنج تجاری"}
+      ],
+      
+      "family_terms": [
+        {"langari": "بابا", "persian": "پدر"},
+        {"langari": "مامان", "persian": "مادر"},
+        {"langari": "برار", "persian": "برادر"},
+        {"langari": "خواهر", "persian": "خواهر"},
+        {"langari": "پسر", "persian": "پسر"},
+        {"langari": "دختر", "persian": "دختر"}
+      ]
+    },
+    
+    "khamiri": {
+      "name": "گویش خمیری",
+      "region": "بندر خمیر و روستاهای اطراف",
+      "population_approx": 60000,
+      "status": "فعال",
+      "features": [
+        {"feature": "آب و هوای گرم و شرجی", "description": "تأثیر بر تلفظ و لحن"},
+        {"feature": "فرهنگ دریایی", "description": "صیادی، غواصی، لنج‌سازی"},
+        {"feature": "تأثیر فارسی معیار", "description": "نزدیک به فارسی معیار"}
+      ],
+      
+      "greetings": [
+        {"khamiri": "سَلام خُوبی؟", "persian": "سلام خوبی؟", "response": "خُوبُم خُو"},
+        {"khamiri": "صُبح بخیر", "persian": "صبح بخیر", "response": "صُبح بخیر"},
+        {"khamiri": "چِطوری؟", "persian": "چطوری؟", "response": "خوبُم"},
+        {"khamiri": "هَی چِکار مِکُنی؟", "persian": "چه کار می‌کنی؟", "response": "هیچی"},
+        {"khamiri": "مَسا بخیر", "persian": "عصر بخیر", "response": "مَسا بخیر"}
+      ],
+      
+      "daily_words": [
+        {"khamiri": "خُو", "persian": "خودت", "example": "خُو رِفتی؟ (خودت رفتی؟)"},
+        {"khamiri": "هَی", "persian": "بله (تعجب)", "example": "هَی چیزا! (وای خدای من!)"},
+        {"khamiri": "گپ", "persian": "حرف", "example": "گپ بزن (حرف بزن)"},
+        {"khamiri": "چِش", "persian": "چشم", "example": "چِشات دَر نَکُن! (چشمت درنیاد!)"}
+      ],
+      
+      "nature_terms": [
+        {"khamiri": "خُور", "persian": "خورشید"},
+        {"khamiri": "ماه", "persian": "ماه"},
+        {"khamiri": "باد", "persian": "باد"},
+        {"khamiri": "باریش", "persian": "باران"},
+        {"khamiri": "دَریا", "persian": "دریا"},
+        {"khamiri": "حرا", "persian": "جنگل حرا", "note": "جاذبه طبیعی خمیر"}
+      ],
+      
+      "family_terms": [
+        {"khamiri": "بابا", "persian": "پدر"},
+        {"khamiri": "ماما", "persian": "مادر"},
+        {"khamiri": "برار", "persian": "برادر"},
+        {"khamiri": "خواهر", "persian": "خواهر"},
+        {"khamiri": "پسر", "persian": "پسر"},
+        {"khamiri": "دختر", "persian": "دختر"}
+      ]
+    },
+    
+    "qeshm": {
+      "name": "گویش قشمی",
+      "region": "جزیره قشم و توابع",
+      "population_approx": 150000,
+      "status": "فعال",
+      "features": [
+        {"feature": "تأثیر زبان هندی", "description": "از طریق تجارت دریایی با هند"},
+        {"feature": "واژگان منحصر به فرد", "description": "مخصوص جزیره قشم"},
+        {"feature": "کشیدگی خاص", "description": "لحن آهنگین و کشیده"}
+      ],
+      
+      "greetings": [
+        {"qeshm": "سَلام کَیری؟", "persian": "سلام چطوری؟", "response": "خوبُم والا"},
+        {"qeshm": "کَیری داداش؟", "persian": "چطوری داداش؟", "response": "خوبُم"},
+        {"qeshm": "صُبح بخیر", "persian": "صبح بخیر", "response": "صُبح بخیر"},
+        {"qeshm": "شو بخیر", "persian": "شب بخیر", "response": "شو بخیر"},
+        {"qeshm": "دَج چِطوری؟", "persian": "رفیق چطوری؟", "response": "خوبُم"}
+      ],
+      
+      "daily_words": [
+        {"qeshm": "کَیری", "persian": "چطوری", "example": "کَیری؟ (چطوری؟)"},
+        {"qeshm": "دَج", "persian": "رفیق", "example": "دَج خوبی؟ (رفیق خوبی؟)"},
+        {"qeshm": "بُو", "persian": "باشد", "example": "بُو باشه (باشد)"},
+        {"qeshm": "خَری", "persian": "رفیق", "example": "خَری جان (رفیق جان)"},
+        {"qeshm": "واویلا", "persian": "وای خدای من", "example": "واویلا چیزا!"}
+      ],
+      
+      "tourism_terms": [
+        {"qeshm": "دره ستارگان", "persian": "دره ستارگان", "note": "جاذبه زمین‌شناسی"},
+        {"qeshm": "حرا", "persian": "جنگل حرا", "note": "بوم‌سازگان دریایی"},
+        {"qeshm": "چاهکوه", "persian": "تنگه چاهکوه", "note": "ژئوپارک"},
+        {"qeshm": "غار نمکدان", "persian": "غار نمکدان", "note": "طولانی‌ترین غار نمکی"},
+        {"qeshm": "جزیره ناز", "persian": "جزیره ناز", "note": "جزیره جزر و مدی"},
+        {"qeshm": "بازار درگهان", "persian": "بازار درگهان", "note": "مرکز خرید صنایع دستی"}
+      ],
+      
+      "food_terms": [
+        {"qeshm": "قلیه میگو", "persian": "قلیه میگو"},
+        {"qeshm": "هواری", "persian": "هواری", "note": "برنج دودی"},
+        {"qeshm": "ماهی کباب", "persian": "ماهی کباب"},
+        {"qeshm": "نان محلی", "persian": "نان محلی"}
+      ]
+    },
+    
+    "jaski": {
+      "name": "گویش جاسکی",
+      "region": "بندر جاسک و روستاهای اطراف",
+      "population_approx": 60000,
+      "status": "فعال",
+      "features": [
+        {"feature": "نزدیک به بلوچی", "description": "تأثیر از همسایگی با استان سیستان و بلوچستان"},
+        {"feature": "واژگان خاص", "description": "تلفظ و واژه‌های منحصر به فرد"},
+        {"feature": "فرهنگ دریایی مکران", "description": "دریای عمان و صیادی"}
+      ],
+      
+      "greetings": [
+        {"jaski": "سَلام خُوبی؟", "persian": "سلام خوبی؟", "response": "خُوبُم"},
+        {"jaski": "چِطوری؟", "persian": "چطوری؟", "response": "خوبُم والا"},
+        {"jaski": "اومدی؟", "persian": "آمدی؟", "response": "اومدم"},
+        {"jaski": "صُبح بخیر", "persian": "صبح بخیر", "response": "صُبح بخیر"},
+        {"jaski": "شو بخیر", "persian": "شب بخیر", "response": "شو بخیر"}
+      ],
+      
+      "daily_words": [
+        {"jaski": "اومدی", "persian": "آمدی", "example": "اومدی جاسک؟ (آمدی جاسک؟)"},
+        {"jaski": "اوت", "persian": "آنجا", "example": "اوت رفتم (آنجا رفتم)"},
+        {"jaski": "اومدم", "persian": "آمدم", "example": "اومدم خونه (آمدم خانه)"},
+        {"jaski": "برگشتم", "persian": "برگشتم", "example": "برگشتم جاسک"},
+        {"jaski": "چِکار", "persian": "چه کار", "example": "چِکار داری؟ (چه کار داری؟)"}
+      ],
+      
+      "fishing_terms": [
+        {"jaski": "صیاد", "persian": "ماهیگیر"},
+        {"jaski": "تور", "persian": "تور"},
+        {"jaski": "ماهی", "persian": "ماهی"},
+        {"jaski": "میگو", "persian": "میگو"},
+        {"jaski": "دریا", "persian": "دریای عمان"},
+        {"jaski": "قایق", "persian": "قایق"}
+      ],
+      
+      "nature_terms": [
+        {"jaski": "دریا", "persian": "دریای عمان"},
+        {"jaski": "کوه", "persian": "کوه"},
+        {"jaski": "باد", "persian": "باد"},
+        {"jaski": "بارون", "persian": "باران"},
+        {"jaski": "خور", "persian": "خورشید"}
+      ]
+    },
+    
+    "minabi": {
+      "name": "گویش مینابی",
+      "region": "شهرستان میناب و روستاهای اطراف",
+      "population_approx": 260000,
+      "status": "فعال (پرگویش‌ترین)",
+      "features": [
+        {"feature": "تأثیر کشاورزی", "description": "واژگان مربوط به نخل و خرما"},
+        {"feature": "تأثیر فارسی معیار", "description": "نزدیک‌ترین گویش به فارسی"},
+        {"feature": "واژگان منحصر به فرد", "description": "اصطلاحات محلی میناب"}
+      ],
+      
+      "greetings": [
+        {"minabi": "سَلام چَگوری؟", "persian": "سلام چطوری؟", "response": "خُوبُم"},
+        {"minabi": "خُوبی تو؟", "persian": "خوبی تو؟", "response": "خُوبُم"},
+        {"minabi": "چَگوری داداش؟", "persian": "چطوری داداش؟", "response": "خوبُم"},
+        {"minabi": "صُبح بخیر", "persian": "صبح بخیر", "response": "صُبح بخیر"},
+        {"minabi": "شو بخیر", "persian": "شب بخیر", "response": "شو بخیر"},
+        {"minabi": "مَسا بخیر", "persian": "عصر بخیر", "response": "مَسا بخیر"}
+      ],
+      
+      "daily_words": [
+        {"minabi": "چَگور", "persian": "چطور", "example": "چَگوری؟ (چطوری؟)"},
+        {"minabi": "اَمره", "persian": "امروز", "example": "اَمره رفتم بازار"},
+        {"minabi": "گپ", "persian": "حرف", "example": "گپ بزن (حرف بزن)"},
+        {"minabi": "خُرما", "persian": "خرما", "example": "خُرما پیارم"},
+        {"minabi": "نَخل", "persian": "نخل", "example": "نَخلِ کوهم"},
+        {"minabi": "باغ", "persian": "باغ", "example": "باغ اَنار"}
+      ],
+      
+      "agriculture_terms": [
+        {"minabi": "نَخل", "persian": "نخل خرما"},
+        {"minabi": "خُرما", "persian": "خرما"},
+        {"minabi": "رُطب", "persian": "خرمای تازه"},
+        {"minabi": "پیارم", "persian": "نوعی خرما"},
+        {"minabi": "مضافتی", "persian": "نوعی خرما"},
+        {"minabi": "کبکاب", "persian": "نوعی خرما"},
+        {"minabi": "اَنار", "persian": "انار"},
+        {"minabi": "پرتقال", "persian": "پرتقال"},
+        {"minabi": "لیمو", "persian": "لیمو"},
+        {"minabi": "گندم", "persian": "گندم"},
+        {"minabi": "جو", "persian": "جو"},
+        {"minabi": "آبیاری", "persian": "آبیاری"},
+        {"minabi": "دِرَو", "persian": "درو کردن"}
+      ],
+      
+      "market_terms": [
+        {"minabi": "پنجشنبه بازار", "persian": "پنجشنبه بازار", "note": "بازار معروف میناب"},
+        {"minabi": "صیفی‌جات", "persian": "سبزیجات"},
+        {"minabi": "تریاک", "persian": "تریاک", "note": "قاچاق"},
+        {"minabi": "خرید و فروش", "persian": "خرید و فروش"}
+      ],
+      
+      "family_terms": [
+        {"minabi": "بابا", "persian": "پدر"},
+        {"minabi": "مامان", "persian": "مادر"},
+        {"minabi": "برار", "persian": "برادر"},
+        {"minabi": "خواهر", "persian": "خواهر"},
+        {"minabi": "پسر", "persian": "پسر"},
+        {"minabi": "دختر", "persian": "دختر"},
+        {"minabi": "شوهر", "persian": "شوهر"},
+        {"minabi": "زن", "persian": "زن"}
+      ]
+    }
+  },
+  
+  "comparative_table": {
+    "persian_word": "سلام چطوری؟",
+    "bandari": "ابی چش؟",
+    "minabi": "سَلام چَگوری؟",
+    "qeshm": "سَلام کَیری؟",
+    "langari": "سَلام چَکری؟",
+    "jaski": "سَلام خُوبی؟",
+    "khamiri": "سَلام خُوبی؟",
+    "rudani": "سَلام چَگُری؟",
+    "hormozgan_common": "چِطوری؟"
+  },
+  
+  "comparative_vocabulary": {
+    "persian": "من",
+    "bandari": "مِ",
+    "minabi": "مُو",
+    "qeshm": "مِن",
+    "langari": "مَن",
+    "jaski": "مَن",
+    "khamiri": "مَن",
+    "rudani": "مُو"
+  },
+  
+  "vector_search_ready": {
+    "total_embeddings": 2200,
+    "dimension": 384,
+    "embedding_model": "multilingual-E5-small",
+    "similarity_metric": "cosine",
+    "dialects_supported": ["langari", "khamiri", "qeshm", "jaski", "minabi", "bandari", "rudani"],
+    "search_fields": ["dialect", "persian", "word", "phrase", "tags"]
+  }
+}

@@ -20,9 +20,15 @@
     "express-rate-limit": "^8.0.0",
     "helmet": "^8.1.0",
     "http-proxy": "^1.18.1",
+    "ml-cart": "^2.1.1",
+    "ml-knn": "^3.0.0",
+    "ml-logistic-regression": "^2.0.0",
+    "ml-random-forest": "^2.1.0",
     "morgan": "^1.10.1",
     "path": "^0.12.7",
-    "ws": "^8.18.3"
+    "sql.js": "^1.14.1",
+    "string-similarity": "^4.0.4",
+    "ws": "^8.21.0"
   },
   "keywords": [
     "ai",

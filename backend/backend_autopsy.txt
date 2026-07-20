@@ -1,0 +1,325 @@
+==================================================
+bandari-server.js
+const http = require('http');
+const url = require('url');
+function detectDialect(text) {
+function toBandari(text) {
+function toPersian(text) {
+function smartTranslate(text) {
+const server = http.createServer((req, res) => {
+module.exports = server;
+
+==================================================
+bandari_algorithm.js
+class BandariTranslator {
+module.exports = BandariTranslator;
+
+==================================================
+bandari_api.js
+const express = require('express');
+const cors = require('cors');
+const app = express();
+app.use(express.json());
+function detectBandari(text) {
+function toBandari(text) {
+function toPersian(text) {
+function smartTranslate(text) {
+async function toBandari(){
+async function toPersian(){
+async function detect(){
+app.listen(PORT, () => {
+module.exports = app;
+
+==================================================
+deep_ai_integration.js
+
+==================================================
+enhance_chat.js
+const fs = require('fs');
+function getRandomResponse(intent) {
+function getSuggestions(intent) {
+
+==================================================
+finalIntentClassifier_OPTIMIZED.js
+const fs = require('fs');
+const path = require('path');
+class FinalIntentClassifier {
+module.exports = FinalIntentClassifier;
+
+==================================================
+finalIntentClassifier_PRODUCTION.js
+const fs = require('fs');
+const path = require('path');
+class FinalIntentClassifier {
+module.exports = FinalIntentClassifier;
+
+==================================================
+fix_traffic.js
+const fs = require('fs');
+function getTrafficAdvice(status) {
+
+==================================================
+full-server.js
+const http = require('http');
+const url = require('url');
+function detectIntent(text) {
+const server = http.createServer((req, res) => {
+module.exports = server;
+
+==================================================
+hdp-complete.js
+const http = require('http');
+const url = require('url');
+function detectIntent(text) {
+function toBandari(text) {
+function toPersian(text) {
+function detectDialect(text) {
+const server = http.createServer((req, res) => {
+module.exports = server;
+
+==================================================
+hdp-final.js
+const http = require('http');
+const https = require('https');
+function getGoldPrice() {
+function getWeatherData(city) {
+function getTrafficData(location) {
+function classifyIntent(text) {
+function getResponse(intent) {
+function parseQuery(url) {
+function getBody(req) {
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp-iran-apis-fixed.js
+const http = require('http');
+const https = require('https');
+function getGoldPrice() {
+function fallbackGold() {
+function getWeather(city) {
+function getTraffic(location) {
+function classifyIntent(text) {
+function getResponse(intent) {
+function parseQuery(url) {
+function getBody(req) {
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp-iran-apis.js
+const http = require('http');
+const https = require('https');
+function getGoldFromNavasan() {
+function getGoldFromGold18() {
+function getGoldFallback() {
+async function getGoldPrice() {
+function getWeatherForeca() {
+function getWeatherFallback(city = 'بندرعباس') {
+async function getWeather(city = 'بندرعباس') {
+class IntentClassifier {
+function parseQuery(url) {
+const server = http.createServer(async (req, res) => {
+
+==================================================
+hdp-one-final.js
+const http = require('http');
+class IntentClassifier {
+function getResponse(intent) {
+function getRealGold() {
+        const https = require('https');
+function getRealWeather(city) {
+        const https = require('https');
+function getBody(req) {
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp-one-fixed-weather.js
+const http = require('http');
+class IntentClassifier {
+function getResponse(intent) {
+function getRealGold() {
+        const https = require('https');
+function getRealWeather(city) {
+        const https = require('https');
+function getBody(req) {
+function parseQuery(url) {
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp-one-standalone-fixed.js
+const http = require('http');
+class IntentClassifier {
+function getResponse(intent) {
+async function getRealGold() {
+            const req = require('https').get('https://raw.githubusercontent.com/HosseinOdd/Navasan-API/main/data/gold.json', (res) => {
+async function getRealWeather(city) {
+            const req = require('https').get(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`, (res) => {
+function parseBody(req) {
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp-one-standalone.js
+const http = require('http');
+const url = require('url');
+// 🚀 HTTP Server ساده (بدون نیاز به express)
+class IntentClassifier {
+function getResponse(intent) {
+async function getRealGold() {
+        const https = require('https');
+async function getRealWeather(city) {
+        const https = require('https');
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp-traffic-full.js
+const http = require('http');
+const url = require('url');
+function getTrafficStatus(location) {
+function getAlternativeRoute(location) {
+function getSmartRoute(from, to) {
+function getSafetyAlert(location) {
+function getFullReport() {
+const server = http.createServer((req, res) => {
+module.exports = server;
+
+==================================================
+hdp-traffic-updated.js
+const http = require('http');
+const url = require('url');
+function getTrafficStatus(location) {
+function getAlternativeRoute(location) {
+function getSmartRoute(from, to) {
+function getSafetyAlert(location) {
+function getFullReport() {
+const server = http.createServer((req, res) => {
+module.exports = server;
+
+==================================================
+hdp-v8-complete.js
+const http = require('http');
+const https = require('https');
+function getGoldPrice() {
+function getWeather(city) {
+function getTraffic(location) {
+function getBandari(word) {
+function classifyIntent(text) {
+function getResponse(intent) {
+function parseQuery(url) {
+function getBody(req) {
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp-v8-final.js
+const http = require('http');
+const https = require('https');
+async function getGoldFromTgju() {
+async function getGoldFromBonbast() {
+function getGoldFallback() {
+async function getGoldPrice() {
+async function getWeatherFromOpenWeather(city) {
+function getWeatherLocal(city) {
+async function getWeather(city) {
+function getTraffic(location) {
+function getBandariWord(word) {
+function getBandariSample() {
+function getPersianDate() {
+function classifyIntent(text) {
+function getIntentName(intent) {
+function getChatResponse(intent) {
+function parseQuery(url) {
+function getBody(req) {
+const server = http.createServer(async (req, res) => {
+module.exports = server;
+
+==================================================
+hdp_fixed.js
+const trafficAPI = require('./traffic_api');
+
+==================================================
+index.js
+const express = require('express');
+const cors = require('cors');
+const app = express();
+app.use(express.json());
+const IntentClassifier = require('./finalIntentClassifier_PRODUCTION.js');
+const KeywordClassifier = require('./keyword-classifier.js');
+function getRandomResponse(intent) {
+function getSuggestions(intent) {
+app.listen(PORT, () => {
+module.exports = app;
+const TrafficIntelligenceSystem = require('./traffic_cameras');
+const neshanRoute = require('./services/neshan-route');
+const neshanConfig = require('./config/neshan.config');
+    const config = require('./config/neshan.config');
+    const neshan = require('./services/neshan-route');
+const neighborhoodRoutes = require('./services/neighborhood-routes');
+
+==================================================
+keyword-classifier.js
+class KeywordClassifier {
+module.exports = KeywordClassifier;
+
+==================================================
+server.js
+const http = require('http');
+const server = http.createServer((req, res) => {
+
+==================================================
+simple-server.js
+const http = require('http');
+const server = http.createServer((req, res) => {
+
+==================================================
+test-server.js
+const http = require('http');
+const server = http.createServer((req, res) => {
+
+==================================================
+test_optimized.js
+const IntentClassifier = require('./finalIntentClassifier_OPTIMIZED.js');
+
+==================================================
+traffic_api.js
+const express = require('express');
+const router = express.Router();
+module.exports = router;
+
+==================================================
+traffic_cameras.js
+class TrafficIntelligenceSystem {
+module.exports = TrafficIntelligenceSystem;
+
+==================================================
+vector_db.js
+const fs = require('fs');
+const path = require('path');
+class BandariVectorDB {
+const express = require('express');
+const app = express();
+app.use(express.json());
+app.use(express.static('public'));
+                async function search() {
+                async function loadStats() {
+                async function loadSamples() {
+app.listen(PORT, () => {
+module.exports = { BandariVectorDB, app };
+
+==================================================
+vector_db_standalone.js
+const fs = require('fs');
+class BandariVectorDB {
+const express = require('express');
+const app = express();
+app.use(express.json());
+app.use(express.static('public'));
+                async function search(){
+                async function loadStats(){
+app.listen(PORT, () => {
+module.exports = app;
+

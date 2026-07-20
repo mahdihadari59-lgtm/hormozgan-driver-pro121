@@ -1,0 +1,359 @@
+{
+  "metadata": {
+    "name": "گویش بستکی (بستکی)",
+    "alternative_names": ["بستکی", "گویش بستک", "بستکی هرمزگان"],
+    "version": "1.0",
+    "date": "خرداد ۱۴۰۵",
+    "author": "مهدی حیدری پوری",
+    "description": "پایگاه داده جامع گویش بستکی شهرستان بستک، غرب استان هرمزگان",
+    "region": "شهرستان بستک، غرب استان هرمزگان",
+    "center": "بستک",
+    "population": "۸۰,۰۰۰+ نفر",
+    "total_records": 780,
+    "dialect_family": "جنوب غربی ایرانی - شاخه بندری-لارستانی",
+    "status": "فعال",
+    "neighboring_dialects": ["لارستانی", "بندری", "اچمی"]
+  },
+  
+  "phonology": {
+    "vowels": [
+      {"ipa": "/æ/", "bastaki": "مَن", "persian": "من", "example": "مَن رَفتم"},
+      {"ipa": "/ɒː/", "bastaki": "دَرِیا", "persian": "دریا", "example": "دَرِیا مواج"},
+      {"ipa": "/e/", "bastaki": "کِه", "persian": "که", "example": "کِه چیزا"},
+      {"ipa": "/i/", "bastaki": "شیر", "persian": "شیر", "example": "شیر تازه"},
+      {"ipa": "/o/", "bastaki": "دُم", "persian": "دم", "example": "دُمِ ماشی"},
+      {"ipa": "/u/", "bastaki": "پول", "persian": "پول", "example": "پول نقد"},
+      {"ipa": "/eː/", "bastaki": "بِه", "persian": "به", "example": "بِه خونه", "note": "مصوت کشیده شاخص"}
+    ],
+    "characteristics": [
+      {"feature": "تغییر â به o", "example": "نان → نون", "persian": "نان"},
+      {"feature": "تلفظ /q/ (قاف)", "example": "غذا → قَذا", "persian": "غذا", "note": "مشابه لارستانی"},
+      {"feature": "کشیدگی مصوت‌ها در پایان کلمه", "example": "بیااا", "persian": "بیا"},
+      {"feature": "تغییر و به ا", "example": "گوسفند → گسفند", "persian": "گوسفند"},
+      {"feature": "ادغام دو مصوت", "example": "بِه + اونا → بونا", "persian": "به آنها"},
+      {"feature": "تأثیر لهجه لارستانی", "note": "واژگان مشترک با لارستان"}
+    ]
+  },
+  
+  "pronouns": {
+    "independent": [
+      {"bastaki": "مُ", "persian": "من", "enclitic": "-م/-وم", "example": "مُ رَفتم"},
+      {"bastaki": "تُ", "persian": "تو", "enclitic": "-ت/-وت", "example": "تُ رَفتی"},
+      {"bastaki": "او", "persian": "او", "enclitic": "-ش/-وش", "example": "او رَفت"},
+      {"bastaki": "ما", "persian": "ما", "enclitic": "-مون", "example": "ما رَفتی م"},
+      {"bastaki": "شُما", "persian": "شما", "enclitic": "-تون", "example": "شُما رَفتین"},
+      {"bastaki": "ایشون", "persian": "ایشان", "enclitic": "-شون", "example": "ایشون رَفتِن"}
+    ],
+    "demonstrative": [
+      {"bastaki": "اینا", "persian": "اینها"},
+      {"bastaki": "اونا", "persian": "آنها"},
+      {"bastaki": "ای", "persian": "این"},
+      {"bastaki": "اون", "persian": "آن"}
+    ]
+  },
+  
+  "verbs": {
+    "to_go": {
+      "present": "مِرُم",
+      "past": "رَفتُم",
+      "stem_present": "ر",
+      "stem_past": "رَفت",
+      "meaning": "رفتن",
+      "transitivity": "intransitive"
+    },
+    "to_come": {
+      "present": "ایُم",
+      "past": "اومَدُم",
+      "stem_present": "ا",
+      "stem_past": "اومَد",
+      "meaning": "آمدن",
+      "transitivity": "intransitive"
+    },
+    "to_see": {
+      "present": "بینُم",
+      "past": "دیدُم",
+      "stem_present": "بین",
+      "stem_past": "دید",
+      "meaning": "دیدن",
+      "transitivity": "transitive"
+    },
+    "to_eat": {
+      "present": "خورُم",
+      "past": "خوردُم",
+      "stem_present": "خور",
+      "stem_past": "خورد",
+      "meaning": "خوردن",
+      "transitivity": "transitive"
+    },
+    "to_say": {
+      "present": "گُم",
+      "past": "گُفتُم",
+      "stem_present": "گ",
+      "stem_past": "گُفت",
+      "meaning": "گفتن",
+      "transitivity": "transitive"
+    },
+    "to_do": {
+      "present": "کُنُم",
+      "past": "کَردُم",
+      "stem_present": "کُن",
+      "stem_past": "کَرد",
+      "meaning": "کردن",
+      "transitivity": "transitive"
+    },
+    "to_have": {
+      "present": "دارُم",
+      "past": "داشتم",
+      "meaning": "داشتن",
+      "note": "مشابه فارسی معیار"
+    },
+    "to_want": {
+      "present": "خوُم",
+      "past": "خاستُم",
+      "meaning": "خواستن",
+      "note": "مخفف شده"
+    },
+    "to_be_able": {
+      "present": "تونُم",
+      "past": "تونستُم",
+      "meaning": "توانستن",
+      "note": "مشابه فارسی"
+    }
+  },
+  
+  "greetings": [
+    {"bastaki": "سَلام", "persian": "سلام", "response": "سَلام", "time": "any"},
+    {"bastaki": "صُبَح بِخِیر", "persian": "صبح بخیر", "response": "صُبَح بِخِیر", "time": "morning"},
+    {"bastaki": "چَطوری؟", "persian": "چطوری؟", "response": "خوبُم, تُ چَطوری؟", "register": "casual"},
+    {"bastaki": "چِه خَبَر؟", "persian": "چه خبر؟", "response": "خبری نی", "register": "casual"},
+    {"bastaki": "حالت چَطورَه؟", "persian": "حالت چطوره؟", "response": "خوبُم, نِگِران نَباش", "register": "formal"},
+    {"bastaki": "خُوبی داداش؟", "persian": "خوبی داداش؟", "response": "خوبُم, مَرسی", "register": "intimate"},
+    {"bastaki": "مَسا بِخِیر", "persian": "عصر بخیر", "response": "مَسا بِخِیر", "time": "evening"},
+    {"bastaki": "شَو بِخِیر", "persian": "شب بخیر", "response": "شَو بِخِیر", "time": "night"},
+    {"bastaki": "رُوزِ تُو خُوب", "persian": "روز تو خوب", "response": "رُوزِ تُو خُوب", "register": "local"}
+  ],
+  
+  "farewells": [
+    {"bastaki": "خُدا نِگَهدار", "persian": "خدا نگهدار", "response": "خُدا نِگَهدار"},
+    {"bastaki": "بای", "persian": "خداحافظ", "response": "بای", "register": "casual"},
+    {"bastaki": "فِعلَن", "persian": "فعلاً", "response": "فِعلَن", "register": "casual"},
+    {"bastaki": "بِه سَلامَت", "persian": "به سلامت", "response": "خُدا نِگَهدار"},
+    {"bastaki": "خُوش باشی", "persian": "خوش باشی", "response": "خُوش باشی"},
+    {"bastaki": "راهِ تُو سَبز", "persian": "راه تو سبز", "response": "خُدا نِگَهدار", "note": "اصطلاح محلی"}
+  ],
+  
+  "daily_expressions": [
+    {"bastaki": "دَستِت طَلا", "persian": "دستت طلا", "usage": "تشکر از آشپز"},
+    {"bastaki": "نونِ حَلال", "persian": "روزی حلال", "usage": "تبریک برای درآمد"},
+    {"bastaki": "واویلا!", "persian": "وای خدای من!", "usage": "تعجب"},
+    {"bastaki": "ای چیزها!", "persian": "ای عجب!", "usage": "تعجب"},
+    {"bastaki": "دِلُم وَسِت تَنگ بُو", "persian": "دلم برایت تنگ بود", "usage": "ابراز محبت"},
+    {"bastaki": "خُدا رُوزی بِدِه", "persian": "خدا روزی بده", "usage": "آرزوی موفقیت"},
+    {"bastaki": "اِنشاءالله", "persian": "انشاءالله", "usage": "آرزو"},
+    {"bastaki": "ماشاءالله", "persian": "ماشاءالله", "usage": "تحسین"},
+    {"bastaki": "حَمدُلله", "persian": "الحمدلله", "usage": "خدا را شکر"},
+    {"bastaki": "چَش", "persian": "چشم", "usage": "بله، حتماً"},
+    {"bastaki": "باشه", "persian": "باشه", "usage": "موافقت"},
+    {"bastaki": "والله", "persian": "به خدا", "usage": "تأکید"},
+    {"bastaki": "قُربونت بِرَم", "persian": "قربانت بروم", "usage": "ابراز محبت شدید"}
+  ],
+  
+  "slang_words": [
+    {"bastaki": "وَچ", "persian": "پسر/بچه", "category": "address"},
+    {"bastaki": "دِلبَر", "persian": "اصلاً", "category": "emphasis"},
+    {"bastaki": "هِی", "persian": "بله (تعجب)", "category": "exclamation"},
+    {"bastaki": "بابا", "persian": "بابا", "category": "address"},
+    {"bastaki": "داداش", "persian": "برادر", "category": "address"},
+    {"bastaki": "جانُم", "persian": "جانم", "category": "affection"},
+    {"bastaki": "عزیزُم", "persian": "عزیزم", "category": "affection"},
+    {"bastaki": "کُه", "persian": "کوه", "category": "geography"},
+    {"bastaki": "دَر", "persian": "در/داخل", "category": "preposition"},
+    {"bastaki": "بَرو", "persian": "برو", "category": "command"},
+    {"bastaki": "بیو", "persian": "بیا", "category": "command"},
+    {"bastaki": "نَرو", "persian": "نرو", "category": "negative command"},
+    {"bastaki": "نیو", "persian": "نیا", "category": "negative command"}
+  ],
+  
+  "business_commerce": [
+    {"bastaki": "بازار", "persian": "بازار", "description": "بازار قدیم بستک"},
+    {"bastaki": "دُکون", "persian": "دکان", "description": "مغازه"},
+    {"bastaki": "جِنس", "persian": "جنس", "description": "کالا"},
+    {"bastaki": "قیمَت", "persian": "قیمت", "description": "بهای کالا"},
+    {"bastaki": "تخفیف", "persian": "تخفیف", "description": "کاهش قیمت"},
+    {"bastaki": "سود", "persian": "سود", "description": "منفعت"},
+    {"bastaki": "زیان", "persian": "زیان", "description": "ضرر"},
+    {"bastaki": "نقد", "persian": "نقد", "description": "پول نقد"},
+    {"bastaki": "نسیه", "persian": "نسیه", "description": "بدهکاری"}
+  ],
+  
+  "architecture_terms": [
+    {"bastaki": "بافت تاریخی", "persian": "بافت تاریخی", "description": "بافت قدیم بستک"},
+    {"bastaki": "قلعه", "persian": "قلعه", "description": "قلعه بستک"},
+    {"bastaki": "برج", "persian": "برج", "description": "برج‌های دیده‌بانی"},
+    {"bastaki": "بادگیر", "persian": "بادگیر", "description": "بادگیرهای سنتی"},
+    {"bastaki": "خانه گِلی", "persian": "خانه گلی", "description": "معماری سنتی"},
+    {"bastaki": "مسجد", "persian": "مسجد", "description": "مسجد قدیم بستک"},
+    {"bastaki": "بازار سَرپوشیده", "persian": "بازار سرپوشیده", "description": "بازار سنتی"},
+    {"bastaki": "آبانبار", "persian": "آبانبار", "description": "ذخیره آب"}
+  ],
+  
+  "driving_terms": [
+    {"bastaki": "جاده بستک-لار", "persian": "جاده بستک-لار", "type": "road"},
+    {"bastaki": "کمربندی", "persian": "کمربندی", "type": "road"},
+    {"bastaki": "پُل", "persian": "پل", "type": "location"},
+    {"bastaki": "راه بَستِه", "persian": "راه بسته", "type": "warning"},
+    {"bastaki": "تَردُد سَنگین", "persian": "تردد سنگین", "type": "traffic"},
+    {"bastaki": "تایم کَمی دارُم", "persian": "زمان کمی دارم", "type": "phrase"},
+    {"bastaki": "تا بستک چَند?", "persian": "تا بستک چند؟", "type": "question"},
+    {"bastaki": "بِ پُر سُرعت نَرو", "persian": "پر سرعت نرو", "type": "warning"}
+  ],
+  
+  "shopping_phrases": [
+    {"bastaki": "این چَند?", "persian": "این چند؟"},
+    {"bastaki": "گَرون نَگُو", "persian": "گران نگو"},
+    {"bastaki": "خَری داری؟", "persian": "خرید داری؟"},
+    {"bastaki": "قیمَت آخَر چَند?", "persian": "قیمت آخر چند؟"},
+    {"bastaki": "تَخفیف بِدِه", "persian": "تخفیف بده"},
+    {"bastaki": "نَقد نِدارُم", "persian": "نقد ندارم"},
+    {"bastaki": "بَعذَن می خَرُم", "persian": "بعداً می خرم"},
+    {"bastaki": "جِنسِ تُو خوبه", "persian": "جنس تو خوبه", "note": "تعریف از کالا"}
+  ],
+  
+  "family_terms": [
+    {"bastaki": "بابا / پیَر", "persian": "پدر"},
+    {"bastaki": "مامان / دَدِ", "persian": "مادر"},
+    {"bastaki": "بِرار", "persian": "برادر"},
+    {"bastaki": "خواهر", "persian": "خواهر"},
+    {"bastaki": "پوسَر", "persian": "پسر"},
+    {"bastaki": "دُختر", "persian": "دختر"},
+    {"bastaki": "شوهَر", "persian": "شوهر"},
+    {"bastaki": "زَن", "persian": "زن"},
+    {"bastaki": "نَوِه", "persian": "نوه"},
+    {"bastaki": "بی بی", "persian": "مادربزرگ"},
+    {"bastaki": "بایی", "persian": "پدربزرگ"},
+    {"bastaki": "خالو", "persian": "دایی"},
+    {"bastaki": "خاله", "persian": "خاله"},
+    {"bastaki": "عَمو", "persian": "عمو"},
+    {"bastaki": "عَمه", "persian": "عمه"}
+  ],
+  
+  "food_terms": [
+    {"bastaki": "نان", "persian": "نان", "description": "نان محلی"},
+    {"bastaki": "بِرِنج", "persian": "برنج", "description": "برنج"},
+    {"bastaki": "گوشت", "persian": "گوشت", "description": "گوشت"},
+    {"bastaki": "ماهی", "persian": "ماهی", "description": "ماهی"},
+    {"bastaki": "خُرما", "persian": "خرما", "description": "خرما"},
+    {"bastaki": "شیرینی محلی", "persian": "شیرینی محلی", "description": "شیرینی سنتی بستک"},
+    {"bastaki": "دوغ", "persian": "دوغ", "description": "دوغ محلی"},
+    {"bastaki": "چایی", "persian": "چای", "description": "چای"},
+    {"bastaki": "آش", "persian": "آش", "description": "آش محلی"},
+    {"bastaki": "قَلیه", "persian": "قلیه", "description": "خورشت محلی"},
+    {"bastaki": "کباب", "persian": "کباب", "description": "کباب محلی"}
+  ],
+  
+  "time_words": [
+    {"bastaki": "دِگه", "persian": "دیگر"},
+    {"bastaki": "هَنوز", "persian": "هنوز"},
+    {"bastaki": "بَعذَن", "persian": "بعداً"},
+    {"bastaki": "اَلان", "persian": "الان"},
+    {"bastaki": "دیروز", "persian": "دیروز"},
+    {"bastaki": "فَردا", "persian": "فردا"},
+    {"bastaki": "پَس فردا", "persian": "پس فردا"},
+    {"bastaki": "صُبح", "persian": "صبح"},
+    {"bastaki": "ظُهر", "persian": "ظهر"},
+    {"bastaki": "عَصر", "persian": "عصر"},
+    {"bastaki": "شَو", "persian": "شب"},
+    {"bastaki": "نیمه شَو", "persian": "نیمه شب"},
+    {"bastaki": "سَحَر", "persian": "سحر"},
+    {"bastaki": "همین اَلان", "persian": "همین الان", "note": "تأکید زمانی"}
+  ],
+  
+  "emotional_expressions": [
+    {"bastaki": "ناراحَتُم", "persian": "ناراحتم", "response": "ناراحَت نَباش, باشه"},
+    {"bastaki": "خوشحالُم", "persian": "خوشحالم", "response": "خوشحالُم کِ خوشحالی"},
+    {"bastaki": "دِلُم گِرِفتِه", "persian": "دلم گرفته", "response": "میفهمُم, گریه کُن راحت"},
+    {"bastaki": "عصبیُم", "persian": "عصبانیم", "response": "آروم باش جانُم"},
+    {"bastaki": "خَستُِم", "persian": "خسته‌ام", "response": "خَسته نباشی, استراحت کُن"},
+    {"bastaki": "دوسِت دارُم", "persian": "دوست دارم", "response": "مَنَم دوسِت دارُم"},
+    {"bastaki": "دِلُم وَسِت تَنگ بُو", "persian": "دلم برایت تنگ بود", "response": "مَنَم دِلُم وَسِت تَنگ بُو"},
+    {"bastaki": "قُربونت بِرَم", "persian": "قربانت بروم", "response": "جانُم", "note": "محبت شدید"}
+  ],
+  
+  "proverbs": [
+    {"bastaki": "اَز چاه بِدَر بِیای, تُو چاه نَمیفتی", "persian": "از چاه بدر بیایی, تو چاه نمی‌افتی", "meaning": "تجربه باعث احتیاط می‌شود"},
+    {"bastaki": "نونِ کِ دَستِ بابا باشه, پَسَر نَمی مونه", "persian": "نانی که دست بابا باشه, پسر نمی مونه", "meaning": "اتکا به دیگران باعث تنبلی می‌شود"},
+    {"bastaki": "آب کِ رَفت, باز نَمِیاد", "persian": "آب که رفت, باز نمیاد", "meaning": "فرصت از دست رفته"},
+    {"bastaki": "دَستِ تُو سَنگ باشه, دَستِ ما گِل باشه", "persian": "دست تو سنگ باشه, دست ما گل باشه", "meaning": "هر کس به کار خود"},
+    {"bastaki": "کوه بِه کوه نَمی رسه, اِنسان بِه اِنسان می رسه", "persian": "کوه به کوه نمی رسه, انسان به انسان می رسه", "meaning": "دوران گردش دارد"}
+  ],
+  
+  "sample_dialogues": [
+    {
+      "title": "احوالپرسی دو دوست بستکی",
+      "lines": [
+        {"speaker": "A", "bastaki": "سَلام داداش, چَطوری؟", "persian": "سلام داداش, چطوری؟"},
+        {"speaker": "B", "bastaki": "خوبُم والا, تُ چَطوری؟", "persian": "خوبم والا, تو چطوری؟"},
+        {"speaker": "A", "bastaki": "خوبُم مَرسی, چِه خَبَر؟", "persian": "خوبم مرسی, چه خبر؟"},
+        {"speaker": "B", "bastaki": "خبری نی, رَفتم بازار", "persian": "خبری نیست, رفتم بازار"}
+      ]
+    },
+    {
+      "title": "در بازار بستک",
+      "lines": [
+        {"speaker": "خریدار", "bastaki": "این چَند؟", "persian": "این چند؟"},
+        {"speaker": "فروشنده", "bastaki": "۵۰ تومن", "persian": "۵۰ تومان"},
+        {"speaker": "خریدار", "bastaki": "گَرون نَگُو, ۳۰ بِدِه", "persian": "گران نگو, ۳۰ بده"},
+        {"speaker": "فروشنده", "bastaki": "باشه, ۴۰ بِبَر", "persian": "باشه, ۴۰ ببر"}
+      ]
+    },
+    {
+      "title": "صحبت در مورد محصولات",
+      "lines": [
+        {"speaker": "A", "bastaki": "اَمسال خُرما چَطور بوده؟", "persian": "امسال خرما چطور بوده؟"},
+        {"speaker": "B", "bastaki": "خوب بوده, شیرین و دَرِشت", "persian": "خوب بوده, شیرین و درشت"},
+        {"speaker": "A", "bastaki": "چه قِیمَت میدی؟", "persian": "چه قیمت می‌دی؟"},
+        {"speaker": "B", "bastaki": "کیلویی ۵۰ تومن", "persian": "کیلویی ۵۰ تومان"}
+      ]
+    }
+  ],
+  
+  "historical_tourism": [
+    {"name": "قلعه بستک", "description": "قلعه تاریخی بستک از دوره صفویه", "type": "historical"},
+    {"name": "بازار قدیم بستک", "description": "بازار سنتی با معماری قاجاری", "type": "historical"},
+    {"name": "مسجد جامع بستک", "description": "مسجد تاریخی با معماری خاص", "type": "religious"},
+    {"name": "برج‌های دیده‌بانی", "description": "برج‌های مراقبت قدیمی", "type": "historical"},
+    {"name": "نخلستان‌های بستک", "description": "باغ‌های نخل سنتی", "type": "natural"},
+    {"name": "تپه باستانی", "description": "تپه با آثار تاریخی", "type": "archaeological"}
+  ],
+  
+  "vector_search_ready": {
+    "total_embeddings": 780,
+    "dimension": 384,
+    "embedding_model": "multilingual-E5-small",
+    "similarity_metric": "cosine",
+    "search_fields": ["bastaki", "persian", "tags", "category"],
+    "dialect_code": "BST"
+  },
+  
+  "comparison_with_bandari": {
+    "similarities": [
+      {"feature": "واژه‌های پایه مشترک", "examples": ["هو (آب)", "دِریا", "ماهی"]},
+      {"feature": "ساختار جمله", "note": "مشابه بندری"},
+      {"feature": "احوالپرسی", "note": "شباهت زیاد"}
+    ],
+    "differences": [
+      {"feature": "تلفظ /q/", "bandari": "غذا → قَذا", "bastaki": "غذا → قَذا (مشابه)"},
+      {"feature": "کشیدگی مصوت", "bandari": "بیشتر", "bastaki": "متوسط"},
+      {"feature": "واژگان لارستانی", "bandari": "کمتر", "bastaki": "بیشتر (تأثیر لارستانی)"},
+      {"feature": "آوای خاص", "bandari": "واکه ü", "bastaki": "واکه eː کشیده"},
+      {"feature": "واژه کشاورزی", "bandari": "بحر", "bastaki": "باغداری و نخل"}
+    ]
+  },
+  
+  "cultural_notes": {
+    "hospitality": "تعارف و مهمان‌نوازی بستکی‌ها بسیار قوی است",
+    "handicrafts": "صنایع دستی: حصیربافی، گلابتون‌دوزی",
+    "music": "موسیقی محلی بستکی با نی‌انبان و دمام",
+    "festivals": "جشن‌های نخل‌گردانی و عروسی‌های محلی"
+  }
+}

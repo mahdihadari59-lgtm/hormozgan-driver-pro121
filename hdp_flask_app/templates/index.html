@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDP ONE - سامانه هوشمند یکپارچه هرمزگان</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Vazir', 'Tahoma', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        .card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin: 15px 0;
+        }
+        .card .update {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        .chat-box {
+            background: white;
+            border-radius: 15px;
+            margin-top: 30px;
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #667eea;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+        }
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f5f5f5;
+        }
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.bot {
+            justify-content: flex-start;
+        }
+        .message .bubble {
+            max-width: 70%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            background: white;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .message.user .bubble {
+            background: #667eea;
+            color: white;
+        }
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #ddd;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 1rem;
+        }
+        .chat-input button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .loading {
+            text-align: center;
+            color: #888;
+            padding: 10px;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .status {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4caf50;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏝️ HDP ONE</h1>
+            <p>سامانه هوشمند یکپارچه هرمزگان</p>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>💰 قیمت طلا</h3>
+                <div class="value" id="goldPrice">در حال بارگذاری...</div>
+                <div class="update" id="goldUpdate">-</div>
+            </div>
+            <div class="card">
+                <h3>🌤️ آب و هوا</h3>
+                <div class="value" id="weather">در حال بارگذاری...</div>
+                <div class="update" id="weatherUpdate">بندرعباس</div>
+            </div>
+            <div class="card">
+                <h3>🚦 ترافیک</h3>
+                <div class="value" id="traffic">در حال بارگذاری...</div>
+                <div class="update" id="trafficUpdate">چهارراه غزی</div>
+            </div>
+            <div class="card">
+                <h3>🗣️ گویش بندری</h3>
+                <div class="value" id="bandari">واویلا</div>
+                <div class="update">به معنی "چه قدر"</div>
+            </div>
+        </div>
+
+        <div class="chat-box">
+            <div class="chat-header">
+                <span class="status"></span>
+                🤖 چت‌بات هوشمند HDP ONE
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="bubble">
+                        👋 سلام! به HDP ONE خوش آمدید.<br>
+                        می‌توانید بپرسید:<br>
+                        • قیمت طلا چند است؟<br>
+                        • آب و هوا چطوره؟<br>
+                        • ترافیک چطوره؟<br>
+                        • واویلا یعنی چی؟
+                    </div>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="پیام خود را بنویسید..." onkeypress="if(event.keyCode===13) sendMessage()">
+                <button onclick="sendMessage()">📤 ارسال</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // بارگذاری اطلاعات اولیه
+        async function loadData() {
+            try {
+                // قیمت طلا
+                const goldRes = await fetch('/api/gold');
+                const gold = await goldRes.json();
+                document.getElementById('goldPrice').innerHTML = `${gold.gold18} تومان`;
+                
+                // آب و هوا
+                const weatherRes = await fetch('/api/weather?city=بندرعباس');
+                const weather = await weatherRes.json();
+                document.getElementById('weather').innerHTML = `${weather.temperature} - ${weather.condition}`;
+                
+                // ترافیک
+                const trafficRes = await fetch('/api/traffic?location=چهارراه غزی');
+                const traffic = await trafficRes.json();
+                document.getElementById('traffic').innerHTML = traffic.status;
+            } catch(e) {
+                console.error('Error loading data:', e);
+            }
+        }
+
+        // ارسال پیام
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            // نمایش پیام کاربر
+            const messagesDiv = document.getElementById('chatMessages');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message user';
+            userMsg.innerHTML = `<div class="bubble">${escapeHtml(message)}</div>`;
+            messagesDiv.appendChild(userMsg);
+            
+            // پاک کردن ورودی
+            input.value = '';
+            
+            // نمایش لودینگ
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = 'message bot';
+            loadingMsg.id = 'loadingMsg';
+            loadingMsg.innerHTML = '<div class="bubble">🤔 در حال پردازش...</div>';
+            messagesDiv.appendChild(loadingMsg);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+                const data = await res.json();
+                
+                // حذف لودینگ
+                document.getElementById('loadingMsg')?.remove();
+                
+                // نمایش پاسخ
+                const botMsg = document.createElement('div');
+                botMsg.className = 'message bot';
+                botMsg.innerHTML = `<div class="bubble">${escapeHtml(data.response)}</div>`;
+                messagesDiv.appendChild(botMsg);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            } catch(e) {
+                document.getElementById('loadingMsg')?.remove();
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'message bot';
+                errorMsg.innerHTML = '<div class="bubble">❌ خطا در ارتباط با سرور</div>';
+                messagesDiv.appendChild(errorMsg);
+            }
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // بارگذاری اولیه
+        loadData();
+        
+        // آپدیت خودکار هر 30 ثانیه
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
