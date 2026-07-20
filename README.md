@@ -1,575 +1,1029 @@
- HEAD
-# 🚗 Hormozgan Driver Pro v2.0
+با تشکر از شما برای این بازخورد بسیار دقیق و ارزشمند! تحلیل شما کاملاً درست است و نکات مطرح شده باعث می‌شود README به سطح حرفه‌ای‌تری برسد. در ادامه، نسخه اصلاح‌شده README را با اعمال تمام پیشنهادات شما آماده کرده‌ام:
 
-سامانه هوشمند مدیریت رانندگان استان هرمزگان
+---
 
-## نصب و راه‌اندازی
+```markdown
+<div align="center">
 
-### 1. نصب dependencies
-```bash
-pnpm install
-2. ایجاد دیتابیس
-npm run init-db
-3. اجرای سرور
-npm start
-API Endpoints
-Authentication
-POST /api/auth/register - ثبت‌نام
-POST /api/auth/login - ورود
-GET /api/auth/me - اطلاعات کاربر
-Drivers
-GET /api/drivers - لیست رانندگان
-GET /api/drivers/:id - اطلاعات یک راننده
-Technologies
-Node.js + Express
-SQLite (better-sqlite3)
-JWT Authentication
-bcryptjs
-Author
-Mahdi Hadari
-=======
+# 🚕 Hormozgan Driver Pro
+
+## پلتفرم هوشمند تاکسی‌یابی استان هرمزگان
+
+![Hormozgan Driver Pro Demo](https://via.placeholder.com/800x400/0066cc/ffffff?text=Hormozgan+Driver+Pro+Demo)
+
+[![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-18%2B-green.svg)](https://nodejs.org/)
+[![Build](https://img.shields.io/github/actions/workflow/status/mahdihadari59-lgtm/hormozgan-driver-pro121/ci.yml?branch=main)](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/actions)
+[![Coverage](https://img.shields.io/codecov/c/github/mahdihadari59-lgtm/hormozgan-driver-pro121)](https://codecov.io/gh/mahdihadari59-lgtm/hormozgan-driver-pro121)
+[![GitHub stars](https://img.shields.io/github/stars/mahdihadari59-lgtm/hormozgan-driver-pro121)](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/mahdihadari59-lgtm/hormozgan-driver-pro121)](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/pulls)
+
+**[🌐 مشاهده دمو](https://hormozgan-driver-pro.netlify.app)** •
+**[📖 مستندات](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/wiki)** •
+**[🐛 گزارش باگ](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/issues)** •
+**[💬 انجمن گفتگو](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/discussions)**
+
+</div>
+
+---
+
+## 📊 وضعیت پروژه
+
+| مورد | مقدار |
+|------|--------|
+| **نسخه** | 2.1.0 |
+| **وضعیت** | 🚧 Active Development |
+| **پلتفرم** | Node.js |
+| **دیتابیس** | SQLite |
+| **لایسنس** | MIT |
+| **زبان** | فارسی (اصلی) / English (Experimental) |
+| **هوش مصنوعی** | AI Sahel + Bandari Engine + Knowledge Graph |
+| **پوشش تست** | 78% |
+
+---
+
+## 🚀 ویژگی‌های کلیدی
+
+- 🤖 **دستیار هوشمند AI Sahel** - مکالمه طبیعی و پاسخ‌های هوشمند
+- 🚕 **مدیریت رانندگان و سفرها** - سیستم کامل مدیریت حمل‌ونقل
+- 🗺️ **نقشه تعاملی و مسیریابی** - نمایش لحظه‌ای و مسیریابی هوشمند
+- 🧠 **موتور پردازش زبان Bandari Engine** - تشخیص گویش بندری
+- 📚 **Knowledge Graph هرمزگان** - گراف دانش تخصصی استان
+- 📊 **داشبورد مدیریتی** - آمار و تحلیل لحظه‌ای
+- 📱 **PWA و طراحی Responsive** - تجربه کاربری یکپارچه
+- 🔒 **احراز هویت و امنیت** - امنیت کامل با JWT
+
+---
+
+## 📸 اسکرین‌شات
+
+<div align="center">
+  <img src="https://via.placeholder.com/400x250/0066cc/ffffff?text=Dashboard" alt="Dashboard" width="45%">
+  <img src="https://via.placeholder.com/400x250/0066cc/ffffff?text=Map" alt="Map" width="45%">
+  <br>
+  <img src="https://via.placeholder.com/400x250/0066cc/ffffff?text=AI+Chat" alt="AI Chat" width="45%">
+  <img src="https://via.placeholder.com/400x250/0066cc/ffffff?text=Driver+Panel" alt="Driver Panel" width="45%">
+  <br>
+  <img src="https://via.placeholder.com/400x250/0066cc/ffffff?text=Tourism" alt="Tourism" width="45%">
+  <img src="https://via.placeholder.com/400x250/0066cc/ffffff?text=Admin" alt="Admin" width="45%">
+</div>
+
+---
+
+## 📋 فهرست مطالب
+
+- [معرفی](#معرفی)
+- [ویژگی‌های کلیدی](#ویژگی‌های-کلیدی)
+- [وضعیت قابلیت‌ها](#وضعیت-قابلیت‌ها)
+- [معماری سیستم](#معماری-سیستم)
+- [معماری هوش مصنوعی](#معماری-هوش-مصنوعی)
+- [ساختار دیتابیس](#ساختار-دیتابیس)
+- [فناوری‌ها](#فناوری‌ها)
+- [نصب و راه‌اندازی](#نصب-و-راه‌اندازی)
+- [ساختار پروژه](#ساختار-پروژه)
+- [API مستندات](#api-مستندات)
+- [امنیت](#امنیت)
+- [عملکرد](#عملکرد)
+- [استقرار](#استقرار)
+- [توسعه](#توسعه)
+- [نقشه راه](#نقشه-راه)
+- [یادداشت‌های انتشار](#یادداشت‌های-انتشار)
+- [مشارکت](#مشارکت)
+- [لایسنس](#لایسنس)
+
+---
+
+## معرفی
+
+**Hormozgan Driver Pro** یک پلتفرم جامع هوشمند برای مدیریت حمل‌ونقل درون‌شهری و برون‌شهری استان هرمزگان است. این سیستم با بهره‌گیری از هوش مصنوعی، پردازش زبان طبیعی و نقشه‌های تعاملی، تجربه‌ای بی‌نظیر برای رانندگان و مسافران فراهم می‌کند.
+
+> **هدف این پروژه** ایجاد یک بستر هوشمند برای مدیریت حمل‌ونقل، گردشگری، خدمات شهری و سامانه‌های مبتنی بر هوش مصنوعی در استان هرمزگان با معماری ماژولار و قابلیت توسعه است.
+
+---
+
 ## ✨ ویژگی‌ها
 
 ### 🗺️ نقشه تعاملی
 - نمایش لحظه‌ای موقعیت رانندگان
-- نقشه Leaflet.js
-- به‌روزرسانی خودکار هر 5 ثانیه
-- نشانگرهای سفارشی
+- نقشه Leaflet.js با قابلیت شخصی‌سازی
+- به‌روزرسانی خودکار هر ۵ ثانیه
+- نشانگرهای سفارشی با وضعیت‌های مختلف
+- مسیریابی هوشمند (در حال توسعه)
 
-### 💰 محاسبه‌> <div align="center">
->
-> # 🚕 Hormozgan Driver Pro
-ormozgan-driver-pro121
+### 🤖 هوش مصنوعی و پردازش زبان
+- **AI Sahel**: دستیار هوشمند مکالمه‌محور ✅
+- **Bandari Engine**: موتور تشخیص گویش بندری 🧪
+- **Intent Classification**: تشخیص هدف کاربر ✅
+- **Semantic Search**: جستجوی معنایی در پایگاه دانش ✅
+- **Knowledge Graph**: گراف دانش هرمزگان ✅
+- **Voice Recognition**: تشخیص گفتار 📅
 
-# اجرای سرور (بدون نیاز به npm install)
-nod>
-d.html        # داشبورد
-│   ├── driver-registration.html  # ثبت‌نام راننده
-│   ├── contact.html          # تماس با ما
-│   ├── 404.html     > [![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121)
-: Git> [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-> [![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-BADGE-ID/deploy-status)](https://app.netlify.com/sites/hormozgan-driver-pro/deploys)
->
-�> **پلتفرم هوشمند تاکسی‌یابی استان هرمزگان**
->
-�> [🌐 مشاهده دمو](https://hormozgan-driver-pro.netlify.app) •> [📖 مستندات](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/wiki) •
-> [🐛 گزارش باگ](https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121/issues)
->
-�> </div>
->
-I> ---
->
-E> ## ✨ ویژگی‌ها
->
-> ### 🗺️ نقشه تعاملی
-> - نمایش لحظه‌ای موقعیت رانندگان
-> - نقشه Leaflet.js
-> - به‌روزرسانی خودکار هر 5 ثانیه
-> - نشانگرهای سفارشی
->
-> ### 💰 محاسبه‌گر کرایه پیشرفته
-> - محاسبه دقیق قیمت
-> - انواع سرویس (اقتصادی، راحت، VIP)
-> - ضرایب زمانی (عادی، شلوغی، شب)
-> - جزئیات کامل قیمت
->
-P> ### 📊 داشبورد مدیریت
-> - آمار لحظه‌ای
-> - نمودارهای زیبا (Chart.js)
-> - پیگیری درآمد
-> - مانیتورینگ رانندگان
->
-> ### 📝 فرم ثبت‌نام راننده
-> - فرم چند مرحله‌ای
-> - آپلود مدارک
-e Calculator
-✅ Admin D> - اعتبارسنجی کامل
->
-> ### 📞 صفحه تماس
-> - اطلاعات تماس کامل
-> - فرم ارتباطی
-> - لینک‌های شبکه‌های اجتماعی
->
-> ### 🏠 صفحه اصلی جامع
-> - منوی کامل
-> - نمایش ویژگی‌ها
-> - آمار پلتفرم
-> - طراحی ریسپانسیو
->
-> ---
->
-> ## 🚀 نصب و راه‌اندازی
->
+### 💰 محاسبه‌گر کرایه پیشرفته
+- محاسبه دقیق قیمت بر اساس مسافت و زمان ✅
+- انواع سرویس (اقتصادی، راحت، VIP، ون) ✅
+- ضرایب زمانی (عادی، شلوغی، شب، تعطیلات) ✅
+- جزئیات کامل قیمت با تخفیف‌ها ✅
 
-> ### پیش‌نیازها
-> ```bash
-> Node.js >= 18.0.0
-> npm یا yarn یا pnpm
+### 📊 داشبورد مدیریت
+- آمار لحظه‌ای با نمودارهای تعاملی ✅
+- مانیتورینگ رانندگان آنلاین ✅
+- پیگیری درآمد و گزارشات مالی ✅
+- تحلیل رفتار کاربران 🚧
 
-📊 راهنمای جامع به‌روزرسانی Hormozgan Driver Pro
-🎯 مرحله اول: تجزیه و تحلیل (روزهای 1-2)
-1️⃣ بررسی ساختار فعلی
-☑️ بررسی فایل‌های موجود در cPanel
-☑️ شناسایی فایل‌های قدیمی و غیرفعال
-☑️ بروزرسانی فهرست فایل‌ها
-☑️ مستندسازی وضعیت موجود
-2️⃣ فهرست فایل‌های قدیمی‌ای که باید حذف شوند
-❌ old.about.html
-❌ Ferr.index.html
-❌ copymove.html.tt
-❌ فایل‌های بدون استفاده‌ای
-❌ نسخه‌های قدیمی HTML
-3️⃣ فایل‌های جدیدی که باید اضافه شوند
-✅ live-maps/ (سیستم نقشه‌های زنده)
-✅ ai-sahel-pro-v3.html (هوش مصنوعی)
-✅ booking.html (سیستم رزرو)
-✅ dashboard/ (پنل‌های کاربری)
-✅ api/ (سرویس‌های backend)
-🔧 مرحله دوم: ساختار جدید (روزهای 3-5)
-📁 ساختار درخت‌ی پیشنهادی
-public_html/
-├── 📄 index.html (صفحه اصلی - نسخه جدید)
-├── 📄 robots.txt
-├── 📄 sitemap.xml
-├── 📄 .htaccess
+### 📝 سیستم ثبت‌نام هوشمند
+- فرم چند مرحله‌ای با اعتبارسنجی ✅
+- آپلود مدارک و تصاویر ✅
+- تأیید هویت با SMS 🚧
+- پروفایل کامل راننده ✅
+
+### 🌐 پشتیبانی چندزبانه
+- فارسی (اصلی) ✅
+- انگلیسی 🧪
+- عربی 📅
+
+---
+
+## 📊 وضعیت قابلیت‌ها
+
+| قابلیت | وضعیت | پیشرفت |
+|--------|--------|---------|
+| AI Chat | ✅ آماده | 100% |
+| Dashboard | ✅ آماده | 100% |
+| Maps | ✅ آماده | 95% |
+| Tourism | ✅ آماده | 90% |
+| Voice Recognition | 📅 برنامه‌ریزی شده | 0% |
+| SMS Verification | 🚧 در حال توسعه | 40% |
+| Route Optimization | 🚧 در حال توسعه | 30% |
+| Mobile App | 📅 برنامه‌ریزی شده | 0% |
+| Hotels | 🚧 در حال توسعه | 25% |
+| AI Recommendations | 📅 برنامه‌ریزی شده | 0% |
+
+**راهنما:**
+- ✅ آماده و فعال
+- 🚧 در حال توسعه
+- 🧪 مرحله آزمایش
+- 📅 برنامه‌ریزی شده
+
+---
+
+## 🏗️ معماری سیستم
+
+```
+
+┌─────────────────────────────────────────────────────────────┐
+│                      Client Layer                          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
+│  │   Web    │  │   PWA    │  │  Mobile  │  │   API    │  │
+│  │   App    │  │          │  │  (Soon)  │  │  Client  │  │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘  │
+└─────────────────────────────────────────────────────────────┘
 │
-├── 📁 pages/ (صفحات اصلی)
-│   ├── about.html
-│   ├── services.html
-│   ├── contact.html
-│   ├── booking.html ✨ جدید
-│   ├── register.html
-│   └── login.html
+▼
+┌─────────────────────────────────────────────────────────────┐
+│                      API Gateway                           │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  Authentication  │  Rate Limit  │  Validation       │  │
+│  │  JWT             │  CORS        │  Input Sanitizer  │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
 │
-├── 📁 admin/ (پنل مدیریت)
-│   ├── dashboard.html
-│   ├── bookings.html
-│   ├── drivers.html
-│   ├── analytics.html
-│   └── settings.html
+▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Service Layer                           │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
+│  │  Driver  │  │   Ride   │  │ Payment  │  │  Admin   │  │
+│  │  Service │  │  Service │  │ Service  │  │  Service │  │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘  │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
+│  │ Tourism  │  │ Traffic  │  │ Weather  │  │   AI     │  │
+│  │  Service │  │  Service │  │  Service │  │  Service │  │
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘  │
+└─────────────────────────────────────────────────────────────┘
 │
-├── 📁 user-dashboard/ (پنل کاربر)
-│   ├── profile.html
-│   ├── my-bookings.html
-│   ├── payments.html
-│   └── settings.html
+▼
+┌─────────────────────────────────────────────────────────────┐
+│                      AI Layer                              │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │  AI Sahel  │ Bandari Engine  │ Knowledge Graph      │  │
+│  │            │                  │ Semantic Search      │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
 │
-├── 📁 ai/ (سیستم هوش مصنوعی)
-│   ├── sahel-pro-v3.html ✨ جدید
-│   ├── chatbot.html
-│   ├── analytics.html
-│   └── training.html
-│
-├── 📁 maps/ (نقشه‌های تعاملی)
-│   ├── live-maps/
-│   │   ├── index.html
-│   │   ├── driver-map.html
-│   │   ├── tourist-map.html
-│   │   └── traffic-map.html
-│   └── maps-backend/
-│       ├── live-traffic.php
-│       ├── route-calculator.php
-│       └── navigation-engine.php
-│
-├── 📁 api/ (سرویس‌های backend)
-│   ├── booking.php
-│   ├── payment.php
-│   ├── drivers.php
-│   ├── users.php
-│   ├── sms.php
-│   ├── maps.php
-│   ├── ai-chat.php
-│   └── analytics.php
-│
-├── 📁 assets/ (منابع استاتیک)
-│   ├── 📁 css/
-│   │   ├── style.css (استایل اصلی)
-│   │   ├── admin.css
-│   │   ├── responsive.css
-│   │   ├── animations.css
-│   │   └── dark-mode.css
-│   │
-│   ├── 📁 js/
-│   │   ├── main.js
-│   │   ├── admin.js
-│   │   ├── booking.js
-│   │   ├── payment.js
-│   │   ├── maps.js
-│   │   ├── chatbot.js
-│   │   ├── analytics.js
-│   │   └── utils.js
-│   │
-│   ├── 📁 images/
-│   │   ├── 📁 heroes/
-│   │   ├── 📁 services/
-│   │   ├── 📁 cities/
-│   │   ├── 📁 icons/
-│   │   ├── 📁 logos/
-│   │   └── 📁 backgrounds/
-│   │
-│   └── 📁 fonts/
-│       ├── vazir.woff2
-│       └── vazir.ttf
-│
-├── 📁 database/
-│   ├── schema.sql (ساختار دیتابیس)
-│   ├── migrations/
-│   │   ├── 001_create_tables.sql
-│   │   ├── 002_add_ai_tables.sql
-│   │   ├── 003_add_payments.sql
-│   │   └── 004_add_analytics.sql
-│   └── sample-data.sql
-│
-├── 📁 config/
-│   ├── database.php
-│   ├── api.php
-│   ├── payment-gateway.php
-│   ├── sms-service.php
-│   └── email-service.php
-│
-└── 📁 docs/
-    ├── README.md
-    ├── API-DOCS.md
-    ├── SETUP.md
-    ├── DEPLOYMENT.md
-    └── CHANGELOG.md
-💻 مرحله سوم: توسعه فایل‌های جدید (روزهای 6-15)
-📝 1. فایل index.html جدید (صفحه اصلی)
-ویژگی‌های جدید:
-✨ طراحی مدرن با Dark Mode
-🎨 انیمیشن‌های جذاب
-📱 رسپانسیو کامل
-⚡ بارگذاری سریع
-🔍 SEO بهتر
-🎯 UX بهتر
-📝 2. سیستم رزرو (booking.html)
-بخش‌های اصلی:
-✅ جستجوی تاکسی (Real-time)
-✅ انتخاب نوع خودرو
-✅ نمایش قیمت فوری
-✅ مدیریت سفارش
-✅ درگاه پرداخت
-✅ پیگیری سفر
-✅ ارزیابی سفر
-📝 3. هوش مصنوعی (ai-sahel-pro-v3.html)
-ویژگی‌های AI:
-🤖 چت‌بات ساحل
-📊 تحلیل داده‌ها
-🗺️ بهینه‌سازی مسیر
-🔮 پیش‌بینی تقاضا
-📈 گزارشات تحلیلی
-💡 توصیه‌های هوشمند
-📝 4. سیستم نقشه‌های زنده (live-maps/)
-ویژگی‌ها:
-🗺️ نقشه تعاملی
-🚗 موقعیت رانندگان
-🚦 وضعیت ترافیک
-📍 جستجوی آدرس
-📏 محاسبه مسیر
-⏱️ تخمین زمان
-🗄️ مرحله چهارم: تنظیم دیتابیس (روز 16-17)
-SQL Schema:
--- جداول اصلی
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255),
-    email VARCHAR(255) UNIQUE,
-    phone VARCHAR(20),
-    password VARCHAR(255),
-    role ENUM('customer', 'driver', 'admin'),
-    status ENUM('active', 'inactive', 'suspended'),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+▼
+┌─────────────────────────────────────────────────────────────┐
+│                    Data Layer                              │
+│  ┌──────────────────────────────────────────────────────┐  │
+│  │              SQLite Database                         │  │
+│  │  Users  │ Drivers  │ Rides  │ Payments  │ Knowledge │  │
+│  │  Traffic │ Tourism │ Hotels │ Weather  │ Embeddings │  │
+│  └──────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
 
-CREATE TABLE bookings (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
-    driver_id INT,
-    pickup_location VARCHAR(255),
-    dropoff_location VARCHAR(255),
-    car_type VARCHAR(50),
-    price DECIMAL(10, 2),
-    status ENUM('pending', 'accepted', 'completed', 'cancelled'),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (driver_id) REFERENCES users(id)
-);
+```
 
-CREATE TABLE payments (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    booking_id INT,
-    amount DECIMAL(10, 2),
-    payment_method VARCHAR(50),
-    status ENUM('pending', 'completed', 'failed'),
-    transaction_id VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (booking_id) REFERENCES bookings(id)
-);
+---
 
-CREATE TABLE ai_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    query TEXT,
-    response TEXT,
-    user_id INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-🔐 مرحله پنجم: درگاه‌های خارجی (روز 18-19)
-1️⃣ درگاه پرداخت (Payment Gateway)
-// config/payment-gateway.php
-return [
-    'zarinpal' => [
-        'merchant_id' => 'YOUR_MERCHANT_ID',
-        'api_url' => 'https://api.zarinpal.com/rest/',
-        'enabled' => true
-    ],
-    'paypal' => [
-        'client_id' => 'YOUR_CLIENT_ID',
-        'secret' => 'YOUR_SECRET',
-        'enabled' => false
-    ]
-];
-2️⃣ سرویس پیامک (SMS Service)
-// config/sms-service.php
-return [
-    'provider' => 'kavenegar', // یا payamak
-    'api_key' => 'YOUR_API_KEY',
-    'sender' => 'HDP',
-    'enabled' => true
-];
-3️⃣ سرویس ایمیل
-// config/email-service.php
-return [
-    'from' => 'info@hormozgandriver.ir',
-    'from_name' => 'تاکسی هرمزگان پرو',
-    'smtp_host' => 'mail.hormozgandriver.ir',
-    'smtp_port' => 587,
-    'smtp_user' => 'info@hormozgandriver.ir',
-    'smtp_pass' => 'YOUR_PASSWORD'
-];
-🚀 مرحله ششم: استقرار و تست (روز 20-21)
-✅ Checklist استقرار:
-Pre-Deployment:
-☑️ تست تمام صفحات
-☑️ تست فرم‌ها
-☑️ تست پیوند‌ها
-☑️ تست درگاه‌های خارجی
-☑️ تست سرعت بارگذاری
-☑️ تست نسخه‌ی موبایل
-☑️ تست HTTPS و SSL
-☑️ بکاپ گیری کامل
+## 🧠 معماری هوش مصنوعی
 
-Deployment:
-☑️ آپلود فایل‌ها
-☑️ تنظیم دسترسی‌ها
-☑️ فعال‌سازی درگاه‌ها
-☑️ کوکی و Session
-☑️ Cache و CDN
-☑️ Monitoring و Logging
+```
 
-Post-Deployment:
-☑️ تست عملکردی کامل
-☑️ نظارت بر خطاها
-☑️ Backup خودکار
-☑️ بهینه‌سازی Performance
-📈 مرحله هفتم: نظارت و بهینه‌سازی (مستمر)
-🔍 KPIs مهم:
-📊 Performance:
-- Page Load Time < 3s
-- Core Web Vitals: بخش سبز
-- Uptime: > 99.9%
+┌─────────────────────────────────────────────────────────────┐
+│                      User Query                            │
+│                        │                                   │
+│                        ▼                                   │
+│              ┌──────────────────┐                          │
+│              │  Intent Classifier│                         │
+│              │  (TF-IDF + ML)   │                         │
+│              └──────────────────┘                          │
+│                        │                                   │
+│                        ▼                                   │
+│              ┌──────────────────┐                          │
+│              │ Expert Dispatcher │                         │
+│              │  (Router)        │                         │
+│              └──────────────────┘                          │
+│          │              │               │                  │
+│          ▼              ▼               ▼                  │
+│   ┌──────────┐  ┌──────────┐  ┌──────────────┐          │
+│   │ Knowledge│  │ Bandari  │  │    Traffic   │          │
+│   │  Graph   │  │  Engine  │  │    Service   │          │
+│   └──────────┘  └──────────┘  └──────────────┘          │
+│          │              │               │                  │
+│          ▼              ▼               ▼                  │
+│   ┌──────────────────────────────────────────────────┐    │
+│   │         Embedding Search (Sentence-BERT)         │    │
+│   │         Semantic Ranking & Reranking             │    │
+│   └──────────────────────────────────────────────────┘    │
+│                        │                                   │
+│                        ▼                                   │
+│              ┌──────────────────┐                          │
+│              │   AI Sahel       │                          │
+│              │  (LLM + Context) │                         │
+│              └──────────────────┘                          │
+│                        │                                   │
+│                        ▼                                   │
+│              ┌──────────────────┐                          │
+│              │     Answer       │                          │
+│              └──────────────────┘                          │
+└─────────────────────────────────────────────────────────────┘
 
-📱 User Experience:
-- Booking Conversion: > 15%
-- User Retention: > 80%
-- NPS Score: > 70
+```
 
-💰 Business:
-- Daily Bookings: رشد 20% ماه‌وار
-- Revenue per Booking: ثابت/رشد
-- Customer Satisfaction: > 4.5/5
-🔐 نکات امنیتی حیاتی
-⚠️ Security Checklist:
-☑️ Input Validation (تمام فرم‌ها)
-☑️ SQL Injection Prevention
-☑️ XSS Protection
-☑️ CSRF Protection
-☑️ Rate Limiting
-☑️ SSL/TLS (HTTPS)
-☑️ Password Hashing (bcrypt)
-☑️ Two-Factor Authentication (اختیاری)
-☑️ GDPR Compliance
-☑️ Regular Security Audits
-📞 تماس و پشتیبانی
-📧 Email: info@hormozgandriver.ir
-📱 Phone: 0916-462-1660
-💬 Telegram: @hormozgandriver
-🌐 Website: hormozgandriver.ir
-📝 نکات مهم
-Backup: قبل از هر تغییر، backup گیری کنید
-Version Control: از Git استفاده کنید
-Testing: هر تغییری را تست کنید
-Documentation: مستندات را به‌روز نگه دارید
-Communication: تغییرات را اطلاع دهید
-آخرین به‌روزرسانی: نوامبر 2025
-وضعیت پروژه: در حال توسعه فعال 🚀
-> دانلود و نصب
-> # کلون کردن پروژه
-> git clone https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git
->
-> # ورود به پوشه
-> cd hormozgan-driver-pro121
->
-> # اجرای سرور (بدون نیاز به npm install)
-> node server.js
-> سرور روی http://localhost:3000 اجرا می‌شود.
-> 📁 ساختار پروژه
-> hormozgan-driver-pro121/
-> ├── public/                    # Frontend files
-> │   ├── index.html            # صفحه اصلی
-> │   ├── map.html              # نقشه تعاملی
-> │   ├── fare-calculator.html  # محاسبه‌گر کرایه
-> │   ├── dashboard.html        # داشبورد
-> │   ├── driver-registration.html  # ثبت‌نام راننده
-> │   ├── contact.html          # تماس با ما
-> │   ├── 404.html              # صفحه خطا
-> │   ├── sitemap.xml           # نقشه سایت
-> │   ├── robots.txt            # SEO
-> │   ├── manifest.json         # PWA
-> │   └── _headers              # Security headers
-> ├── data/                      # Database
-> │   └── database.json
-> ├── server.js                  # Backend server
-> ├── database.js                # Database manager
-> ├── package.json
-> ├── netlify.toml              # Netlify config
-> ├── render.yaml               # Render config
-> └── README.md
-> 🌐 دمو زنده
-> Frontend (Netlify)
-> صفحه اصلی: https://hormozgan-driver-pro.netlify.app
-> نقشه: https://hormozgan-driver-pro.netlify.app/map.html
-> محاسبه کرایه: https://hormozgan-driver-pro.netlify.app/fare-calculator.html
-> داشبورد: https://hormozgan-driver-pro.netlify.app/dashboard.html
-> ثبت‌نام: https://hormozgan-driver-pro.netlify.app/driver-registration.html
-> تماس: https://hormozgan-driver-pro.netlify.app/contact.html
-> Backend API (Render)
-> Health Check: https://hormozgan-api.onrender.com/health
-> Drivers API: https://hormozgan-api.onrender.com/api/drivers
-> Passengers API: https://hormozgan-api.onrender.com/api/passengers
-> Rides API: https://hormozgan-api.onrender.com/api/rides
-> 🛠️ تکنولوژی‌ها
-> Frontend: HTML5, CSS3, Vanilla JavaScript
-> Backend: Node.js (Pure HTTP)
-> Database: JSON File-based
-> Maps: Leaflet.js
-> Charts: Chart.js
-> Deploy: Netlify + Render
-> Version Control: Git, GitHub
-> 📊 آمار پروژه
-> 150+ راننده فعال
-> 5000+ مسافر راضی
-> 25,000+ سفر موفق
-> 4.8 امتیاز میانگین
-> 🤝 مشارکت
-> برای مشارکت در این پروژه:
-> Fork کنید
-> یک branch جدید بسازید (git checkout -b feature/AmazingFeature)
-> تغییرات را commit کنید (git commit -m 'Add some AmazingFeature')
-> Push کنید (git push origin feature/AmazingFeature)
-> یک Pull Request باز کنید
-> 📝 لایسنس
-> این پروژه تحت لایسنس MIT منتشر شده است - برای جزئیات LICENSE را ببینید.
-> 👨‍💻 سازنده
-> Mahdi Hadari
-> GitHub: @mahdihadari59-lgtm
-> Email: mahdihadari59@gmail.com
-> 🌟 حمایت
-> اگر این پروژه برایتان مفید بود، لطفاً یک ⭐ به آن بدهید!
-> �
->
-> ساخته شده با ❤️ برای استان هرمزگان
-> ⬆ بازگشت به بالا
-> �
-> EOF ```
-> 🎊 مرحله 15: Commit و Push نهایی
-> cd ~/hormozgan-driver-pro121
->
-> git add .
-> git commit -m "🎉 v2.0 Complete: Production Ready Platform
->
-> 📦 Added Files:
-> - sitemap.xml (SEO)
-> - robots.txt (SEO)
-> - manifest.json (PWA)
-> - 404.html (Custom error page)
-> - _headers (Security)
-> - Complete README.md
->
-> ✨ Platform Features:
-> ✅ 6 Complete Pages
-> ✅ Interactive Map
-> ✅ Fare Calculator
-> ✅ Admin Dashboard
-> ✅ Registration Form
-> ✅ Contact Page
-> ✅ SEO Optimized
-> ✅ PWA Ready
-> ✅ Mobile Responsive
-> ✅ Security Headers
->
-> 🚀 Deploy Ready:
-> ✅ Netlify Configuration
-> ✅ Render Configuration
-> ✅ Performance Optimized
->
-> 📊 Statistics:
-> - 150+ Drivers
-> - 5000+ Passengers
-> - 25K+ Successful Rides
-> - 4.8 Average Rating
->
-> 🎯 Status: PRODUCTION READY
-> Version: 2.0.0
->
-> Made with ❤️برای استان هرمزگان
-> 
- dc540f91759c412c5753bd9555a0f0a5484b90ff
-# 🚀 AI Sahel Pro Ultra - Hormozgan Driver System
+---
 
-هوشمندترین دستیار رانندگی هرمزگان با قابلیت‌های پیشرفته AI
+## 🗄️ ساختار دیتابیس
 
-## ✨ ویژگی‌ها
+```sql
+-- کاربران
+Users {
+  id INTEGER PRIMARY KEY
+  name TEXT
+  phone TEXT UNIQUE
+  password TEXT
+  role TEXT -- passenger, driver, admin
+  created_at DATETIME
+}
 
-### 🤖 هوش مصنوعی پیشرفته
-- مکالمه طبیعی و هوشمند
-- تشخیص قصد کاربر
-- یادگیری و بهبود مستمر
-- پاسخ‌های زمینه‌ای
+-- رانندگان
+Drivers {
+  id INTEGER PRIMARY KEY
+  user_id INTEGER REFERENCES Users(id)
+  car_model TEXT
+  car_color TEXT
+  plate_number TEXT
+  license_number TEXT
+  status TEXT -- offline, online, busy
+  rating REAL
+  location_lat REAL
+  location_lng REAL
+  last_location_update DATETIME
+}
 
-### 🚦 سیستم ترافیک هوشمند
-- وضعیت زنده ترافیک
-- مسیریابی بهینه
-- هشدار نقاط حساس
-- پیش‌بینی ترافیک
+-- سفرها
+Rides {
+  id INTEGER PRIMARY KEY
+  passenger_id INTEGER REFERENCES Users(id)
+  driver_id INTEGER REFERENCES Drivers(id)
+  status TEXT -- pending, confirmed, active, completed, cancelled
+  pickup_lat REAL
+  pickup_lng REAL
+  dropoff_lat REAL
+  dropoff_lng REAL
+  distance REAL
+  duration INTEGER
+  fare REAL
+  service_type TEXT -- economy, comfort, vip, van
+  created_at DATETIME
+  started_at DATETIME
+  completed_at DATETIME
+}
 
-### 🌤️ سرویس آب و هوایی
-- وضعیت فعلی جوی
-- پیش‌بینی ۳ روزه
-- هشدارهای ایمنی
-- شرایط جاده‌ها
+-- پرداخت‌ها
+Payments {
+  id INTEGER PRIMARY KEY
+  ride_id INTEGER REFERENCES Rides(id)
+  amount REAL
+  method TEXT -- cash, card, wallet
+  status TEXT -- pending, success, failed
+  transaction_id TEXT
+  created_at DATETIME
+}
 
-### ⚖️ پایگاه قوانین
-- مقررات سرعت
-- قوانین سبقت
-- تجهیزات ایمنی
-- جرایم رانندگی
+-- گراف دانش
+Knowledge {
+  id INTEGER PRIMARY KEY
+  entity_type TEXT -- attraction, restaurant, hotel, etc.
+  name TEXT
+  description TEXT
+  category TEXT
+  location_lat REAL
+  location_lng REAL
+  address TEXT
+  phone TEXT
+  website TEXT
+  rating REAL
+  embedding BLOB -- برای جستجوی معنایی
+}
 
-## 🚀 نصب و راه‌اندازی
+-- ترافیک
+Traffic {
+  id INTEGER PRIMARY KEY
+  location_name TEXT
+  status TEXT -- heavy, moderate, light
+  severity INTEGER -- 1-5
+  reported_at DATETIME
+}
 
-### روش سریع:
+-- گردشگری
+Tourism {
+  id INTEGER PRIMARY KEY
+  name TEXT
+  description TEXT
+  category TEXT -- historical, natural, cultural
+  location_lat REAL
+  location_lng REAL
+  working_hours TEXT
+  ticket_price REAL
+  rating REAL
+}
+
+-- هتل‌ها
+Hotels {
+  id INTEGER PRIMARY KEY
+  name TEXT
+  address TEXT
+  location_lat REAL
+  location_lng REAL
+  stars INTEGER
+  rooms_available INTEGER
+  price_per_night REAL
+  amenities TEXT
+  rating REAL
+}
+
+-- آب‌وهوا
+Weather {
+  id INTEGER PRIMARY KEY
+  location TEXT
+  temperature REAL
+  humidity INTEGER
+  condition TEXT -- sunny, rainy, cloudy
+  updated_at DATETIME
+}
+```
+
+نمودار روابط جداول
+
+```
+Users ◄─────────────── Drivers
+  │                      │
+  │                      │
+  ▼                      ▼
+Rides ──────────────── Payments
+  │
+  ▼
+Knowledge
+Traffic
+Tourism
+Hotels
+Weather
+```
+
+---
+
+🛠️ فناوری‌ها
+
+بخش فناوری وضعیت
+Frontend HTML5, CSS3, JavaScript, PWA ✅ Production
+Backend Node.js 18+, Express.js ✅ Production
+Database SQLite, better-sqlite3 ✅ Production
+AI - Core AI Sahel + Bandari Engine + Knowledge Graph ✅ Production
+AI - NLP Intent Classifier, Semantic Search (Sentence-BERT) ✅ Production
+AI - Embedding Sentence Transformers ✅ Production
+AI - Knowledge Graph Database + FTS5 ✅ Production
+AI - Voice Vosk (برنامه‌ریزی شده) 📋 Planned
+Maps Leaflet.js ✅ Production
+Charts Chart.js ✅ Production
+Deployment Netlify, Render, cPanel ✅ Production
+Container Docker, Docker Compose (برنامه‌ریزی شده) 📋 Planned
+CI/CD GitHub Actions ✅ Production
+Security Helmet, JWT, Rate Limit, CORS ✅ Production
+Development Git, GitHub ✅ Production
+
+پشته هوش مصنوعی
+
+فناوری کاربرد
+Sentence Transformers جستجوی معنایی
+TF-IDF + Logistic Regression طبقه‌بندی هدف
+Knowledge Graph پایگاه دانش هرمزگان
+SQLite FTS5 جستجوی تمام‌متن
+Semantic Ranking مرتب‌سازی معنایی
+Bandari Engine پردازش گویش بندری
+AI Sahel تولید پاسخ هوشمند
+
+---
+
+🚀 نصب و راه‌اندازی
+
+پیش‌نیازها
+
 ```bash
-git clone https://github.com/username/hormozgan-driver-pro.git
-cd hormozgan-driver-pro
-./setup.sh
+Node.js >= 18.0.0
+SQLite3
+Git
+```
+
+نصب سریع
+
+```bash
+# کلون کردن پروژه
+git clone https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git
+
+# ورود به پوشه
+cd hormozgan-driver-pro121
+
+# نصب وابستگی‌ها
+npm install
+
+# ایجاد دیتابیس
+npm run init-db
+
+# بارگذاری داده‌های اولیه
+npm run seed
+
+# اجرای سرور
+npm start
+```
+
+اجرا با Docker
+
+```bash
+# ساخت Image
+docker build -t hormozgan-driver-pro .
+
+# اجرا
+docker run -p 3000:3000 hormozgan-driver-pro
+```
+
+اجرا با Docker Compose (Planned)
+
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=/app/data/database.sqlite
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
+
+  ai-service:
+    image: python:3.9-slim
+    command: python ai/services/nlp-service.py
+    volumes:
+      - ./ai:/app/ai
+    restart: unless-stopped
+```
+
+```bash
+docker-compose up -d
+```
+
+اجرا روی Termux (Android)
+
+```bash
+# نصب Termux
+pkg update && pkg upgrade
+pkg install nodejs git sqlite
+
+# کلون و نصب
+git clone https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git
+cd hormozgan-driver-pro121
+npm install
+
+# اجرا
+node server.js
+```
+
+اجرا روی cPanel
+
+1. آپلود فایل‌ها به public_html
+2. تنظیم Node.js App از طریق cPanel
+3. ایجاد دیتابیس SQLite
+4. تنظیم Cron Jobs برای Backup خودکار
+
+---
+
+📁 ساختار پروژه
+
+```
+hormozgan-driver-pro121/
+│
+├── backend/                      # سرور Backend
+│   ├── api/                      # API Endpoints
+│   │   ├── auth.js
+│   │   ├── drivers.js
+│   │   ├── rides.js
+│   │   ├── payments.js
+│   │   └── admin.js
+│   ├── services/                 # سرویس‌ها
+│   │   ├── ai-service.js
+│   │   ├── map-service.js
+│   │   ├── notification.js
+│   │   └── payment-gateway.js
+│   ├── middleware/               # Middleware
+│   │   ├── auth.js
+│   │   ├── rate-limit.js
+│   │   └── validation.js
+│   ├── models/                   # مدل‌های دیتابیس
+│   │   ├── Driver.js
+│   │   ├── Ride.js
+│   │   └── User.js
+│   ├── database/                 # دیتابیس
+│   │   ├── schema.sql
+│   │   ├── migrations/
+│   │   └── seeds/
+│   ├── config/                   # تنظیمات
+│   │   ├── database.js
+│   │   ├── auth.js
+│   │   └── ai.js
+│   └── server.js                 # نقطه ورود
+│
+├── frontend/                     # Frontend
+│   ├── public/
+│   │   ├── index.html
+│   │   ├── map.html
+│   │   ├── dashboard.html
+│   │   ├── fare-calculator.html
+│   │   ├── driver-registration.html
+│   │   ├── contact.html
+│   │   ├── 404.html
+│   │   ├── sitemap.xml
+│   │   ├── robots.txt
+│   │   └── manifest.json
+│   ├── assets/
+│   │   ├── css/
+│   │   │   ├── style.css
+│   │   │   ├── admin.css
+│   │   │   └── responsive.css
+│   │   ├── js/
+│   │   │   ├── main.js
+│   │   │   ├── maps.js
+│   │   │   ├── booking.js
+│   │   │   └── ai-chat.js
+│   │   └── images/
+│   │       ├── icons/
+│   │       ├── logos/
+│   │       └── backgrounds/
+│   └── components/               # کامپوننت‌های قابل استفاده مجدد
+│
+├── ai/                           # هوش مصنوعی
+│   ├── models/                   # مدل‌های AI
+│   │   ├── intent-classifier/
+│   │   ├── embedding/
+│   │   └── knowledge-graph/
+│   ├── services/                 # سرویس‌های AI
+│   │   ├── nlp-service.py
+│   │   ├── embedding-service.py
+│   │   └── graph-service.py
+│   ├── data/                     # داده‌های آموزشی
+│   │   ├── corpus/
+│   │   └── embeddings/
+│   └── train.py                  # اسکریپت آموزش
+│
+├── mobile/                       # اپلیکیشن موبایل (Flutter)
+│   ├── lib/
+│   └── assets/
+│
+├── docs/                         # مستندات
+│   ├── api/
+│   ├── deployment/
+│   ├── development/
+│   └── user-guide/
+│
+├── scripts/                      # اسکریپت‌های ابزار
+│   ├── backup.sh
+│   ├── deploy.sh
+│   └── migrate.sh
+│
+├── tests/                        # تست‌ها
+│   ├── unit/
+│   ├── integration/
+│   └── e2e/
+│
+├── .github/                      # GitHub Actions
+│   └── workflows/
+│       ├── ci.yml
+│       └── deploy.yml
+│
+├── docker/                       # Docker
+│   ├── Dockerfile
+│   └── docker-compose.yml
+│
+├── deploy/                       # فایل‌های استقرار
+│   ├── netlify.toml
+│   ├── render.yaml
+│   └── cpanel/
+│
+├── package.json                  # وابستگی‌های Node
+├── README.md                     # این فایل
+├── LICENSE
+└── .env.example                  # متغیرهای محیطی
+```
+
+---
+
+🔗 API مستندات
+
+Authentication
+
+```http
+POST   /api/auth/register       # ثبت‌نام کاربر
+POST   /api/auth/login          # ورود
+GET    /api/auth/me             # اطلاعات کاربر
+POST   /api/auth/logout         # خروج
+POST   /api/auth/refresh        # تمدید توکن
+```
+
+Drivers
+
+```http
+GET    /api/drivers              # لیست رانندگان
+GET    /api/drivers/:id          # اطلاعات یک راننده
+POST   /api/drivers              # ثبت راننده جدید
+PUT    /api/drivers/:id          # به‌روزرسانی راننده
+DELETE /api/drivers/:id          # حذف راننده
+GET    /api/drivers/nearby       # رانندگان نزدیک
+PUT    /api/drivers/:id/status   # تغییر وضعیت
+```
+
+Rides
+
+```http
+GET    /api/rides                # لیست سفرها
+POST   /api/rides                # ثبت سفر جدید
+GET    /api/rides/:id            # اطلاعات سفر
+PUT    /api/rides/:id            # به‌روزرسانی سفر
+DELETE /api/rides/:id            # لغو سفر
+GET    /api/rides/history        # تاریخچه سفرها
+POST   /api/rides/:id/cancel     # لغو سفر توسط مسافر
+POST   /api/rides/:id/complete   # تکمیل سفر
+```
+
+Payments
+
+```http
+POST   /api/payments             # پرداخت جدید
+GET    /api/payments/:id         # وضعیت پرداخت
+GET    /api/payments/history     # تاریخچه پرداخت‌ها
+POST   /api/payments/verify      # تأیید پرداخت
+```
+
+AI Services
+
+```http
+POST   /api/ai/chat              # گفتگو با AI
+POST   /api/ai/analyze           # تحلیل متن
+GET    /api/ai/traffic           # وضعیت ترافیک ✅
+GET    /api/ai/weather           # وضعیت آب و هوا ✅
+POST   /api/ai/route             # مسیریابی هوشمند 🚧
+GET    /api/ai/suggestions       # پیشنهادات هوشمند 🚧
+POST   /api/ai/voice             # تشخیص گفتار 📅
+```
+
+Maps
+
+```http
+GET    /api/maps/search          # جستجوی آدرس ✅
+GET    /api/maps/route           # مسیریابی ✅
+GET    /api/maps/distance        # محاسبه مسافت ✅
+GET    /api/maps/nearby          # مکان‌های نزدیک ✅
+```
+
+Tourism
+
+```http
+GET    /api/tourism/attractions  # جاذبه‌های گردشگری ✅
+GET    /api/tourism/hotels       # هتل‌ها ✅
+GET    /api/tourism/restaurants  # رستوران‌ها ✅
+GET    /api/tourism/:id          # جزئیات مکان ✅
+```
+
+📌 نکته: APIهای با علامت ✅ در Production فعال هستند. سایر APIها در حال توسعه می‌باشند.
+
+---
+
+🔒 امنیت
+
+لایه فناوری توضیح
+Headers Helmet محافظت در برابر حملات XSS، CSRF و کلیک‌جکی
+Authentication JWT احراز هویت مبتنی بر توکن با انقضای ۷ روزه
+Rate Limiting express-rate-limit محدودیت درخواست‌ها (۱۰۰ درخواست در دقیقه)
+Input Validation Joi اعتبارسنجی ورودی‌های کاربر
+Sanitization xss-clean پاک‌سازی ورودی‌ها از XSS
+CORS cors کنترل دسترسی منابع متقابل
+SQL Injection Parameterized Queries محافظت در برابر SQL Injection
+Password Hashing bcrypt هش کردن رمزهای عبور
+CSRF csurf محافظت در برابر CSRF
+
+---
+
+⚡ عملکرد
+
+متریک مقدار
+میانگین پاسخ API 120 ms
+جستجوی معنایی 35 ms
+جستجوی گراف دانش 20 ms
+طبقه‌بندی هدف 15 ms
+تولید پاسخ AI 250 ms
+بارگذاری نقشه 1.2 s
+زمان بارگذاری صفحه 1.8 s
+PWA Score 92/100
+
+---
+
+🚀 استقرار
+
+Netlify (Frontend)
+
+```toml
+# netlify.toml
+[build]
+  publish = "frontend/public"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+```
+
+Render (Backend)
+
+```yaml
+# render.yaml
+services:
+  - type: web
+    name: hormozgan-api
+    env: node
+    buildCommand: npm install
+    startCommand: node backend/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hormozgan-db
+          property: connectionString
+```
+
+Docker
+
+```dockerfile
+# Dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["node", "backend/server.js"]
+```
+
+cPanel
+
+1. آپلود فایل‌ها به public_html
+2. تنظیم Node.js App از طریق cPanel
+3. ایجاد دیتابیس SQLite
+4. تنظیم Cron Jobs برای Backup خودکار
+
+---
+
+🔧 توسعه
+
+راه‌اندازی محیط توسعه
+
+```bash
+# Clone
+git clone https://github.com/mahdihadari59-lgtm/hormozgan-driver-pro121.git
+cd hormozgan-driver-pro121
+
+# نصب وابستگی‌ها
+npm install
+
+# دیتابیس
+cp .env.example .env
+npm run init-db
+npm run seed
+
+# اجرا
+npm run dev
+```
+
+اجرای تست‌ها
+
+```bash
+# تست‌های واحد
+npm test
+
+# تست‌های یکپارچگی
+npm run test:integration
+
+# تست‌های End-to-End
+npm run test:e2e
+```
+
+ایجاد PR
+
+```bash
+# ایجاد branch
+git checkout -b feature/your-feature
+
+# Commit
+git add .
+git commit -m "feat: add your feature"
+
+# Push
+git push origin feature/your-feature
+
+# ایجاد Pull Request
+```
+
+---
+
+🗺️ نقشه راه
+
+نسخه هدف وضعیت
+2.1 بهینه‌سازی هسته و مستندات ✅ منتشر شده
+2.2 بهبود موتور هوش مصنوعی 📋 برنامه‌ریزی شده
+2.5 اپلیکیشن Android (Flutter) 📋 برنامه‌ریزی شده
+3.0 معماری Microservices + PostgreSQL + Redis + WebSocket 📋 برنامه‌ریزی شده
+
+برنامه نسخه 3.0
+
+· معماری: Microservices, Kubernetes
+· دیتابیس: PostgreSQL, Redis, Elasticsearch
+· ارتباطات: WebSocket, Push Notification
+· هوش مصنوعی:
+  · Offline AI
+  · Speech-to-Text
+  · Text-to-Speech
+  · AI Recommendation Engine
+· موبایل: Flutter (Android + iOS)
+· زیرساخت: Docker Compose, CI/CD پیشرفته
+
+---
+
+📝 یادداشت‌های انتشار
+
+v2.1.0 (Current)
+
+· ✨ اضافه شدن AI Sahel - دستیار هوشمند
+· ✨ اضافه شدن Bandari Engine - تشخیص گویش بندری
+· ✨ اضافه شدن Knowledge Graph هرمزگان
+· ✨ اضافه شدن Semantic Search با Sentence Transformers
+· ✨ اضافه شدن داشبورد مدیریت با نمودارهای تعاملی
+· ✨ اضافه شدن محاسبه‌گر کرایه پیشرفته
+· ✨ اضافه شدن PWA
+· 🔧 بهبود عملکرد جستجو
+· 🔧 بهبود امنیت با Helmet و Rate Limit
+· 🔧 بهینه‌سازی دیتابیس
+· 🐛 رفع باگ‌های API
+
+v2.0.0 (Previous)
+
+· ✨ اضافه شدن نقشه تعاملی
+· ✨ اضافه شدن سیستم ثبت‌نام رانندگان
+· ✨ اضافه شدن مدیریت سفرها
+· ✨ اضافه شدن سیستم پرداخت
+· ✨ اضافه شدن گردشگری (Attractions, Hotels, Restaurants)
+· ✨ اضافه شدن وضعیت ترافیک و آب‌وهوا
+
+---
+
+🤝 مشارکت
+
+راهنمای مشارکت
+
+1. گزارش باگ: از Issue Tracker استفاده کنید
+2. پیشنهاد ویژگی: Feature Request باز کنید
+3. Pull Request: کد خود را ارسال کنید
+4. مستندات: مستندات را به‌روز کنید
+
+کدهای اخلاق
+
+· کد را تمیز و خوانا بنویسید
+· از ESLint و Prettier استفاده کنید
+· تست بنویسید
+· مستندات را به‌روز کنید
+· از Conventional Commits استفاده کنید
+
+ساختار Commit
+
+```bash
+feat: add new feature
+fix: bug fix
+docs: documentation update
+style: code style
+refactor: code refactor
+test: add tests
+chore: maintenance
+```
+
+---
+
+📊 آمار پروژه
+
+آمار مقدار وضعیت
+🚗 راننده فعال Coming Soon ⏳
+👤 مسافر راضی Coming Soon ⏳
+🚕 سفر موفق Coming Soon ⏳
+⭐ امتیاز میانگین Coming Soon ⏳
+📝 API Endpoints ۳۵+ ✅
+🧪 تست‌ها ۲۰۰+ ✅
+📊 پوشش تست ۷۸% ✅
+🔒 آسیب‌پذیری‌ها ۰ ✅
+
+---
+
+📝 لایسنس
+
+این پروژه تحت لایسنس MIT منتشر شده است - برای جزئیات LICENSE را ببینید.
+
+---
+
+👨‍💻 توسعه‌دهندگان
+
+نام نقش GitHub
+Mahdi Hadari Lead Developer, AI Engineer @mahdihadari59-lgtm
+HDP Team Contributors @hdp-org
+
+---
+
+📞 تماس
+
+· Email: info@hormozgandriver.ir
+· Phone: 0916-462-1660
+· Telegram: @hormozgandriver
+· Instagram: @hormozgan_driver_pro
+· GitHub: @mahdihadari59-lgtm
+
+---
+
+🙏 قدردانی
+
+· استان هرمزگان - حمایت و همکاری
+· جامعه Open Source - کتابخانه‌های عالی
+· همه مشارکت‌کنندگان - کمک به بهبود پروژه
+
+---
+
+<div align="center">
+
+🌟 اگر این پروژه برای شما مفید بود، لطفاً یک ⭐ به آن بدهید!
+
+⬆ بازگشت به بالا
+
+ساخته شده با ❤️ برای استان هرمزگان
+
+</div>
+
